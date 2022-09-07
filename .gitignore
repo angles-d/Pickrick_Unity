@@ -56,7 +56,9 @@ sysinfo.txt
 *.unitypackage
 
 #Ignore fbx for storage
-
+Assets/Models/Objects/Pickrick_Signs/ClosedPickrickSign.fbx
+Assets/Models/Objects/Pickrick/Restaurant/Pickrick\ Restaurant.fbx
+Assets/Models/Objects/Pickrick/Restaurant/Pickrick\ RestaurantWithGlass.fbx
 
 # Crashlytics generated file
 crashlytics-build.properties
