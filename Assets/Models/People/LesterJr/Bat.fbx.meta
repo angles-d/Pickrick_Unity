@@ -1,0 +1,154 @@
+fileFormatVersion: 2
+guid: c5999dab4ed894d188abc263c02454da
+ModelImporter:
+  serializedVersion: 26
+  internalIDToNameTable:
+  - first:
+      74: -655837061792092870
+    second: Bat BoneAction
+  - first:
+      74: -8180398546169940489
+    second: Bat Bone|Bat BoneAction
+  - first:
+      74: 1831607722511719884
+    second: Bat Bone|DriverIndex.LAction
+  - first:
+      74: 5881682434870613458
+    second: Bat Bone|DriverIndex.RAction
+  - first:
+      74: -2301030052325354485
+    second: Bat Bone|DriverMiddle.LAction
+  - first:
+      74: 8126672043087535846
+    second: Bat Bone|DriverMiddle.RAction
+  - first:
+      74: 5571878679202479981
+    second: Bat Bone|DriverPinky.LAction
+  - first:
+      74: 8243015541946056657
+    second: Bat Bone|DriverPinky.RAction
+  - first:
+      74: 8020076950341005408
+    second: Bat Bone|DriverRing.LAction
+  - first:
+      74: -958541436381922425
+    second: Bat Bone|DriverRing.RAction
+  - first:
+      74: 7091218011252705350
+    second: Bat Bone|SonDriverIndex.LAction
+  - first:
+      74: 1244744904395553679
+    second: Bat Bone|SonDriverIndex.RAction
+  - first:
+      74: -1699343585482729103
+    second: Bat Bone|SonDriverMiddle.LAction
+  - first:
+      74: -8561919660723614836
+    second: Bat Bone|SonDriverMIddle.RAction
+  - first:
+      74: -7310694594194622727
+    second: Bat Bone|SonDriverPinky.LAction
+  - first:
+      74: -3598503113909694227
+    second: Bat Bone|SonDriverPinky.RAction
+  - first:
+      74: -3264831434890488812
+    second: Bat Bone|SonDriverRing.LAction
+  - first:
+      74: 2379999325770598346
+    second: Bat Bone|SonDriverRing.RAction
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BaseBallBat
+    second: {fileID: 2100000, guid: 88ba08c2eef4f45a3aea9bfa654c6ae4, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,455 @@
+fileFormatVersion: 2
+guid: 25ac22e7adfe547429c9fc6d26aa864e
+ModelImporter:
+  serializedVersion: 26
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Big Roof Cylinder
+    second: {fileID: 2100000, guid: c50ce9d0e2444466eb98c9532207a8e9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ceiling
+    second: {fileID: 2100000, guid: 570dfed227c884a9aa37e9f1d7f0b105, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Columns
+    second: {fileID: 2100000, guid: 1d822852e31714004a637540d39a6db2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Concrete
+    second: {fileID: 2100000, guid: b0a12bbab3d9343558f4ce258d5f07d1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Corda
+    second: {fileID: 2100000, guid: 083edf2882b4e476fabbb64328d86e29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Counter Napkin
+    second: {fileID: 2100000, guid: cb4d482e2c32e416da6a1e84df765ad3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cross_
+    second: {fileID: 2100000, guid: b46836f8fe46f45fea8c8a38cc46771a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Flat vents
+    second: {fileID: 2100000, guid: 5d3a4f837302045f7a3ea18ee43cfc02, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Gateway Cafeteria Wooden Sign
+    second: {fileID: 2100000, guid: 25e4f1940a1f346fdba75ad6e6015d3a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Inside Wood
+    second: {fileID: 2100000, guid: a3f29637665394cbe9980541bfcd9d23, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ketchup-Bottle-top
+    second: {fileID: 2100000, guid: 55a868af7a60c4dd1ad3d68ac5ac705c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ketchup-bottle-top-label
+    second: {fileID: 2100000, guid: 823f8638c65f148d5934b927ec79d505, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lester Maddox Cafeteria Wooden Sign
+    second: {fileID: 2100000, guid: 75a095badc4e64fd4ad5169e5df36c36, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Light
+    second: {fileID: 2100000, guid: 9e22e1e29543845b889d0d9120d02dc2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 317b5547c349e4a199f67be0cdb7eed5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.002
+    second: {fileID: 2100000, guid: 7d7ca0b58e65a463c8a646ebc33242eb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.003
+    second: {fileID: 2100000, guid: 36e6c4e08342b457193819fea513eedd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.007
+    second: {fileID: 2100000, guid: 2a366108557824b94b9e461316b87337, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.008
+    second: {fileID: 2100000, guid: e914fb24723284200b20e6b506bcddb4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.009
+    second: {fileID: 2100000, guid: 28d53d79fc792433e8a36d924915fe5f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.010
+    second: {fileID: 2100000, guid: 4396f908e12e54091b487536f463f6c8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.011
+    second: {fileID: 2100000, guid: 0b0ade761f78048d6a944e1c9b880405, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.014
+    second: {fileID: 2100000, guid: 87a989298e9d4492dbf98529e35ee43d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.015
+    second: {fileID: 2100000, guid: c73fdc99e79fb4224bcda7b219a10d8b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.016
+    second: {fileID: 2100000, guid: f60d3cccc57ca4bf3bc99efb200205e9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Medium Roof Cylinder
+    second: {fileID: 2100000, guid: d317667c61ab9486ab46c29d1c330f27, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Monument stone
+    second: {fileID: 2100000, guid: 8dfe3a2be142c49f9851aa9922aa1eba, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Napkin
+    second: {fileID: 2100000, guid: 9ae790a74f67941d8a0be9043cb37865, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Napkin Holder
+    second: {fileID: 2100000, guid: 8b4d240cba636488c995871989c7f7ab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Napkin Holder Feet
+    second: {fileID: 2100000, guid: da3d668c03fe9421e86145cc798af59e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Napkin Holder Feet.001
+    second: {fileID: 2100000, guid: 32f0d18e0d4464ca4aedc173c0c1dc05, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Napkin Holder Feet.002
+    second: {fileID: 2100000, guid: ce9e31e88784140b5be3754117eb31b6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Napkin Holder Feet.003
+    second: {fileID: 2100000, guid: 44b6d60fd5ea249b08f330d7c415f6ed, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: beebc651dc3ad4719a17e5cc5482bb88, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Outside
+    second: {fileID: 2100000, guid: eb33f30917dc14dcdb5bd9bf41e0da18, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pepper Shaker Body
+    second: {fileID: 2100000, guid: df5da6284f19b431e8f68cbc33ec846c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plastico
+    second: {fileID: 2100000, guid: e45231e561d9a4b7d9452a1f4237b87f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Restaurant base
+    second: {fileID: 2100000, guid: 2c7d48ee3aff549a883a240ef467cbc1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Roof Ventilation I
+    second: {fileID: 2100000, guid: b99d566b91df24e67aa7cd7ded46faac, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Roof Ventilation L
+    second: {fileID: 2100000, guid: 0fec17b4da0e84371bb4d5117d481d8a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Salt
+    second: {fileID: 2100000, guid: d589280a82f3042279614579bab664bf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shaker Top.001
+    second: {fileID: 2100000, guid: 23f6ffc1a92144e72928b53f4ed1e3c5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Small Roof Cylinder
+    second: {fileID: 2100000, guid: 43e730038db9e43628639d148ed831a8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sugar Container Glass
+    second: {fileID: 2100000, guid: 5fc8638430474468b99df5b2c7bd12d0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sugar Spout
+    second: {fileID: 2100000, guid: 2afb3fb31f96a48bb8bb6c5de10a18cb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sugar Top
+    second: {fileID: 2100000, guid: babe9f32f1bc74b56b2c889068d66d9e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sugar.001
+    second: {fileID: 2100000, guid: 2b0bfc34d74fa4d04bebb12f3db0029f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wood
+    second: {fileID: 2100000, guid: 7accac38f52954aeba534abe798aed42, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: black matte
+    second: {fileID: 2100000, guid: 46235f272349a48acb218ef3bbc5cb54, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blinds
+    second: {fileID: 2100000, guid: 8457307a9246e4cc4aefd27b2c556b9a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: brick
+    second: {fileID: 2100000, guid: 1ab146d8b30d446649e6ba4e2d24d81d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: car lights
+    second: {fileID: 2100000, guid: 083f01ac2cd3149a38a1ebeb7748b267, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: door handles
+    second: {fileID: 2100000, guid: 780900445971c4e01964f23f1b8d4da3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: electricity poles
+    second: {fileID: 2100000, guid: bd4b82d9b981146fcb57ae2828b3145d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: electricity things
+    second: {fileID: 2100000, guid: fcf0bb34ab71e458c8e0c81ac3394c5d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: flat black
+    second: {fileID: 2100000, guid: 738ae8a7454e446a9aa6ae1ad7265be8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: leg bottom
+    second: {fileID: 2100000, guid: 2bb9913e4ee6545fab73c7d9990b1ba8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: light top
+    second: {fileID: 2100000, guid: 5c09d1789b540441dbc1143e070aa462, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pepper
+    second: {fileID: 2100000, guid: 5b4d780237b6f47119428809fa9c791b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: restaurant floor
+    second: {fileID: 2100000, guid: ea0ce8501a647422db991d219d827145, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rusty green roof object
+    second: {fileID: 2100000, guid: 171e4e0613c88456bae6210222a6251e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sliver metallic
+    second: {fileID: 2100000, guid: 245b89f44b5db4e9aa0e216bc38aa2de, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: table top
+    second: {fileID: 2100000, guid: 48e8e49b565e446a0ae6e5d446ca821c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tail lights
+    second: {fileID: 2100000, guid: ad99c34ec723e448ea76d3dd85f10660, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tall roof cubes
+    second: {fileID: 2100000, guid: d5fb94a62a827428da55b8a69ac7b0eb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: white car
+    second: {fileID: 2100000, guid: edeb0bc56591b42a8b5bba7132e3556a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: window
+    second: {fileID: 2100000, guid: 63ff30a3e5971409c891cad555b7bd29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: window lining
+    second: {fileID: 2100000, guid: efb9498a19f5945ce8c3e8f748af8eb6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: window lining.001
+    second: {fileID: 2100000, guid: 44da38018764c47e3bb3da3a9904694a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wood
+    second: {fileID: 2100000, guid: 4baa785516eac4cd18b08a2de244d92b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wood legs
+    second: {fileID: 2100000, guid: 221f28120a320477cb05532d7f3f8c82, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: yellow car
+    second: {fileID: 2100000, guid: b14234bdd19d64883b5fca53db7e51d5, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
