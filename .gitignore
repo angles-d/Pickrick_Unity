@@ -56,7 +56,7 @@ sysinfo.txt
 *.unitypackage
 
 #Ignore fbx for storage
-*.fbx
+
 
 # Crashlytics generated file
 crashlytics-build.properties
