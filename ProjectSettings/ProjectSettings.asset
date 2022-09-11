@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DILAC
-  productName: Final 4/27/21
+  productName: Pickrick AR App
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -163,6 +163,7 @@ PlayerSettings:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 6030233426474894780, guid: 74175913a5934f843aad7ec80b325956, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -206,7 +207,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    iPhone: com.Final.ipad
+    iPhone: Final.Pickrick-AR-App.ipad
   buildNumber:
     iPhone: 1.0.0
   AndroidBundleVersionCode: 1
