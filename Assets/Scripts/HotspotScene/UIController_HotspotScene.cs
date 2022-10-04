@@ -38,7 +38,7 @@ public class UIController_HotspotScene : MonoBehaviour {
     [SerializeField]
     private bool arCalibrated;
     // reference to IsCompassSetUpCorrectly Script
-    private IsCompassSetUpCorrectly isCompassSetUpCorrectly;
+    //private IsCompassSetUpCorrectly isCompassSetUpCorrectly;
 
     // Start is called before the first frame update
     void Start() {
@@ -61,10 +61,10 @@ public class UIController_HotspotScene : MonoBehaviour {
         Input.location.Start();
 
         // get reference to IsCompassSetUpCorrectly Script
-        isCompassSetUpCorrectly = compass.GetComponent<IsCompassSetUpCorrectly>();
-        if (isCompassSetUpCorrectly == null) {
-            throw new Exception("Make sure this object: " + compass +" has a IsCompassSetUpCorrectly Component");
-        }
+        //isCompassSetUpCorrectly = compass.GetComponent<IsCompassSetUpCorrectly>();
+        //if (isCompassSetUpCorrectly == null) {
+        //    throw new Exception("Make sure this object: " + compass +" has a IsCompassSetUpCorrectly Component");
+        //}
     }
 
     void Update() {
@@ -74,7 +74,7 @@ public class UIController_HotspotScene : MonoBehaviour {
             arrow.SetActive(false);
             images.SetActive(false);
             whereButtonText.gameObject.SetActive(false);
-            compass.SetActive(false);
+            //compass.SetActive(false);
             instructionsText.text = "The AR experience is properly calibrated! Press the LAUNCH AR BUTTON.";
             instructionsText.fontSize = 75f;
         } else {
@@ -83,21 +83,22 @@ public class UIController_HotspotScene : MonoBehaviour {
                 images.SetActive(false);
                 whereButtonText.gameObject.SetActive(false);
                 whereButtonText.color = blue;
-                compass.SetActive(true);
-                instructionsText.text = "In order to calibrate the AR experience, angle your device fowards and rotate northeast using the compass.";
-                instructionsText.fontSize = 75f;
-                if (isCompassSetUpCorrectly.isCompassSetUpCorrectly) {
-                    arCalibrated = true;
-                } else {
-                    launchARButton.SetActive(false);
-                    placeObjectInFrontOfCamera.PlaceInFrontOfCamera();
-                }
+                arCalibrated = true;
+                //compass.SetActive(true);
+                //instructionsText.text = "In order to calibrate the AR experience, angle your device fowards and rotate northeast using the compass.";
+                //instructionsText.fontSize = 75f;
+                //if (isCompassSetUpCorrectly.isCompassSetUpCorrectly) {
+                //    arCalibrated = true;
+                //} else {
+                //    launchARButton.SetActive(false);
+                //    placeObjectInFrontOfCamera.PlaceInFrontOfCamera();
+                //}
             // What to do when the user is not in the hotspot
             } else {
                 arrow.SetActive(true);
                 launchARButton.SetActive(false);
                 whereButtonText.gameObject.SetActive(true);
-                compass.SetActive(false);
+                //compass.SetActive(false);
                 instructionsText.text = "This App is based on the location, please go to the 881 Hemphill Street NW, Atlanta, GA, 30318 (Now in Georgia Tech campus, EcoCommons site).";
                 instructionsText.fontSize = 58f;
             }
@@ -118,6 +119,7 @@ public class UIController_HotspotScene : MonoBehaviour {
     public void PressLaunchSceneButton() {
         arrow.SetActive(false);
         gameObject.SetActive(false);
+        placeObjectInFrontOfCamera.PlaceInFrontOfCamera();
         pageController.TurnPageOff(Menu.PageType.Hotspot, Menu.PageType.Timeline);
     }
 
