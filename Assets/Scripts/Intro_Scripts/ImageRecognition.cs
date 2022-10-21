@@ -3,17 +3,23 @@ using System.Collections.Generic;
 using UnityEngine.XR;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine;
+using UnityEngine.Video;
 
 public class ImageRecognition : MonoBehaviour
 {
     [SerializeField]
-    private GameObject[] placablePrefabs;
+    private GameObject[] placeablePrefabs;
     private Dictionary<string, GameObject> spawnedPrefabs = new Dictionary<string, GameObject>();
     private ARTrackedImageManager ar;
+    public bool firstImageScanned = false; //tracks if first image was scanned
+    public bool vidDone = false; //tracks if first image was scanned
+    public GameObject finalVid = null;
+    public VideoPlayer finalVidPlayer;
+
     public void Awake()
     {
         ar = FindObjectOfType<ARTrackedImageManager>();
-        foreach (GameObject prefab in placablePrefabs)
+        foreach (GameObject prefab in placeablePrefabs)
         {
             //instantiates a physical version of the prefab
             GameObject newPrefab = Instantiate(prefab, Vector3.zero, Quaternion.identity);
@@ -21,6 +27,16 @@ public class ImageRecognition : MonoBehaviour
             newPrefab.SetActive(false);
             spawnedPrefabs.Add(prefab.name, newPrefab);
         }
+        print("helllooooo");
+
+        foreach (KeyValuePair<string, GameObject> kvp in spawnedPrefabs)
+        {
+            print("ooooo");
+            print("Key, Value" +  kvp.Key + ":"+ kvp.Value);
+        }
+
+        finalVid = spawnedPrefabs["Activist"];
+        finalVidPlayer = finalVid.GetComponentInChildren<VideoPlayer>();
     }
 
     public void OnEnable()
@@ -37,6 +53,8 @@ public class ImageRecognition : MonoBehaviour
     {
         foreach (ARTrackedImage tracked in args.added)
         {
+            //tracks that the first image was scanned for the vignette controller
+            if (!firstImageScanned) { firstImageScanned = true; }
             SetImage(tracked);
         }
 
@@ -52,6 +70,13 @@ public class ImageRecognition : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        if (finalVid != null && !vidDone && finalVid.activeSelf)
+        {
+            checkVidsEnd();
+        }
+    }
 
     private void SetImage(ARTrackedImage trackedImage)
     {
@@ -78,20 +103,21 @@ public class ImageRecognition : MonoBehaviour
 
     }
 
-    public bool VectorDif(Vector3 cur, Vector3 other, float allowedDifference)
+    //check if the user is done playing the video
+
+    void checkVidsEnd()
     {
-        //var dx = cur.x - other.x;
-        //if (Mathf.Abs(dx) > allowedDifference)
-        //    return false;
-
-        var dy = cur.y - other.y;
-        if (Mathf.Abs(dy) > allowedDifference)
-            return false;
-
-        var dz = cur.z - other.z;
-
-        return Mathf.Abs(dz) >= allowedDifference;
+        //Debug.Log("frame" +   finalVidPlayer.frame);
+        if (finalVidPlayer.frame >= 1400)
+        {
+            Debug.Log("vid done");
+            vidDone = true;
+        }
     }
+
+    
+
+
 
 
 }

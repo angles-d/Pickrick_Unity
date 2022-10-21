@@ -14,6 +14,8 @@ public class UIController_HotspotScene : MonoBehaviour {
     public GameObject instructions;
     // Reference to the compass object
     public GameObject compass;
+    //Reference to AR ARmarker image
+    public GameObject arMarker;
     // Reference to the where button Text
     public TextMeshProUGUI whereButtonText;
     // A reference to the TMPRO object for the instructions
@@ -71,6 +73,7 @@ public class UIController_HotspotScene : MonoBehaviour {
         // What to do when the user is in the hotspot
         if (arCalibrated) {
             launchARButton.SetActive(true);
+            arMarker.SetActive(true);
             arrow.SetActive(false);
             images.SetActive(false);
             whereButtonText.gameObject.SetActive(false);
@@ -119,6 +122,7 @@ public class UIController_HotspotScene : MonoBehaviour {
     public void PressLaunchSceneButton() {
         arrow.SetActive(false);
         gameObject.SetActive(false);
+        arMarker.SetActive(false);
         placeObjectInFrontOfCamera.PlaceInFrontOfCamera();
         pageController.TurnPageOff(Menu.PageType.Hotspot, Menu.PageType.Timeline);
     }
