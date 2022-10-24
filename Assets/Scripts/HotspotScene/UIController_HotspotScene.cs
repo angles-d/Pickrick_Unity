@@ -120,9 +120,9 @@ public class UIController_HotspotScene : MonoBehaviour {
 
     // Method runs when the user presses the launch scene button
     public void PressLaunchSceneButton() {
-        arrow.SetActive(false);
-        gameObject.SetActive(false);
-        arMarker.SetActive(false);
+        //arrow.SetActive(false);
+        //gameObject.SetActive(false);
+        //arMarker.SetActive(false);
         placeObjectInFrontOfCamera.PlaceInFrontOfCamera();
         pageController.TurnPageOff(Menu.PageType.Hotspot, Menu.PageType.Timeline);
     }
