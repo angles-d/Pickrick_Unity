@@ -18,6 +18,7 @@ public class VignetteController : MonoBehaviour
     public GameObject introInfo;
     public bool landscape = false;
     public bool portrait = true;
+    public GameObject vin_light;
     public State state = State.TO_LANDSCAPE;
 
     private GameObject goToArButton;
@@ -88,7 +89,7 @@ public class VignetteController : MonoBehaviour
     {
         if (scanArInfo.activeSelf && image_rec.firstImageScanned)
         {
-          
+            vin_light.SetActive(true);
             scanArInfo.SetActive(false);
         }
 
@@ -127,6 +128,7 @@ public class VignetteController : MonoBehaviour
         launchArInfo.SetActive(true);
        
         vignettes.gameObject.SetActive(false);
+        
 
     }
 
