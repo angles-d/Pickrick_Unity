@@ -16,6 +16,7 @@ public class HotspotCollision : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            Debug.Log("collision???");
             hotspotInfo.SetActive(true);
         }
     }

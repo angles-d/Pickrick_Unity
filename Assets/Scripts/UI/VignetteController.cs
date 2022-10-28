@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class VignetteController : MonoBehaviour
 {
@@ -122,13 +123,15 @@ public class VignetteController : MonoBehaviour
    // }
 
     //start the go to AR UI
+
     public void toAR()
     {
-        Screen.orientation = ScreenOrientation.Portrait;
-        launchArInfo.SetActive(true);
        
-        vignettes.gameObject.SetActive(false);
-        
+        //launchArInfo.SetActive(true);
+
+        //vignettes.gameObject.SetActive(false);
+        SceneManager.LoadScene("Main_Scene");
+
 
     }
 
