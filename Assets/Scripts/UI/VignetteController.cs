@@ -19,13 +19,10 @@ public class VignetteController : MonoBehaviour
     public GameObject introInfo;
     public bool landscape = false;
     public bool portrait = true;
-    public GameObject vin_light;
+
     public State state = State.TO_LANDSCAPE;
 
-    private GameObject goToArButton;
-
-    Menu.Page page;
-    Menu.PageController pageController;
+   
 
     public enum State
     {
@@ -38,12 +35,6 @@ public class VignetteController : MonoBehaviour
     {
         image_rec.enabled = true;
         ar_track.enabled = true;
-
-        goToArButton = vinToArInfo.transform.GetChild(3).gameObject;
-
-        //pageController = FindObjectOfType<Menu.PageController>();
-        //page = gameObject.GetComponent<Menu.Page>();
-
     }
 
     // Update is called once per frame
@@ -89,8 +80,7 @@ public class VignetteController : MonoBehaviour
     void trackImage()
     {
         if (scanArInfo.activeSelf && image_rec.firstImageScanned)
-        {
-            vin_light.SetActive(true);
+        { 
             scanArInfo.SetActive(false);
         }
 
@@ -126,13 +116,7 @@ public class VignetteController : MonoBehaviour
 
     public void toAR()
     {
-       
-        //launchArInfo.SetActive(true);
-
-        //vignettes.gameObject.SetActive(false);
         SceneManager.LoadScene("Main_Scene");
-
-
     }
 
     public void startVignettes()

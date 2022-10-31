@@ -27,6 +27,7 @@ public class LaunchAR : MonoBehaviour
     void Start()
     {
         Screen.orientation = ScreenOrientation.Portrait;
+        UI.SetActive(false);
     }
 
     void Update()
