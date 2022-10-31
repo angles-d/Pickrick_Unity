@@ -12,11 +12,27 @@ public class HotspotCollision : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            Debug.Log("collision???");
             hotspotInfo.SetActive(true);
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("collision???");
+            hotspotInfo.SetActive(false);
+        }
+
+    }
+
+    public void TestHotspot()
+    {
+        hotspotInfo.SetActive(true);
     }
 }

@@ -8,13 +8,13 @@ public class StartTimeline : MonoBehaviour
     // Reference to page controller
     public Menu.PageController pageController;
     // Reference to PlaceObjectInFrontOfCameraScript
-    public PlaceObjectInFrontOfCamera placeObjectInFrontOfCamera;
-    void Awake()
+    public PlaceObjectInFrontOfCamera arObjects;
+    void Start()
     {
-        print("hellooo");
-        placeObjectInFrontOfCamera.PlaceInFrontOfCamera();
+        arObjects.PlaceInFrontOfCamera();
         pageController.TurnPageOff(Menu.PageType.Hotspot, Menu.PageType.Timeline);
     }
+    
 
     // Update is called once per frame
     void Update()

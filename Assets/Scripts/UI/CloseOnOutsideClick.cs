@@ -5,15 +5,21 @@ using UnityEngine.EventSystems;
 
 public class CloseOnOutsideClick : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject infoUI;
+    public GameObject title;
+
+    private void Start()
     {
-        EventSystem.current.SetSelectedGameObject(gameObject);
+        infoUI = transform.parent.gameObject;
+    }
+    void Update()
+    {
+        if ((Input.touchCount > 0 || Input.GetMouseButtonDown(0)) && !EventSystem.current.IsPointerOverGameObject())
+        {
+            title.SetActive(false);
+            //panel.SetActive(false);
+            infoUI.SetActive(false);
+        }
     }
 
-
-    public void OnDeselect(BaseEventData eventData)
-    {
-        gameObject.SetActive(false);
-    }
 }
