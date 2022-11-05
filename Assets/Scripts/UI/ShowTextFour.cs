@@ -7,7 +7,7 @@ public class ShowTextFour : MonoBehaviour
 {
     public string textValue;
     public Text textElement;
-    void Start(){
+    void OnEnable(){
         SetTextToDisplayAndCleanIt("July 3, 1964");
     }
 
@@ -17,6 +17,12 @@ public class ShowTextFour : MonoBehaviour
     }
 
     void CleanText(){
-        textElement.enabled=false;
+        //textElement.enabled=false;
+        textElement.gameObject.SetActive(false);
+    }
+
+    private void OnDisable()
+    {
+        textElement.enabled = true;
     }
 }

@@ -7,8 +7,8 @@ public class ShowTextSeven : MonoBehaviour
 {
     public string textValue;
     public Text textElement;
-    void Start(){
-        SetTextToDisplayAndCleanIt("September 1964");
+    void OnEnable(){
+        SetTextToDisplayAndCleanIt("September 26, 1964");
     }
 
     public void SetTextToDisplayAndCleanIt(string textValue){
@@ -17,6 +17,12 @@ public class ShowTextSeven : MonoBehaviour
     }
 
     void CleanText(){
-        textElement.enabled=false;
+        //textElement.enabled=false;
+        textElement.gameObject.SetActive(false);
+    }
+
+    private void OnDisable()
+    {
+        textElement.enabled = true;
     }
 }
