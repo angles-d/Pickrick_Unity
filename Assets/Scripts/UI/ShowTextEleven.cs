@@ -23,6 +23,6 @@ public class ShowTextEleven : MonoBehaviour
 
     private void OnDisable()
     {
-        textElement.enabled = true;
+        textElement.gameObject.SetActive(true);
     }
 }
