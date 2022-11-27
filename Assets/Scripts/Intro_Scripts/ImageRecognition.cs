@@ -27,13 +27,6 @@ public class ImageRecognition : MonoBehaviour
             newPrefab.SetActive(false);
             spawnedPrefabs.Add(prefab.name, newPrefab);
         }
-        print("helllooooo");
-
-        foreach (KeyValuePair<string, GameObject> kvp in spawnedPrefabs)
-        {
-            print("ooooo");
-            print("Key, Value" +  kvp.Key + ":"+ kvp.Value);
-        }
 
         finalVid = spawnedPrefabs["Activist"];
         finalVidPlayer = finalVid.GetComponentInChildren<VideoPlayer>();
@@ -74,7 +67,7 @@ public class ImageRecognition : MonoBehaviour
     {
         if (finalVid != null && !vidDone && finalVid.activeSelf)
         {
-            checkVidsEnd();
+            CheckVidsEnd();
         }
     }
 
@@ -105,10 +98,9 @@ public class ImageRecognition : MonoBehaviour
 
     //check if the user is done playing the video
 
-    void checkVidsEnd()
+    void CheckVidsEnd()
     {
-        //Debug.Log("frame" +   finalVidPlayer.frame);
-        if (finalVidPlayer.frame >= 1400)
+        if (finalVidPlayer.frame >= 1750)
         {
             Debug.Log("vid done");
             vidDone = true;

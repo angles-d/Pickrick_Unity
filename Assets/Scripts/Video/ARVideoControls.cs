@@ -92,8 +92,10 @@ public class ARVideoControls : MonoBehaviour
                 else if (hit.collider.gameObject.name == "Progress Bar Back")
                 {
                     Debug.Log("Hit Progress Bar");
-                    slider.transform.localPosition = new Vector3(hit.point.x, slider.transform.localPosition.y, slider.transform.localPosition.z);
-                    float barLength = (hit.point.x - barStart.transform.localPosition.x) / barRectScaleX;
+                    Vector3 hitPoint = slider.transform.InverseTransformPoint(hit.point);
+                    slider.transform.localPosition = new Vector3(hitPoint.x, slider.transform.localPosition.y, slider.transform.localPosition.z);
+
+                    float barLength = (hit.point.x - barStart.transform.position.x) / barRectScaleX;
                     progress.transform.localScale = new Vector3(barLength, 1, 1);
                     progress.transform.localPosition = new Vector3((progress.transform.localScale.x * barRectScaleX / 2.0f) + barStart.transform.localPosition.x,
                                                                 barY, barZ);                                       
