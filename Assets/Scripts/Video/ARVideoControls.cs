@@ -9,17 +9,13 @@ using UnityEngine.XR.ARFoundation;
 public class ARVideoControls : MonoBehaviour
 {
     public VideoPlayer player;
-    //public Image progress;
     public GameObject progress;
     public GameObject barStart;
+    public GameObject slider;
     public GameObject play;
     public GameObject pause;
     float progressAmount;
     GameObject barRect;
-
-    [SerializeField]
-    ARRaycastManager aRRaycastManager;
-    List<ARRaycastHit> hits = new List<ARRaycastHit>();
 
     Camera arCamera;
     float barY;
@@ -28,12 +24,14 @@ public class ARVideoControls : MonoBehaviour
 
     private void Start()
     {
-        barY = progress.transform.position.y;
-        barZ = progress.transform.position.z;
+        barY = progress.transform.localPosition.y;
+        barZ = progress.transform.localPosition.z;
         barRect = progress.transform.GetChild(0).gameObject;
         barRectScaleX = barRect.transform.localScale.x*10;
-        progress.transform.position = new Vector3(barStart.transform.position.x,
+        progress.transform.position = new Vector3(barStart.transform.localPosition.x,
                                                         barY, barZ);
+        //Finds camera in the scene; tag camera as MainCamera
+        arCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
 
     }
 
@@ -47,57 +45,60 @@ public class ARVideoControls : MonoBehaviour
         {
             progressAmount = (float)player.frame / player.frameCount;
             progress.transform.localScale = new Vector3(progressAmount, 1, 1);
-            progress.transform.position = new Vector3((progress.transform.localScale.x * barRectScaleX / 2.0f) + barStart.transform.position.x,
-                                                        barY, barZ);
+
+            float x = progress.transform.localScale.x * barRectScaleX ; //size x of bar
+
+            progress.transform.localPosition = new Vector3(x/2.0f + barStart.transform.localPosition.x, barY, barZ);
+            slider.transform.localPosition = new Vector3(x + barStart.transform.localPosition.x, slider.transform.localPosition.y, slider.transform.localPosition.z);
         }
     }
   
     void ARTouchButton()
     {
         if (Input.touchCount == 0)
-            return;
-        RaycastHit hit;
-        Ray r = arCamera.ScreenPointToRay(Input.GetTouch(0).position);
-
-        if (aRRaycastManager.Raycast(Input.GetTouch(0).position, hits))
         {
-            if (Input.GetTouch(0).phase == TouchPhase.Began)
-            {
-                if (Physics.Raycast(r, out hit))
-                {
-                    if (hit.collider.gameObject.name == "Play")
-                    {
-                        print("Hit Play");
-                        if (player != null)
-                        {
-                            player.Play();
-                            play.SetActive(false);
-                            pause.SetActive(true);
-                        }
-                    } else if (hit.collider.gameObject.name == "Pause")
-                    {
-                        print("Hit Pause");
-                        if (player != null)
-                        {
-                            player.Pause();
-                            play.SetActive(true);
-                            pause.SetActive(false);
-                        }
-                            
-                    }else if (hit.collider.gameObject.name == "Progress Bar")
-                    {
-                        print("Hit Parent Bar");
-                        float barLength = hits[0].pose.position.x - barStart.transform.position.x/barRectScaleX;
-                        progress.transform.localScale = new Vector3(barLength, 1, 1);
-                        progress.transform.position = new Vector3((progress.transform.localScale.x * barRectScaleX / 2.0f) + barStart.transform.position.x,
-                                                                    barY, barZ);
+            return;
+        }
 
-                        float frame = player.frameCount * barLength;
-                        player.frame = (long)frame;
-                    } else if (hit.collider.gameObject.name == "Bar Rect")
+        Touch touch = Input.GetTouch(0);
+
+        if (touch.phase == TouchPhase.Began)
+        {
+            RaycastHit hit;
+            Ray r = arCamera.ScreenPointToRay(touch.position);
+            if (Physics.Raycast(r, out hit))
+            {
+                if (hit.collider.gameObject.name == "Play")
+                {
+                    Debug.Log("Hit Play");
+                    if (player != null)
                     {
-                        print("Hit Child Bar");
+                        play.SetActive(false);
+                        pause.SetActive(true);
+                        player.Play();
                     }
+                }
+                else if (hit.collider.gameObject.name == "Pause")
+                {
+                    Debug.Log("Hit Pause");
+                    if (player != null)
+                    {
+                        play.SetActive(true);
+                        pause.SetActive(false);
+                        player.Pause();
+                    }
+
+                }
+                else if (hit.collider.gameObject.name == "Progress Bar Back")
+                {
+                    Debug.Log("Hit Progress Bar");
+                    slider.transform.localPosition = new Vector3(hit.point.x, slider.transform.localPosition.y, slider.transform.localPosition.z);
+                    float barLength = (hit.point.x - barStart.transform.localPosition.x) / barRectScaleX;
+                    progress.transform.localScale = new Vector3(barLength, 1, 1);
+                    progress.transform.localPosition = new Vector3((progress.transform.localScale.x * barRectScaleX / 2.0f) + barStart.transform.localPosition.x,
+                                                                barY, barZ);                                       
+                    float frame = player.frameCount * barLength;
+                    player.frame = (long)frame;
 
                 }
 
@@ -105,4 +106,5 @@ public class ARVideoControls : MonoBehaviour
         }
 
     }
+     
 }
