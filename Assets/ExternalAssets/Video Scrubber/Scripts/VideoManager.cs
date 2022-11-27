@@ -4,13 +4,23 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Video;
 using UnityEngine.UI;
+using UnityEngine.XR.ARFoundation;
 
 public class VideoManager : MonoBehaviour, IDragHandler, IPointerDownHandler
 {
 
     public VideoPlayer player;
     public Image progress;
-    
+
+    [SerializeField]
+    ARRaycastManager aRRaycastManager;
+    List<ARRaycastHit> hits = new List<ARRaycastHit>();
+
+    [SerializeField]
+    GameObject playerPrefab;
+
+    Camera arCamera;
+
     void Update()
     {
         if (player.frameCount > 0)
@@ -48,6 +58,32 @@ public class VideoManager : MonoBehaviour, IDragHandler, IPointerDownHandler
     {
         if(player != null)
             player.Play();  
+    }
+
+    void ARTouchButton()
+    {
+        if (Input.touchCount == 0)
+            return;
+        RaycastHit hit;
+        Ray r = arCamera.ScreenPointToRay(Input.GetTouch(0).position);
+
+        if (aRRaycastManager.Raycast(Input.GetTouch(0).position, hits))
+        {
+            if (Input.GetTouch(0).phase == TouchPhase.Began)
+            {
+                if (Physics.Raycast(r, out hit))
+                {
+                    if (hit.collider.gameObject.tag == "Play")
+                    {
+                        if (player != null)
+                            player.Play();
+                    }
+                    
+                }
+
+            }
+        }
+
     }
   
 }
