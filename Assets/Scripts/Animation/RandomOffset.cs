@@ -12,6 +12,7 @@ public class RandomOffset : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         anim.SetFloat("Offset", Random.Range(0.0f, 1.0f));
+        anim.speed = Random.Range(0.5f, 1.2f);
     }
     
 }

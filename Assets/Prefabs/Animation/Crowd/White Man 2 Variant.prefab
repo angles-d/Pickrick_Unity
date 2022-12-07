@@ -373,7 +373,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: f2c8a97709bb44150826e1a28888f703, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: -5696235270323981043, guid: f8670de4e3c5f7445abec4708a0665c5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -482,7 +482,7 @@ PrefabInstance:
     - target: {fileID: -4431429744085825124, guid: f8670de4e3c5f7445abec4708a0665c5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.018620284
+      value: -0.018620286
       objectReference: {fileID: 0}
     - target: {fileID: -4431429744085825124, guid: f8670de4e3c5f7445abec4708a0665c5,
         type: 3}
@@ -492,7 +492,7 @@ PrefabInstance:
     - target: {fileID: -4431429744085825124, guid: f8670de4e3c5f7445abec4708a0665c5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.007138869
+      value: -0.0071388707
       objectReference: {fileID: 0}
     - target: {fileID: -4431429744085825124, guid: f8670de4e3c5f7445abec4708a0665c5,
         type: 3}
@@ -792,7 +792,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: f8670de4e3c5f7445abec4708a0665c5,
         type: 3}
       propertyPath: m_Name
-      value: White Man 2
+      value: White Man 2 Variant
       objectReference: {fileID: 0}
     - target: {fileID: -790435773315590083, guid: f8670de4e3c5f7445abec4708a0665c5,
         type: 3}
