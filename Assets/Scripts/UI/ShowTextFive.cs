@@ -22,8 +22,8 @@ public class ShowTextFive : MonoBehaviour
     }
 
 
-    private void OnDisable()
-    {
-        textElement.gameObject.SetActive(true);
-    }
+    // private void OnDisable()
+    // {
+    //     textElement.gameObject.SetActive(true);
+    // }
 }

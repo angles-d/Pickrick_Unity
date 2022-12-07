@@ -21,8 +21,8 @@ public class ShowTextSeven : MonoBehaviour
         textElement.gameObject.SetActive(false);
     }
 
-    private void OnDisable()
-    {
-        textElement.gameObject.SetActive(true);
-    }
+    // private void OnDisable()
+    // {
+    //     textElement.gameObject.SetActive(true);
+    // }
 }
