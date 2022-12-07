@@ -100,7 +100,7 @@ public class ImageRecognition : MonoBehaviour
 
     void CheckVidsEnd()
     {
-        if (finalVidPlayer.frame >= 1750)
+        if (finalVidPlayer.time >= finalVidPlayer.clip.length - 5)
         {
             Debug.Log("vid done");
             vidDone = true;

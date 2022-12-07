@@ -125,4 +125,12 @@ public class VignetteController : MonoBehaviour
         vignettes.SetActive(true);
     }
 
+    //Switch back to the vignettes from the AR timeline
+    public void BackToVignettes(){
+        SceneManager.LoadScene("Intros");
+        print("Back to AR");
+        startVignettes();
+    
+    }
+
 }
