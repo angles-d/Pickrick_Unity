@@ -33,8 +33,8 @@ public class VignetteController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        image_rec.enabled = true;
-        ar_track.enabled = true;
+        image_rec.enabled = false;
+        ar_track.enabled = false;
     }
 
     // Update is called once per frame
