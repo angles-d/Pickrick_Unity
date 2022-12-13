@@ -16,11 +16,11 @@ public class LaunchAR : MonoBehaviour
     public Camera arCamera;
     public GameObject UI;
     //public GameObject launchArInfo;
-    public PlaceObjectInFrontOfCamera arObjects;
+    public GameObject arObjects;
     public Menu.PageController pageController;
+    [Range(0, 100)]
+    public float distance;
 
-    // Reference to PlaceObjectInFrontOfCameraScript
-    //public PlaceObjectInFrontOfCamera placeObjectInFrontOfCamera;
 
 
     // Start is called before the first frame update
@@ -30,28 +30,20 @@ public class LaunchAR : MonoBehaviour
         UI.SetActive(false);
     }
 
-    void Update()
+    //places the ARobjects in front of the AR camera
+    public void PlaceInFrontOfCamera()
     {
-       
+        // Put the object in front of the camera
+        arObjects.transform.position = arCamera.transform.position + arCamera.transform.forward * distance;
+        // Make the y rotation equal to the cameras y rotation
+        Vector3 eulerRotation = new Vector3(arObjects.transform.eulerAngles.x, arCamera.transform.eulerAngles.y, arObjects.transform.eulerAngles.z);
+        arObjects.transform.rotation = Quaternion.Euler(eulerRotation);
     }
-
-    //public void toAR()
-    //{
-       
-    //    Screen.orientation = ScreenOrientation.Portrait;
-    //    //launchArInfo.SetActive(true);
-
-    //    //vignettes.gameObject.SetActive(false);
-
-    //}
-
 
     // Method runs when the user presses the launch scene button
     public void PressLaunchSceneButton()
     {
-        //arMarker.SetActive(false);
-        //SceneManager.LoadScene("Main_Scene");
-        arObjects.PlaceInFrontOfCamera();
+        PlaceInFrontOfCamera();
         UI.SetActive(true);
         pageController.TurnPageOff(Menu.PageType.Hotspot, Menu.PageType.Timeline);
 
