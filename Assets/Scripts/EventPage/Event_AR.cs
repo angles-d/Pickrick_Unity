@@ -76,10 +76,11 @@ public class Event_AR : Timeline_Event {
         pageController.TurnPageOff(Menu.PageType.Timeline);
 
         foreach(Transform child in moreInfoPage.transform) {
-            if (child.gameObject.tag == "MoreInfo") {
-                child.gameObject.SetActive(false);
-            } else {
+            if (child.gameObject.tag == "Info") {
                 child.gameObject.SetActive(true);
+            } else {
+                child.gameObject.SetActive(false);
+                
             }
         }
     }
@@ -89,10 +90,11 @@ public class Event_AR : Timeline_Event {
         pageController.TurnPageOn(Menu.PageType.Timeline);
 
         foreach(Transform child in moreInfoPage.transform) {
-            if (child.gameObject.tag == "MoreInfo") {
-                child.gameObject.SetActive(true);
-            } else {
+            if (child.gameObject.tag == "Info") {
                 child.gameObject.SetActive(false);
+            } else {
+                child.gameObject.SetActive(true);
+                
             }
         }
     }
