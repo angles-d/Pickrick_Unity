@@ -12,6 +12,7 @@ public class LightEstimation : MonoBehaviour
 
     [SerializeField]
     private Text tempValue;
+    
 
     [SerializeField]
     private Text colorCorrectionValue;
