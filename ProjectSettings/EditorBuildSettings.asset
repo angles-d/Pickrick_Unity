@@ -8,15 +8,18 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Intros.unity
     guid: 0851f4f2398af4d599214ec910144484
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Main_Scene.unity
     guid: 8b38aa2ce80315044a2739f28a967e4b
   - enabled: 0
     path: Assets/Scenes/Test Scenes/Test Vid.unity
     guid: 9c00ef93b8fdf4c0e9844f6f22906ced
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Test Scenes/Realtime Lighting.unity
     guid: a8d7977c2d9c345c68cb9b23d5e39cf3
+  - enabled: 0
+    path: Assets/Scenes/Test Scenes/Occlusion.unity
+    guid: 4ff2f4cb449dd49958fe5cd2e70dbf7f
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: a14ae7ff30d1def4fa7e9f53491e50b2,
       type: 2}
