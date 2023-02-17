@@ -16,6 +16,8 @@ public class ImageRecognition : MonoBehaviour
     public GameObject finalVid = null;
     public VideoPlayer finalVidPlayer;
 
+
+
     public void Awake()
     {
         ar = FindObjectOfType<ARTrackedImageManager>();
@@ -79,7 +81,6 @@ public class ImageRecognition : MonoBehaviour
 
 
         GameObject newPrefab = spawnedPrefabs[name];
-
 
         newPrefab.transform.position = position;
         newPrefab.transform.rotation = rotation;

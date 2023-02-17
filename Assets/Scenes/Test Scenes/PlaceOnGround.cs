@@ -13,6 +13,8 @@ public class PlaceOnGround : MonoBehaviour
 
     [SerializeField]
     GameObject prefab;
+    [SerializeField]
+    GameObject anim;
 
     Camera arCamera;
     void Start()
@@ -23,41 +25,23 @@ public class PlaceOnGround : MonoBehaviour
 
     
 
-    public void OnEnable()
-    {
-        m_planeManager.planesChanged += OnPlaneChanged;
-    }
-
-    public void OnDisable()
-    {
-        m_planeManager.planesChanged -= OnPlaneChanged;
-    }
-
-    // Update is called once per frame
     void Update()
     {
-
+        if (!placed)
+        {
+            StartCoroutine(Ground());
+        }
+        
     }
 
-
-    public void OnPlaneChanged(ARPlanesChangedEventArgs args)
+    IEnumerator Ground()
     {
-        Debug.Log("PLANE" + args);
-        //foreach(ARPlane plane in args.added)
-        //{
-
-        //}
-
-        //foreach (ARPlane plane in args.updated)
-        //{
-
-        //}
-
-        //foreach (ARPlane plane in args.removed)
-        //{
-
-        //}
-
+        if (!placed && m_planeManager.trackables.count >= 1)
+        {
+            Debug.Log("TRACKED");
+            MoveToGround(prefab);
+        }
+        yield return null;
     }
 
     void MoveToGround(GameObject prefab)
@@ -74,7 +58,20 @@ public class PlaceOnGround : MonoBehaviour
         if (groundHeight != float.MaxValue)
         {
             Vector3 pos = prefab.transform.position;
+            //Instantiate(prefab, new Vector3(pos.x, groundHeight, pos.z), Quaternion.identity);
             prefab.transform.position = new Vector3(pos.x, groundHeight, pos.z);
+            prefab.SetActive(true);
+            placed = true;
+
+            anim.transform.position = new Vector3(anim.transform.position.x, groundHeight, anim.transform.position.z);
+           
+
+            m_planeManager.SetTrackablesActive(false);
+            m_planeManager.enabled = false;
         }
+
+       
     }
+
+    
 }

@@ -12,6 +12,7 @@ TagManager:
   - Event_AR_MaddoxThreatensMinisters
   - Info
   - Spawnable
+  - Camera
   layers:
   - Default
   - TransparentFX

@@ -468,7 +468,7 @@ MonoBehaviour:
   placeablePrefabs:
   - {fileID: 6426898959172529953, guid: 2c7a56448549e45bf90746638f23fb5f, type: 3}
   - {fileID: 5663053624449395366, guid: 2ee302d37fa6d4f8aa357cc1ca3bac7d, type: 3}
-  firstImageScanned: 0
+  firstImageScanned: 1
   vidDone: 0
   finalVid: {fileID: 0}
   finalVidPlayer: {fileID: 0}
