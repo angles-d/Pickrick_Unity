@@ -1,0 +1,46 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PathController : MonoBehaviour
+{
+    // Start is called before the first frame update
+
+    public GameObject[] markers;
+    [SerializeField]
+    int curMarker = 0;
+    [SerializeField]
+    GameObject nextButton;
+    bool firstPlayed = false;
+
+    void Start()
+    {
+        //hide all the markers
+        foreach (GameObject m in markers)
+        {
+            m.SetActive(false);
+        }
+       
+    }
+
+    
+    //Show the marker at the current index
+    public void ShowNextMarker()
+    {
+        //increase to next marker
+        curMarker++;
+        //turn on next marker
+        markers[curMarker].SetActive(true);
+
+    }
+
+    //called after the animaiton has been played once
+    //through the signal emitter on the timeline
+    //Make sure signal only emits once
+    public void MoveToNext()
+    {
+        nextButton.SetActive(true);
+        firstPlayed = true;
+        
+    }
+}

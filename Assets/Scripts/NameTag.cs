@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class NameTag : MonoBehaviour {
     
-    public GameObject TextName;    
+    public GameObject TextName;
+
 
     // Start is called before the first frame update
     void Start() {
