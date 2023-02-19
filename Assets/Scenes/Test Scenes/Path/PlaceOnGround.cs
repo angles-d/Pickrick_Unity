@@ -20,7 +20,7 @@ public class PlaceOnGround : MonoBehaviour
     Camera arCamera;
     private void Awake()
     {
-        anim.SetActive(false);
+        //anim.SetActive(false);
         prefab.SetActive(false);
     }
 

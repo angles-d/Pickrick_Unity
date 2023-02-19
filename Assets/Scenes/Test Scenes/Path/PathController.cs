@@ -13,13 +13,15 @@ public class PathController : MonoBehaviour
     GameObject nextButton;
     bool firstPlayed = false;
 
-    void Start()
+    void Awake()
     {
         //hide all the markers
         foreach (GameObject m in markers)
         {
             m.SetActive(false);
         }
+
+        markers[0].SetActive(true);
        
     }
 

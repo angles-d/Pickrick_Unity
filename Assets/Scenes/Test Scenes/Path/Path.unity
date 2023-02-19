@@ -318,6 +318,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Distorting the Gospel 08/04
       objectReference: {fileID: 0}
+    - target: {fileID: 8586149958402591112, guid: 5c018fcda7a7347f08943506245a44e7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8586149958402591115, guid: 5c018fcda7a7347f08943506245a44e7,
         type: 3}
       propertyPath: m_RootOrder
@@ -586,7 +591,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 509181062}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
   - {fileID: 1391757119}
@@ -747,8 +752,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_planeManager: {fileID: 0}
-  prefab: {fileID: 0}
-  anim: {fileID: 1391757118}
+  prefab: {fileID: 1651129197}
+  anim: {fileID: 509181062}
 --- !u!1001 &615395978
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1393,7 +1398,7 @@ PrefabInstance:
     - target: {fileID: 2617015438202457457, guid: 66231a823674e47608c3f4bc004380a3,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4839512345513974681, guid: 66231a823674e47608c3f4bc004380a3,
         type: 3}
