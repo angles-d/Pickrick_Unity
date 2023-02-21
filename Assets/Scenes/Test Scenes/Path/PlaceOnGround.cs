@@ -16,22 +16,26 @@ public class PlaceOnGround : MonoBehaviour
     GameObject prefab;
     [SerializeField]
     GameObject anim;
+    [SerializeField]
+    GameObject arFloor;
+
 
     Camera arCamera;
-    private void Awake()
+
+    void Awake()
     {
         //anim.SetActive(false);
         prefab.SetActive(false);
+        m_planeManager = gameObject.GetComponent<ARPlaneManager>();
+        m_planeManager.enabled = false;
     }
 
     void Start()
     {
-        m_planeManager = gameObject.GetComponent<ARPlaneManager>();
         arCamera = GameObject.Find("AR Camera").GetComponent<Camera>();
-        m_planeManager.enabled = false;
+       
     }
 
-    
 
     void Update()
     {
@@ -82,6 +86,7 @@ public class PlaceOnGround : MonoBehaviour
         {
             if (plane.transform.position.y < groundHeight) {
                 groundHeight = plane.transform.position.y;
+                Debug.Log("Ground Height: " + groundHeight);
             }
         }
 
@@ -89,8 +94,10 @@ public class PlaceOnGround : MonoBehaviour
         {
             Vector3 pos = prefab.transform.position;
             //Instantiate(prefab, new Vector3(pos.x, groundHeight, pos.z), Quaternion.identity);
-            prefab.transform.position = new Vector3(pos.x, groundHeight, pos.z);
+            prefab.transform.position = new Vector3(pos.x, groundHeight + pos.y, pos.z);
             prefab.SetActive(true);
+
+            arFloor.transform.position = new Vector3(arFloor.transform.position.x, groundHeight + pos.y, arFloor.transform.position.z);
 
             //change tracking flags
             placed = true;

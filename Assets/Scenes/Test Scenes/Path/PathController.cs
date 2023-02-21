@@ -7,6 +7,7 @@ public class PathController : MonoBehaviour
     // Start is called before the first frame update
 
     public GameObject[] markers;
+    public GameObject[] animations;
     [SerializeField]
     int curMarker = 0;
     [SerializeField]
@@ -30,6 +31,7 @@ public class PathController : MonoBehaviour
     public void ShowNextMarker()
     {
         //increase to next marker
+        animations[curMarker].SetActive(false);
         curMarker++;
         //turn on next marker
         markers[curMarker].SetActive(true);
