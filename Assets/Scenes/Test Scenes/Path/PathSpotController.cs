@@ -24,9 +24,13 @@ public class PathSpotController : MonoBehaviour
         //Debug.Log("Trigger: " + other.name);
         if (!animActive && other.gameObject.CompareTag("MainCamera"))
         {
-            Debug.Log("COLLIDE");
+            Debug.Log("COLLIDE: " + gameObject.name);
             arAnim.SetActive(true);
-            animActive = true;
+            if (arAnim != null)
+            {
+                animActive = true;
+            }
+           
             gameObject.SetActive(false);
         }
        

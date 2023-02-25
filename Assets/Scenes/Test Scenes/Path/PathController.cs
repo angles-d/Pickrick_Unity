@@ -13,6 +13,11 @@ public class PathController : MonoBehaviour
     [SerializeField]
     GameObject nextButton;
     bool firstPlayed = false;
+    [SerializeField]
+    InterstitialsController ic;
+
+    //public GameObject nextMarker;
+
 
     void Awake()
     {
@@ -22,21 +27,36 @@ public class PathController : MonoBehaviour
             m.SetActive(false);
         }
 
-        markers[0].SetActive(true);
-       
     }
 
-    
+    public void ShowNextIntersitial()
+    {
+        //hide current animation
+        animations[curMarker].SetActive(false);
+        //show next itnerstitial marker
+        ic.ShowNextIntersitial();
+
+        ic.curInter += 1;
+        curMarker++;
+    }
+
+  
+
+    //Path Marker specific methods
     //Show the marker at the current index
     public void ShowNextMarker()
     {
-        //increase to next marker
-        animations[curMarker].SetActive(false);
-        curMarker++;
+        //hide the current interstitial
+        ic.HideCurrent();
+
+       
+        
         //turn on next marker
         markers[curMarker].SetActive(true);
-
+        
     }
+
+
 
     //called after the animaiton has been played once
     //through the signal emitter on the timeline
