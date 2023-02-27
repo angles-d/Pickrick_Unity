@@ -238,7 +238,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bdd3f5e3410cf4298880c0aaa5c70f3c, type: 2}
+  - {fileID: 2100000, guid: 04c9f08316c6942d28a3f6c7cd9e7bad, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -302,6 +302,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 4419239681847815039}
   tc: {fileID: 0}
+  posOffset: 0
 --- !u!1 &4419239683507211934
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,6 +423,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8758123782010399374, guid: 0b559926ec5ed49a9bf1c4155082e79f,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8758123782010399375, guid: 0b559926ec5ed49a9bf1c4155082e79f,
         type: 3}

@@ -13,9 +13,9 @@ public class PlaceOnGround : MonoBehaviour
     ARPlaneManager m_planeManager;
 
     [SerializeField]
-    GameObject prefab;
-    [SerializeField]
-    GameObject anim;
+    GameObject[] toPlace;
+    //[SerializeField]
+    //GameObject anim;
     [SerializeField]
     GameObject arFloor;
 
@@ -24,8 +24,11 @@ public class PlaceOnGround : MonoBehaviour
 
     void Awake()
     {
-        //anim.SetActive(false);
-        prefab.SetActive(false);
+        foreach (GameObject g in toPlace)
+        {
+            //g.SetActive(false);
+        }
+
         m_planeManager = gameObject.GetComponent<ARPlaneManager>();
         m_planeManager.enabled = false;
     }
@@ -52,7 +55,7 @@ public class PlaceOnGround : MonoBehaviour
         if (!placed && m_planeManager.trackables.count >= 1)
         {
             Debug.Log("TRACKED");
-            MoveToGround(prefab);
+            MoveToGround();
         }
         yield return null;
     }
@@ -72,46 +75,68 @@ public class PlaceOnGround : MonoBehaviour
         if (!placed && m_planeManager.trackables.count >= 1)
         {
             Debug.Log("TRACKED");
-            MoveToGround(prefab);
-        }
+            float groundHeight = float.MaxValue;
+            //set arplane to ground
+            foreach (ARPlane plane in m_planeManager.trackables)
+            {
+                if (plane.transform.position.y < groundHeight)
+                {
+                    groundHeight = plane.transform.position.y;
+                    Debug.Log("Ground Height: " + groundHeight);
+                }
 
-       
-    }
-
-    void MoveToGround(GameObject prefab)
-    {
-        float groundHeight = float.MaxValue;
-
-        foreach (ARPlane plane in m_planeManager.trackables)
-        {
-            if (plane.transform.position.y < groundHeight) {
-                groundHeight = plane.transform.position.y;
-                Debug.Log("Ground Height: " + groundHeight);
             }
-        }
 
-        if (groundHeight != float.MaxValue)
-        {
-            Vector3 pos = prefab.transform.position;
-            //Instantiate(prefab, new Vector3(pos.x, groundHeight, pos.z), Quaternion.identity);
-            prefab.transform.position = new Vector3(pos.x, groundHeight + pos.y, pos.z);
-            prefab.SetActive(true);
-
-            arFloor.transform.position = new Vector3(arFloor.transform.position.x, groundHeight + pos.y, arFloor.transform.position.z);
-
-            //change tracking flags
-            placed = true;
-            tracking = false;
-
-            anim.transform.position = new Vector3(anim.transform.position.x, groundHeight, anim.transform.position.z);
+            if (groundHeight != float.MaxValue)
+            {
+               
+                arFloor.transform.position = new Vector3(arFloor.transform.position.x, groundHeight, arFloor.transform.position.z);
+                Debug.Log("MOVE TO GROUND");
+                MoveToGround();
+            }
            
-
-            m_planeManager.SetTrackablesActive(false);
-            m_planeManager.enabled = false;
         }
 
        
     }
+
+    public void MoveToGround()
+    {
+        float groundHeight = arFloor.transform.position.y;
+        foreach (GameObject g in toPlace)
+        {
+            //for all children in each gameobject
+            foreach (Transform c in g.transform)
+            {
+                Vector3 pos = c.position;
+                Renderer r = c.GetComponent<Renderer>();
+                if (r != null)
+                {
+                    c.position = new Vector3(pos.x, groundHeight + r.bounds.extents.y, pos.z);
+                }
+                else
+                {
+                    c.position = new Vector3(pos.x, groundHeight + pos.y, pos.z);
+                }
+
+                //g.SetActive(true);
+            }
+
+        }
+
+            
+
+        //change trackng flags
+        placed = true;
+        tracking = false;
+
+        //turn off plane manager
+        m_planeManager.SetTrackablesActive(false);
+        m_planeManager.enabled = false;
+    }
+
+       
+    
 
     
 }

@@ -122,6 +122,15 @@ public class InterstitialsController : MonoBehaviour
 
     }
 
+
+    //for 6 markers
+    //private void NextPillar()
+    //{
+    //    nextPillar += 1;
+
+    //}
+
+    //For 3 markers
     private void NextPillar()
     {
         if (nextPillar == 3)
