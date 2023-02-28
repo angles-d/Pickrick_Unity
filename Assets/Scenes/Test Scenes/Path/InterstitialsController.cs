@@ -18,16 +18,18 @@ public class InterstitialsController : MonoBehaviour
 
     public bool trackingImage = false;
 
-    //interstitial prefabs
+    //interstitial gameobject prefabs
     public GameObject[] inters;
-
+    //interstitial pin markers
     public GameObject[] markers;
 
-    //Runs when scene is loaded
-    public void Awake()
-    {
+    //Variables for the timer
+    float timer = 0;
+    public float timeToNext;
+    public bool timerOn = false;
 
-    }
+    //button to show next animation
+    public GameObject nextButtonToAnim;
 
 
     public void OnEnable()
@@ -65,7 +67,10 @@ public class InterstitialsController : MonoBehaviour
 
     private void Update()
     {
-
+        if (timerOn)
+        {
+            InterstitialTimer();
+        }
     }
 
 
@@ -90,11 +95,43 @@ public class InterstitialsController : MonoBehaviour
             inters[curInter].transform.position = position;
             inters[curInter].transform.rotation = rotation;
             inters[curInter].SetActive(true);
+
+            //turn off tracking
             Debug.Log(inters[curInter].name);
+            //turn off tracking
             trackingImage = false;
+
+            //Start the countdown timer
+            timerOn = true;
+
+
         }
 
         
+    }
+
+    void InterstitialTimer()
+    {
+        if (timer < timeToNext)
+        {
+            timer += Time.deltaTime;
+        }
+        else
+        {
+            Debug.Log("timerDone");
+            timer = 0;
+            timerOn = false;
+            nextButtonToAnim.SetActive(true);
+
+        }
+
+    }
+
+    //for testing
+    public void StartTimer()
+    {
+        timerOn = true;
+
     }
 
     public void ShowNextIntersitial()

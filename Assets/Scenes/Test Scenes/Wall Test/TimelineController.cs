@@ -6,6 +6,7 @@ using UnityEngine.XR.ARFoundation;
 public class TimelineController : MonoBehaviour
 {
     public GameObject[] dates;
+    public GameObject[] doors =  new GameObject[3];
     public GameObject wallPosRef;
     //public GameObject[] animations;
     [SerializeField]
@@ -20,6 +21,11 @@ public class TimelineController : MonoBehaviour
     public Vector3 wallRefPos;
 
     GameObject dateParent;
+
+    //variable related to opening door
+    bool doorOpen = false;
+    float timer = 0;
+    public float timeToOpenDoor = 2;
 
     void Awake()
     {
@@ -50,6 +56,27 @@ public class TimelineController : MonoBehaviour
     public void OnDisable()
     {
         _m_trackedImage.trackedImagesChanged -= onImageChanged;
+    }
+
+
+    private void Update()
+    {
+        if (!doorOpen && curDate == dates.Length)
+        {
+            if (timer == 0)
+            {
+                Debug.Log("Door timer started");
+            }
+           
+            if(timer < timeToOpenDoor){
+                timer += Time.deltaTime;
+            } else
+            {
+                Debug.Log("Doors open");
+                OpenDoor();
+                doorOpen = true;
+            }
+        }
     }
 
     public void onImageChanged(ARTrackedImagesChangedEventArgs _m_trackedImagegs)
@@ -87,10 +114,37 @@ public class TimelineController : MonoBehaviour
         dateParent.SetActive(true);
     }
 
-    //public void TestWallPosition()
-    //{
+    public void OpenDoor()
+    {
+        StartCoroutine(OpenDoorCo());
+    }
 
-    //}
+    IEnumerator OpenDoorCo()
+    {
+        //Open doors
+
+        Vector3 offset = new Vector3(2,0,0);
+        float duration = 3.0f;
+        float time = 0.0f;
+
+        Vector3[] ogPos = {doors[0].transform.position,
+                           doors[1].transform.position,
+                           doors[2].transform.position};
+        
+
+        while (time <= duration)
+        {
+            time  = time + Time.deltaTime;
+            float percent = Mathf.Clamp01(time / duration);
+      
+            doors[0].transform.position = Vector3.Lerp(ogPos[0], ogPos[0] + offset, percent);
+            doors[1].transform.position = Vector3.Lerp(ogPos[1], ogPos[1] + offset, percent);
+            doors[2].transform.position = Vector3.Lerp(ogPos[2], ogPos[2] + offset, percent);
+
+            yield return null;
+        }
+      
+    }
 
 
     //Show the marker at the current index
@@ -100,6 +154,8 @@ public class TimelineController : MonoBehaviour
         {
             dates[curDate+3].SetActive(true);
         }
+
+        curDate += 1;
 
 
     }

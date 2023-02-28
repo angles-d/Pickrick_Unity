@@ -11,7 +11,7 @@ public class PathController : MonoBehaviour
     [SerializeField]
     int curMarker = 0;
     [SerializeField]
-    GameObject nextButton;
+    GameObject nextButtonToInter;
     bool firstPlayed = false;
     [SerializeField]
     InterstitialsController ic;
@@ -44,7 +44,7 @@ public class PathController : MonoBehaviour
 
     //Path Marker specific methods
     //Show the marker at the current index
-    public void ShowNextMarker()
+    public void ShowNextAnimMarker()
     {
         //hide the current interstitial
         ic.HideCurrent();
@@ -63,7 +63,7 @@ public class PathController : MonoBehaviour
     //Make sure signal only emits once
     public void MoveToNext()
     {
-        nextButton.SetActive(true);
+        nextButtonToInter.SetActive(true);
         firstPlayed = true;
         
     }

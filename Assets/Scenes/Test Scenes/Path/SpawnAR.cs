@@ -10,6 +10,8 @@ public class SpawnAR : MonoBehaviour
     public GameObject scene;
     public GameObject path;
     public GameObject posReference;
+
+    public GameObject dummyPosRef;
     [SerializeField]
     private ARTrackedImageManager _m_trackedImage;
 
@@ -60,6 +62,22 @@ public class SpawnAR : MonoBehaviour
         this.enabled = false;
         print("Positioned");
     }
+
+
+    public void TestSpawn()
+    {
+        //Vector3 pos = trackedImage.transform.position;
+        scene.transform.position = dummyPosRef.transform.position - posReference.transform.position;
+        Debug.Log("Scene:" + scene.transform.position);
+        //scene.transform.rotation = trackedImage.transform.rotation;
+
+        path.SetActive(true);
+        Debug.Log("SPAWNED");
+
+        this.enabled = false;
+        print("Positioned");
+    }
+    
 
     
 }
