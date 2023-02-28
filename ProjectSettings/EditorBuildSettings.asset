@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Test Scenes/Occlusion/Occlusion.unity
     guid: 4ff2f4cb449dd49958fe5cd2e70dbf7f
   - enabled: 0
-    path: Assets/Scenes/Test Scenes/Minister Quote/Minister.unity
+    path: Assets/Scenes/Test Scenes/4 Ministers/Four Minister.unity
     guid: bf37b7e6b283f442ea95b91bde1b080f
   - enabled: 0
     path: Assets/Scenes/Test Scenes/Path/Path.unity
