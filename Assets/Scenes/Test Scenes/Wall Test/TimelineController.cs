@@ -20,7 +20,9 @@ public class TimelineController : MonoBehaviour
     public Quaternion wallRefRot;
     public Vector3 wallRefPos;
 
-    GameObject dateParent;
+    public float spawnOffset;
+
+    GameObject timeline;
 
     //variable related to opening door
     bool doorOpen = false;
@@ -41,22 +43,22 @@ public class TimelineController : MonoBehaviour
         dates[2].SetActive(true);
 
         //hide the dates
-        dateParent = dates[0].transform.parent.gameObject;
-        dateParent.SetActive(false);
+        timeline = dates[0].transform.parent.gameObject;
+        //timeline.SetActive(false);
 
         //wall marker reference for testing
         wallRefPos = wallPosRef.transform.position;
     }
 
-    public void OnEnable()
-    {
-        _m_trackedImage.trackedImagesChanged += onImageChanged;
-    }
+    //public void OnEnable()
+    //{
+    //    _m_trackedImage.trackedImagesChanged += onImageChanged;
+    //}
 
-    public void OnDisable()
-    {
-        _m_trackedImage.trackedImagesChanged -= onImageChanged;
-    }
+    //public void OnDisable()
+    //{
+    //    _m_trackedImage.trackedImagesChanged -= onImageChanged;
+    //}
 
 
     private void Update()
@@ -79,24 +81,24 @@ public class TimelineController : MonoBehaviour
         }
     }
 
-    public void onImageChanged(ARTrackedImagesChangedEventArgs _m_trackedImagegs)
-    {
-        if (trackingImage)
-        {
-            //If an image m_m_trackedImageker is recognized
-            foreach (ARTrackedImage tracked in _m_trackedImagegs.added)
-            {
-                Debug.Log("IMAGE SCANNED");
-                SetWallPosition(tracked);
-                ShowTimeline();
-                trackingImage = false;
-                _m_trackedImage.enabled = false;
-            }
+    //public void onImageChanged(ARTrackedImagesChangedEventArgs _m_trackedImagegs)
+    //{
+    //    if (trackingImage)
+    //    {
+    //        //If an image m_m_trackedImageker is recognized
+    //        foreach (ARTrackedImage tracked in _m_trackedImagegs.added)
+    //        {
+    //            Debug.Log("IMAGE SCANNED");
+    //            SetWallPosition(tracked);
+    //            ShowTimeline();
+    //            trackingImage = false;
+    //            _m_trackedImage.enabled = false;
+    //        }
 
    
-        }
+    //    }
 
-    }
+    //}
 
     public void SetWallPosition(ARTrackedImage trackedImage)
     {
@@ -108,10 +110,10 @@ public class TimelineController : MonoBehaviour
 
     public void ShowTimeline()
     {
-        //dateParent.transform.position = new Vector3(wallRefPos.x, 0, wallRefPos.z);
-        dateParent.transform.rotation = wallRefRot;
-        dateParent.transform.Rotate(0,90,0);
-        dateParent.SetActive(true);
+        //timeline.transform.position = new Vector3(wallRefPos.x, 0, wallRefPos.z);
+        timeline.transform.rotation = wallRefRot;
+        timeline.transform.Rotate(0,90,0);
+        timeline.SetActive(true);
     }
 
     public void OpenDoor()
@@ -123,7 +125,7 @@ public class TimelineController : MonoBehaviour
     {
         //Open doors
 
-        Vector3 offset = new Vector3(2,0,0);
+        Vector3 offset = new Vector3(0,0,-1);
         float duration = 3.0f;
         float time = 0.0f;
 
@@ -158,6 +160,12 @@ public class TimelineController : MonoBehaviour
         curDate += 1;
 
 
+    }
+
+    public void PlaceInFront()
+    {
+        timeline.transform.position = Camera.main.transform.position += new Vector3(0, 0, spawnOffset);
+        timeline.SetActive(true);
     }
 
 }

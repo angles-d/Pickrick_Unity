@@ -67,7 +67,7 @@ public class SpawnAR : MonoBehaviour
     public void TestSpawn()
     {
         //Vector3 pos = trackedImage.transform.position;
-        scene.transform.position = dummyPosRef.transform.position - posReference.transform.position;
+        scene.transform.position = Camera.main.transform.position - posReference.transform.position;
         Debug.Log("Scene:" + scene.transform.position);
         //scene.transform.rotation = trackedImage.transform.rotation;
 

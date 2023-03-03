@@ -13,6 +13,7 @@ TagManager:
   - Info
   - Spawnable
   - Camera
+  - Anim Marker
   layers:
   - Default
   - TransparentFX

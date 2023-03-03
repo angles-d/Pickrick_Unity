@@ -90,7 +90,7 @@ public class PlaceOnGround : MonoBehaviour
             if (groundHeight != float.MaxValue)
             {
                
-                arFloor.transform.position = new Vector3(arFloor.transform.position.x, groundHeight, arFloor.transform.position.z);
+                arFloor.transform.position = new Vector3(arFloor.transform.position.x, groundHeight + 0.1f, arFloor.transform.position.z);
                 Debug.Log("MOVE TO GROUND");
                 MoveToGround();
             }
