@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
+using UnityEngine.Video;
 
 public class TimelineController : MonoBehaviour
 {
     public GameObject[] dates;
     public GameObject[] doors =  new GameObject[3];
+
+    public VideoPlayer introVidPlayer;
 
     [SerializeField]
     int curDate = 0;
@@ -14,10 +17,15 @@ public class TimelineController : MonoBehaviour
 
     GameObject timeline;
 
+    public AudioSource doorSound;
+
     //variable related to opening door
     bool doorOpen = false;
     float timer = 0;
     public float timeToOpenDoor = 2;
+
+    //video
+    bool introDone = false;
 
     void Awake()
     {
@@ -27,19 +35,18 @@ public class TimelineController : MonoBehaviour
             d.SetActive(false);
         }
 
-        //Show first 3 dates
-        dates[0].SetActive(true);
-        dates[1].SetActive(true);
-        dates[2].SetActive(true);
-
-        //hide the dates
+        //set timeline object
         timeline = dates[0].transform.parent.gameObject;
- 
     }
 
 
     private void Update()
     {
+        if (!introDone)
+        {
+            CheckVidsEnd();
+        }
+
         if (!doorOpen && curDate == dates.Length)
         {
             if (timer == 0)
@@ -58,7 +65,15 @@ public class TimelineController : MonoBehaviour
         }
     }
 
-    
+    public void ShowTimeline()
+    { 
+        //Show first 3 dates
+        dates[0].SetActive(true);
+        dates[1].SetActive(true);
+        dates[2].SetActive(true);
+
+    }
+
     public void OpenDoor()
     {
         StartCoroutine(OpenDoorCo());
@@ -67,9 +82,10 @@ public class TimelineController : MonoBehaviour
     IEnumerator OpenDoorCo()
     {
         //Open doors
+        doorSound.Play();
 
         Vector3 offset = new Vector3(0,0,-1);
-        float duration = 4.0f;
+        float duration = 6.0f;
         float time = 0.0f;
 
         Vector3[] ogPos = {doors[0].transform.position,
@@ -105,7 +121,18 @@ public class TimelineController : MonoBehaviour
 
     }
 
+    void CheckVidsEnd()
+    {
+        if (introVidPlayer.time > introVidPlayer.clip.length - 6)
+        {
+            Debug.Log("vid done");
+            introDone = true;
+            ShowTimeline();
 
-   
+        }
+    }
+
+
+
 
 }

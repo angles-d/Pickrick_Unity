@@ -27,7 +27,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Test Scenes/Path/Path.unity
     guid: 5b0959010ecc248279ba00793e899dc9
   - enabled: 1
-    path: Assets/Scenes/Test Scenes/Wall Test/Wall Timeline.unity
+    path: Assets/Scenes/Test Scenes/Wall Timeline/Wall Timeline.unity
     guid: bd89f1abdc89c48e08fefa46bc7b2dad
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: a14ae7ff30d1def4fa7e9f53491e50b2,

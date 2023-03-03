@@ -29,7 +29,13 @@ public class FindWall : MonoBehaviour
 
     [SerializeField]
     GameObject[] doors;
-     
+
+    [SerializeField]
+    GameObject[] ministers;
+
+    [SerializeField]
+    GameObject[] lightrays;
+
     public GameObject[] popup; //point floor, tap floor, scan wall, tap wall
 
     public GameObject timeline;
@@ -41,7 +47,7 @@ public class FindWall : MonoBehaviour
     GameObject arFloor;
 
 
-    public GameObject[][] toPlace = new GameObject[2][];
+    public GameObject[][] toPlace = new GameObject[4][];
 
     bool scanning = false;
 
@@ -64,6 +70,8 @@ public class FindWall : MonoBehaviour
         //populate to place
         toPlace[0] = doors;
         toPlace[1] = cards;
+        toPlace[2] = lightrays;
+        toPlace[3] = ministers;
 
         //hide timelin
         timeline.SetActive(false);
