@@ -7,20 +7,10 @@ public class TimelineController : MonoBehaviour
 {
     public GameObject[] dates;
     public GameObject[] doors =  new GameObject[3];
-    public GameObject wallPosRef;
-    //public GameObject[] animations;
+
     [SerializeField]
     int curDate = 0;
-    
-    [SerializeField]
-    private ARTrackedImageManager _m_trackedImage;
 
-    public bool trackingImage = false;
-
-    public Quaternion wallRefRot;
-    public Vector3 wallRefPos;
-
-    public float spawnOffset;
 
     GameObject timeline;
 
@@ -44,21 +34,8 @@ public class TimelineController : MonoBehaviour
 
         //hide the dates
         timeline = dates[0].transform.parent.gameObject;
-        //timeline.SetActive(false);
-
-        //wall marker reference for testing
-        wallRefPos = wallPosRef.transform.position;
+ 
     }
-
-    //public void OnEnable()
-    //{
-    //    _m_trackedImage.trackedImagesChanged += onImageChanged;
-    //}
-
-    //public void OnDisable()
-    //{
-    //    _m_trackedImage.trackedImagesChanged -= onImageChanged;
-    //}
 
 
     private void Update()
@@ -81,41 +58,7 @@ public class TimelineController : MonoBehaviour
         }
     }
 
-    //public void onImageChanged(ARTrackedImagesChangedEventArgs _m_trackedImagegs)
-    //{
-    //    if (trackingImage)
-    //    {
-    //        //If an image m_m_trackedImageker is recognized
-    //        foreach (ARTrackedImage tracked in _m_trackedImagegs.added)
-    //        {
-    //            Debug.Log("IMAGE SCANNED");
-    //            SetWallPosition(tracked);
-    //            ShowTimeline();
-    //            trackingImage = false;
-    //            _m_trackedImage.enabled = false;
-    //        }
-
-   
-    //    }
-
-    //}
-
-    public void SetWallPosition(ARTrackedImage trackedImage)
-    {
-        wallRefPos = trackedImage.transform.position;
-        wallRefRot = trackedImage.transform.rotation;
-        
-
-    }
-
-    public void ShowTimeline()
-    {
-        //timeline.transform.position = new Vector3(wallRefPos.x, 0, wallRefPos.z);
-        timeline.transform.rotation = wallRefRot;
-        timeline.transform.Rotate(0,90,0);
-        timeline.SetActive(true);
-    }
-
+    
     public void OpenDoor()
     {
         StartCoroutine(OpenDoorCo());
@@ -126,7 +69,7 @@ public class TimelineController : MonoBehaviour
         //Open doors
 
         Vector3 offset = new Vector3(0,0,-1);
-        float duration = 3.0f;
+        float duration = 4.0f;
         float time = 0.0f;
 
         Vector3[] ogPos = {doors[0].transform.position,
@@ -162,10 +105,7 @@ public class TimelineController : MonoBehaviour
 
     }
 
-    public void PlaceInFront()
-    {
-        timeline.transform.position = Camera.main.transform.position += new Vector3(0, 0, spawnOffset);
-        timeline.SetActive(true);
-    }
+
+   
 
 }

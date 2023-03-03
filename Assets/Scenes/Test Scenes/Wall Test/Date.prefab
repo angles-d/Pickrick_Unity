@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6612281825421761342}
   m_Layer: 0
-  m_Name: CardHolder
+  m_Name: CardHolder 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3331085621043593663}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.705, y: 0, z: 1.14}
+  m_LocalPosition: {x: -2, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4419239681847815027}
@@ -59,7 +59,7 @@ RectTransform:
   m_GameObject: {fileID: 4419239681860959896}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_LocalScale: {x: 0.05, y: 0.1, z: 2}
   m_Children: []
   m_Father: {fileID: 4419239682040541142}
   m_RootOrder: 0
@@ -144,8 +144,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 2868903935
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0.6666667}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -237,7 +237,7 @@ Transform:
   m_GameObject: {fileID: 4419239682040541143}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 0.1}
+  m_LocalScale: {x: 4, y: 2, z: 0.1}
   m_Children:
   - {fileID: 4419239681860959903}
   m_Father: {fileID: 4419239683507211933}
@@ -260,7 +260,7 @@ MeshRenderer:
   m_GameObject: {fileID: 4419239682040541143}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -468,12 +468,12 @@ PrefabInstance:
     - target: {fileID: 8758123782010399375, guid: 0b559926ec5ed49a9bf1c4155082e79f,
         type: 3}
       propertyPath: m_Name
-      value: Card
+      value: Card 0
       objectReference: {fileID: 0}
     - target: {fileID: 8758123782010399375, guid: 0b559926ec5ed49a9bf1c4155082e79f,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b559926ec5ed49a9bf1c4155082e79f, type: 3}

@@ -30,11 +30,7 @@ public class DateController : MonoBehaviour
         //Debug.Log("Trigger: " + other.name);
         if (!cardActive && other.gameObject.CompareTag("MainCamera"))
         {
-            Debug.Log("COLLIDE");
-            //Game object has been rotated 90 degrees
-            //front = positive x
-            //Better to work in local coordinates???
-            card.transform.position = new Vector3(tc.wallRefPos.x + card.transform.position.x + posOffset, 0, tc.wallRefPos.z);
+            Debug.Log("Date Collision");
             card.SetActive(true);
             cardActive = true;
             gameObject.SetActive(false);
