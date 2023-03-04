@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using System;
-using System.Linq;
 
 public class FindWall : MonoBehaviour
 {

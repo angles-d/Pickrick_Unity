@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.Video;
+using UnityEngine.SceneManagement;
 
 public class TimelineController : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class TimelineController : MonoBehaviour
     [SerializeField]
     int curDate = 0;
 
+    public ProjectToPillar ptp;
 
     GameObject timeline;
 
@@ -61,6 +63,7 @@ public class TimelineController : MonoBehaviour
                 Debug.Log("Doors open");
                 OpenDoor();
                 doorOpen = true;
+                ptp.StartScanning();
             }
         }
     }
@@ -132,6 +135,10 @@ public class TimelineController : MonoBehaviour
         }
     }
 
+    public void LoadPathScene()
+    {
+        SceneManager.LoadScene("Path");
+    }
 
 
 

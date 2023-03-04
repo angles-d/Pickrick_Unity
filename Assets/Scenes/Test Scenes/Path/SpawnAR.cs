@@ -19,9 +19,14 @@ public class SpawnAR : MonoBehaviour
 
 
     //Runs when scene is loaded
-    public void Awake()
+    //will automatically start AR when scene is laoded
+    public void Start()
     {
-
+        if(_m_trackedImage != null)
+        {
+            //may have to use pillar position
+            TestSpawn();
+        }
     }
 
 

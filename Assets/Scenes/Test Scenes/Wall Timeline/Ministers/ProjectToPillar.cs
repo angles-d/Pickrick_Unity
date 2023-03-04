@@ -7,7 +7,7 @@ using System;
 
 public class ProjectToPillar : MonoBehaviour
 {
-    bool placed = false;
+    bool tracking = false;
 
     [SerializeField]
     ARPlaneManager m_planeManager;
@@ -25,9 +25,13 @@ public class ProjectToPillar : MonoBehaviour
 
     private void Start()
     {
-
+       
     }
 
+    public void StartScanning()
+    {
+        StartCoroutine(Timer(1f,TrackPillar));
+    }
 
     void Update()
     {
@@ -112,6 +116,7 @@ public class ProjectToPillar : MonoBehaviour
 
                     c.rotation = rot;
                     c.position = new Vector3(planePos.x,cPos.y, planePos.z);
+                    c.transform.Rotate(90, 0, 0);
                     
                 }
             }
@@ -121,6 +126,8 @@ public class ProjectToPillar : MonoBehaviour
             }
 
         }
+
+        gameObject.transform.GetChild(0).gameObject.SetActive(true);
 
        
 
