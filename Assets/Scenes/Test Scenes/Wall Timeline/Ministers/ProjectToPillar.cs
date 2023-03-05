@@ -30,7 +30,7 @@ public class ProjectToPillar : MonoBehaviour
 
     public void StartScanning()
     {
-        StartCoroutine(Timer(1f,TrackPillar));
+        StartCoroutine(Timer(2f,TrackPillar));
     }
 
     void Update()
@@ -127,6 +127,7 @@ public class ProjectToPillar : MonoBehaviour
 
         }
 
+        //turn on intro
         gameObject.transform.GetChild(0).gameObject.SetActive(true);
 
        

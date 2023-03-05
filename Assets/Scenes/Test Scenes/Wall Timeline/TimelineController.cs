@@ -15,8 +15,6 @@ public class TimelineController : MonoBehaviour
     [SerializeField]
     int curDate = 0;
 
-    public ProjectToPillar ptp;
-
     GameObject timeline;
 
     public AudioSource doorSound;
@@ -28,6 +26,7 @@ public class TimelineController : MonoBehaviour
 
     //video
     bool introDone = false;
+
 
     void Awake()
     {
@@ -63,7 +62,7 @@ public class TimelineController : MonoBehaviour
                 Debug.Log("Doors open");
                 OpenDoor();
                 doorOpen = true;
-                ptp.StartScanning();
+               
             }
         }
     }
@@ -74,6 +73,10 @@ public class TimelineController : MonoBehaviour
         dates[0].SetActive(true);
         dates[1].SetActive(true);
         dates[2].SetActive(true);
+
+        //save the current door position
+        LocationInfo.Instance.SetDoorPos(doors[0]);
+        LocationInfo.Instance.PrintDoorPos();
 
     }
 
@@ -107,7 +110,10 @@ public class TimelineController : MonoBehaviour
 
             yield return null;
         }
-      
+
+        LoadPathScene();
+        yield return null;
+
     }
 
 

@@ -5,7 +5,7 @@ using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using System;
 
-public class FindWall : MonoBehaviour
+public class ConfigureAR : MonoBehaviour
 {
     bool placed = false;
 
@@ -186,7 +186,7 @@ public class FindWall : MonoBehaviour
             {
                 arFloor.transform.position = p.transform.position;
                 Debug.Log("ar position:" + arFloor.transform.position);
-               
+                LocationInfo.Instance.SetFloorPos(arFloor);
 
             }
             else

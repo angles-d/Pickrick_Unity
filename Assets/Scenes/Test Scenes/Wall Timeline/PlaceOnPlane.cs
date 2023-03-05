@@ -16,7 +16,7 @@ public class PlaceOnPlane : MonoBehaviour
     GameObject toPlace;
     //[SerializeField]
     //GameObject anim;
-    [SerializeField]
+    //[SerializeField]
     //GameObject arFloor;
 
     void Awake()
