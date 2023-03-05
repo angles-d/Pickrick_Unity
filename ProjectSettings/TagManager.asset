@@ -15,6 +15,9 @@ TagManager:
   - Camera
   - Anim Marker
   - Pillar Position
+  - Ministers
+  - MinistersScroll
+
   layers:
   - Default
   - TransparentFX
