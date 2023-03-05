@@ -19,7 +19,15 @@ public class ProjectToPillar : MonoBehaviour
 
     public SceneController sc;
 
-   
+    [SerializeField]
+    GameObject ministersMenu;
+
+    [SerializeField]
+    GameObject tapPillarText;
+
+    [SerializeField]
+    GameObject pointPillarText;
+
     bool scanning = false;
 
     void Awake()
@@ -34,6 +42,7 @@ public class ProjectToPillar : MonoBehaviour
 
     public void StartScanning()
     {
+        pointPillarText.SetActive(true);
         StartCoroutine(Timer(2f,TrackPillar));
     }
 
@@ -67,6 +76,8 @@ public class ProjectToPillar : MonoBehaviour
 
     public void TrackPillar()
     {
+        pointPillarText.SetActive(false);
+        tapPillarText.SetActive(true);
         Debug.Log("Track Pillar");
         m_planeManager.enabled = true;
         m_planeManager.requestedDetectionMode = PlaneDetectionMode.Vertical;
@@ -103,8 +114,8 @@ public class ProjectToPillar : MonoBehaviour
     public void DetectPillar(List<ARRaycastHit> hits)
     {
         print(hits[0].ToString() + " " + hits[0].trackableId);
-        Vector3 planePos = hits[0].pose.position;
-        Quaternion rot = hits[0].pose.rotation;
+        //Vector3 planePos = hits[0].pose.position;
+        //Quaternion rot = hits[0].pose.rotation;
         scanning = false;
 
 
@@ -114,20 +125,13 @@ public class ProjectToPillar : MonoBehaviour
         {
             if (p.trackableId.Equals(hits[0].trackableId))
             {
-                foreach (Transform c in gameObject.transform)
-                {
-                    Vector3 cPos = c.position;
-
-                    c.rotation = rot;
-                    c.position = new Vector3(planePos.x,cPos.y, planePos.z);
-                    c.transform.Rotate(90, 0, 0);
-                    
-                }
-              
+                Vector3 planePos = p.transform.position;
+                Quaternion rot = p.transform.rotation;
 
                 pillar.transform.position = planePos;
                 pillar.transform.rotation = rot;
                 pillar.transform.Rotate(90, 0, 0);
+
             }
             else
             {
@@ -139,12 +143,24 @@ public class ProjectToPillar : MonoBehaviour
         //move the AR
         //from Pillar
         Debug.Log("POSITION FROM PILLAR");
+
         sc.PositionAR();
 
-        //turn on intro
-        gameObject.transform.GetChild(0).gameObject.SetActive(true);
+        //set the minister position 
+        foreach (Transform c in gameObject.transform)
+        {
+            Vector3 cPos = c.position;
 
-       
+            c.rotation = pillar.transform.rotation;
+            c.position = new Vector3(pillar.transform.position.x, cPos.y, pillar.transform.position.z);
+           
+
+        }
+
+        //Turn on Ministers canvas
+        ministersMenu.SetActive(true);
+        //turn off tap the pillar
+        tapPillarText.SetActive(false);
 
     }
 

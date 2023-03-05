@@ -34,6 +34,7 @@ public class SceneController : MonoBehaviour
     ProjectToPillar ptp;
 
 
+
     public GameObject pillarRef;
 
     //called regardless if object = enabled
@@ -50,10 +51,7 @@ public class SceneController : MonoBehaviour
     }
 
     private void Start()
-    {
-
-
-       
+    {  
         ptp.StartScanning();
         MoveToGround();
 
@@ -129,11 +127,11 @@ public class SceneController : MonoBehaviour
         foreach (GameObject g in toPlace)
         {
             //set ar floor
-            if (g.name.Equals("AR Floor") || g.name.Equals("Pillar Ref"))
+            if (g.name.Equals("AR Floor"))
             {
                 Vector3 pos = g.transform.position;
                 Renderer r = g.GetComponent<Renderer>();
-                g.transform.position = new Vector3(pos.x, groundHeight + r.bounds.extents.y, pos.z);
+                g.transform.position = new Vector3(pos.x, groundHeight, pos.z);
                 continue;
             }
 
