@@ -13,6 +13,8 @@ TagManager:
   - Info
   - Spawnable
   - Camera
+  - Ministers
+  - MinistersScroll
   layers:
   - Default
   - TransparentFX
