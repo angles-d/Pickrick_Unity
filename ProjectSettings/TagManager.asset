@@ -14,6 +14,7 @@ TagManager:
   - Spawnable
   - Camera
   - Anim Marker
+  - Pillar Position
   layers:
   - Default
   - TransparentFX

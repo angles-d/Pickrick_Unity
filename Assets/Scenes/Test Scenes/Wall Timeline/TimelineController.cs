@@ -4,13 +4,15 @@ using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.Video;
 using UnityEngine.SceneManagement;
+using System;
 
 public class TimelineController : MonoBehaviour
 {
     public GameObject[] dates;
     public GameObject[] doors =  new GameObject[3];
 
-    public VideoPlayer introVidPlayer;
+    public GameObject intro;
+    VideoPlayer introVidPlayer;
 
     [SerializeField]
     int curDate = 0;
@@ -27,6 +29,10 @@ public class TimelineController : MonoBehaviour
     //video
     bool introDone = false;
 
+    //buttons
+    public GameObject moveToPath;
+
+    public GameObject posRef;
 
     void Awake()
     {
@@ -38,7 +44,12 @@ public class TimelineController : MonoBehaviour
 
         //set timeline object
         timeline = dates[0].transform.parent.gameObject;
+        introVidPlayer = intro.GetComponent<VideoPlayer>();
+
+       
     }
+
+
 
 
     private void Update()
@@ -77,20 +88,22 @@ public class TimelineController : MonoBehaviour
         //save the current door position
         LocationInfo.Instance.SetDoorPos(doors[0]);
         LocationInfo.Instance.PrintDoorPos();
+        LocationInfo.Instance.SetScenePos(timeline);
+        LocationInfo.Instance.SetPillarLocation(posRef);
 
     }
 
     public void OpenDoor()
     {
+        doorSound.Play();
         StartCoroutine(OpenDoorCo());
     }
 
     IEnumerator OpenDoorCo()
     {
         //Open doors
-        doorSound.Play();
 
-        Vector3 offset = new Vector3(0,0,-1);
+        Vector3 offset = new Vector3(0,0,-1.5f);
         float duration = 6.0f;
         float time = 0.0f;
 
@@ -110,9 +123,19 @@ public class TimelineController : MonoBehaviour
 
             yield return null;
         }
-
-        LoadPathScene();
+        //Switch scenes
+        //StartCoroutine(Timer(4, LoadPathScene));
+        moveToPath.SetActive(true);
         yield return null;
+
+    }
+
+    IEnumerator Timer(float t, Action DoneWait)
+    {
+        //print("WaitAndPrint " + Time.time);
+        yield return new WaitForSeconds(t);
+        //print("WaitAndPrint " + Time.time);
+        DoneWait?.Invoke();
 
     }
 

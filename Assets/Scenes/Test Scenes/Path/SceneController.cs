@@ -31,7 +31,10 @@ public class SceneController : MonoBehaviour
 
 
     [SerializeField]
-    ProjectToPillar ptp; 
+    ProjectToPillar ptp;
+
+
+    public GameObject pillarRef;
 
     //called regardless if object = enabled
     void Awake()
@@ -49,11 +52,14 @@ public class SceneController : MonoBehaviour
     private void Start()
     {
 
-        PositionAR();
-        //PositionAR();
+
+       
         ptp.StartScanning();
+        MoveToGround();
 
     }
+
+   
 
     public void ShowNextIntersitial()
     {
@@ -97,11 +103,17 @@ public class SceneController : MonoBehaviour
     {
         //move to place to ground
         Debug.Log("Path AR Positioned");
-        MoveToGround();
+        Debug.Log("pillar Pos" + pillarRef.transform.position);
 
-        Debug.Log("Door: " + LocationInfo.Instance.GetDoorPosition());
-        transform.position = LocationInfo.Instance.GetDoorPosition() - posReference.transform.position;
+        transform.rotation = pillarRef.transform.rotation;
+        transform.Rotate(0, 90, 0);
+
+        Vector3 pillarPos = new Vector3(pillarRef.transform.position.x, 0, pillarRef.transform.position.z);
+        transform.position = pillarPos;
+        Debug.Log("Ref Pos" + -1 * posReference.transform.position);
+        transform.Translate(posReference.transform.position - pillarPos);
         Debug.Log("Scene:" + transform.position);
+        Debug.Log("Ref Pos" + posReference.transform.position);
 
         path.SetActive(true);
        
@@ -117,7 +129,7 @@ public class SceneController : MonoBehaviour
         foreach (GameObject g in toPlace)
         {
             //set ar floor
-            if (g.name.Equals("AR Floor"))
+            if (g.name.Equals("AR Floor") || g.name.Equals("Pillar Ref"))
             {
                 Vector3 pos = g.transform.position;
                 Renderer r = g.GetComponent<Renderer>();

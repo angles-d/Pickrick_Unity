@@ -15,6 +15,10 @@ public class ProjectToPillar : MonoBehaviour
     [SerializeField]
     ARRaycastManager m_raycastManager;
 
+    public GameObject pillar;
+
+    public SceneController sc;
+
    
     bool scanning = false;
 
@@ -119,6 +123,11 @@ public class ProjectToPillar : MonoBehaviour
                     c.transform.Rotate(90, 0, 0);
                     
                 }
+              
+
+                pillar.transform.position = planePos;
+                pillar.transform.rotation = rot;
+                pillar.transform.Rotate(90, 0, 0);
             }
             else
             {
@@ -126,6 +135,11 @@ public class ProjectToPillar : MonoBehaviour
             }
 
         }
+
+        //move the AR
+        //from Pillar
+        Debug.Log("POSITION FROM PILLAR");
+        sc.PositionAR();
 
         //turn on intro
         gameObject.transform.GetChild(0).gameObject.SetActive(true);
