@@ -249,10 +249,9 @@ public class ConfigureAR : MonoBehaviour
                 dates.transform.position = new Vector3(dates.transform.position.x, Camera.main.transform.position.y - 0.05f, dates.transform.position.z);
                 intro.transform.position = new Vector3(intro.transform.position.x, p.center.y, intro.transform.position.z);
             }
-            else
-            {
-                p.gameObject.SetActive(false);
-            }
+           
+             p.gameObject.SetActive(false);
+            
 
         }
 

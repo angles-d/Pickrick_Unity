@@ -120,7 +120,7 @@ public class ProjectToPillar : MonoBehaviour
 
 
         m_planeManager.enabled = false;
-
+        
         foreach (ARPlane p in m_planeManager.trackables)
         {
             if (p.trackableId.Equals(hits[0].trackableId))
@@ -132,11 +132,10 @@ public class ProjectToPillar : MonoBehaviour
                 pillar.transform.rotation = rot;
                 pillar.transform.Rotate(90, 0, 0);
 
+    
+               
             }
-            else
-            {
-                p.gameObject.SetActive(false);
-            }
+            p.gameObject.SetActive(false);
 
         }
 
@@ -146,22 +145,62 @@ public class ProjectToPillar : MonoBehaviour
 
         sc.PositionAR();
 
-        //set the minister position 
-        foreach (Transform c in gameObject.transform)
-        {
-            Vector3 cPos = c.position;
+        //float groundHeight = LocationInfo.Instance.GetFloorPos().y;
 
-            c.rotation = pillar.transform.rotation;
-            c.position = new Vector3(pillar.transform.position.x - 0.02f, cPos.y, pillar.transform.position.z);
-           
+        ////set the minister position 
+        //foreach (Transform c in gameObject.transform)
+        //{
+        //    Vector3 cPos = c.position;
+        //    c.rotation = pillar.transform.rotation;
+        //    //Renderer r = c.GetComponent<Renderer>();
+        //    //if (r != null)
+        //    //{
+        //    //    c.position = new Vector3(pillar.transform.position.x - 0.02f, groundHeight + r.bounds.extents.y, pillar.transform.position.z);
+        //    //}
+        //    //else
+        //    //{
+        //    c.position = new Vector3(pillar.transform.position.x - 1f, pillar.transform.position.y, pillar.transform.position.z);
+        //    Debug.Log(c.name+ " Move to ground:" + c.position);
+        //    //}
 
-        }
+
+        //}
+
+        PositionMinsiters();
 
         //Turn on Ministers canvas
         ministersMenu.SetActive(true);
         //turn off tap the pillar
         tapPillarText.SetActive(false);
 
+    }
+
+    public void PositionMinsiters()
+    {
+        float groundHeight = LocationInfo.Instance.GetFloorPos().y;
+
+        //set the minister position 
+        foreach (Transform c in gameObject.transform)
+        {
+            Vector3 cPos = c.position;
+            c.rotation = pillar.transform.rotation;
+            //Renderer r = c.GetComponent<Renderer>();
+            //if (r != null)
+            //{
+            //    c.position = new Vector3(pillar.transform.position.x - 0.02f, groundHeight + r.bounds.extents.y, pillar.transform.position.z);
+            //}
+            //else
+
+            //pillar&image has been rotated 90f z = right and left
+            c.position = pillar.transform.position;
+            c.position = new Vector3(pillar.transform.position.x, groundHeight + (cPos.y), pillar.transform.position.z);
+            //c.transform.Translate(-0.5f,0,0);
+            //c.position = new Vector3(pillar.transform.position.x, c.position.y + groundHeight, pillar.transform.position.z -0.5f);
+            Debug.Log(c.name + " Move to ground:" + c.position);
+            //}
+
+
+        }
     }
 
     

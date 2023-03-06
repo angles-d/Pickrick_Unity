@@ -41,10 +41,10 @@ public class SceneController : MonoBehaviour
     void Awake()
     {
         //hide all the markers
-        foreach (GameObject m in markers)
-        {
-            m.SetActive(false);
-        }
+        //foreach (GameObject m in markers)
+        //{
+        //    m.SetActive(false);
+        //}
 
         
 
