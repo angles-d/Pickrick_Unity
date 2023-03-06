@@ -152,7 +152,7 @@ public class ProjectToPillar : MonoBehaviour
             Vector3 cPos = c.position;
 
             c.rotation = pillar.transform.rotation;
-            c.position = new Vector3(pillar.transform.position.x, cPos.y, pillar.transform.position.z);
+            c.position = new Vector3(pillar.transform.position.x - 0.02f, cPos.y, pillar.transform.position.z);
            
 
         }

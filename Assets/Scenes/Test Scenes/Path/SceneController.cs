@@ -108,10 +108,12 @@ public class SceneController : MonoBehaviour
 
         Vector3 pillarPos = new Vector3(pillarRef.transform.position.x, 0, pillarRef.transform.position.z);
         transform.position = pillarPos;
-        Debug.Log("Ref Pos" + -1 * posReference.transform.position);
-        transform.Translate(posReference.transform.position - pillarPos);
-        Debug.Log("Scene:" + transform.position);
-        Debug.Log("Ref Pos" + posReference.transform.position);
+        //Debug.Log("Ref Pos:" + posReference.transform.position);
+
+        //Vector3 noY = pillarPos - posReference.transform.localPosition;
+        //transform.Translate(noY.x,0, noY.z,Space.World);
+        //Debug.Log("Scene:" + transform.position);
+        //Debug.Log("Ref Pos" + posReference.transform.position);
 
         path.SetActive(true);
        

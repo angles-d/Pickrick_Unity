@@ -11,6 +11,7 @@ public class FourMinistersController : MonoBehaviour
     bool allVisited = false;
 
     public GameObject moveToNext;
+    public GameObject arPlane;
     public GameObject meetMinisterText;
     // Start is called before the first frame update
     void Start()
@@ -33,6 +34,7 @@ public class FourMinistersController : MonoBehaviour
         Debug.Log("First Marker on");
 
         firstMarker.SetActive(true);
+        arPlane.SetActive(true);
 
         for (int i = 0; i < ministers.Length; i++)
         {

@@ -32,7 +32,6 @@ public class TimelineController : MonoBehaviour
     //buttons
     public GameObject moveToPath;
 
-    public GameObject posRef;
 
     void Awake()
     {
@@ -86,10 +85,8 @@ public class TimelineController : MonoBehaviour
         dates[2].SetActive(true);
 
         //save the current door position
-        LocationInfo.Instance.SetDoorPos(doors[0]);
-        LocationInfo.Instance.PrintDoorPos();
         LocationInfo.Instance.SetScenePos(timeline);
-        LocationInfo.Instance.SetPillarLocation(posRef);
+      
 
     }
 

@@ -30,13 +30,8 @@ public class ConfigureAR : MonoBehaviour
     GameObject[] doors;
 
     [SerializeField]
-    GameObject[] ministers;
-
-    [SerializeField]
     GameObject[] lightrays;
 
-    [SerializeField]
-    GameObject[] refPos;
 
     [SerializeField]
     GameObject intro;
@@ -53,7 +48,7 @@ public class ConfigureAR : MonoBehaviour
     GameObject arFloor;
 
 
-    public GameObject[][] toPlace = new GameObject[5][];
+    public GameObject[][] toPlace = new GameObject[3][];
 
     bool scanning = false;
 
@@ -77,8 +72,6 @@ public class ConfigureAR : MonoBehaviour
         toPlace[0] = doors;
         toPlace[1] = cards;
         toPlace[2] = lightrays;
-        toPlace[3] = ministers;
-        toPlace[4] = refPos;
 
         //hide timelin
         timeline.SetActive(false);
@@ -249,7 +242,7 @@ public class ConfigureAR : MonoBehaviour
                 timeline.transform.Rotate(0, 90, 0);
                 timeline.transform.Rotate(0, 0, 180);
 
-                Vector3 userPos = new Vector3(pos.x, Camera.main.transform.position.y, Camera.main.transform.position.z);
+                Vector3 userPos = new Vector3(pos.x, Camera.main.transform.position.y, pos.z);
                 timeline.transform.position = userPos - dummy.transform.position;
 
                 //move dates up
