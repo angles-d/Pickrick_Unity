@@ -100,7 +100,7 @@ public class TimelineController : MonoBehaviour
     {
         //Open doors
 
-        Vector3 offset = new Vector3(0,0,-1.5f);
+        Vector3 offset = new Vector3(0,0,-2.5f);
         float duration = 6.0f;
         float time = 0.0f;
 

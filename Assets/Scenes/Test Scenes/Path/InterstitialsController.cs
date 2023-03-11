@@ -141,7 +141,7 @@ public class InterstitialsController : MonoBehaviour
             Debug.Log("Show Next");
             //set transform and pos (in front of pillar)
             markers[curInter + 1].SetActive(true);
-            trackingImage = true;
+            //trackingImage = true;
             print("marker active: Pillar" + nextPillar);
             Debug.Log("prev inter:" + curInter);
         }
@@ -181,5 +181,10 @@ public class InterstitialsController : MonoBehaviour
 
         nextPillar += pillarDir;
 
+    }
+
+    public void StartTracking()
+    {
+        trackingImage = true;
     }
 }

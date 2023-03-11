@@ -28,7 +28,11 @@ public class PathSpotController : MonoBehaviour
             if(gameObject.tag.Equals("Anim Marker"))
             {
                 arAnim.SetActive(true);
-            } 
+            }
+            if (gameObject.tag.Equals("Inter Marker"))
+            {
+                transform.parent.GetComponent<InterstitialsController>().StartTracking();
+            }
             gameObject.SetActive(false);
         }
        
