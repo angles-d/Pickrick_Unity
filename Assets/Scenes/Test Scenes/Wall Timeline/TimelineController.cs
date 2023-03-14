@@ -53,6 +53,7 @@ public class TimelineController : MonoBehaviour
 
     private void Update()
     {
+       
         if (!introDone)
         {
             CheckVidsEnd();
@@ -60,20 +61,11 @@ public class TimelineController : MonoBehaviour
 
         if (!doorOpen && curDate == dates.Length)
         {
-            if (timer == 0)
-            {
-                Debug.Log("Door timer started");
-            }
-           
-            if(timer < timeToOpenDoor){
-                timer += Time.deltaTime;
-            } else
-            {
-                Debug.Log("Doors open");
-                OpenDoor();
-                doorOpen = true;
+            Debug.Log("Start Doors open");
+            StartCoroutine(Timer(15f, OpenDoor));
+            doorOpen = true;
                
-            }
+            
         }
     }
 
@@ -86,8 +78,8 @@ public class TimelineController : MonoBehaviour
 
         //save the current door position
         LocationInfo.Instance.SetScenePos(timeline);
-      
 
+        introVidPlayer.Pause();
     }
 
     public void OpenDoor()
@@ -98,16 +90,19 @@ public class TimelineController : MonoBehaviour
 
     IEnumerator OpenDoorCo()
     {
-        //Open doors
 
-        Vector3 offset = new Vector3(0,0,-2.5f);
+        //TODO change this to global coordinates
+        //offset in left direction; based on local direction of doors
+        Vector3 offset = doors[0].transform.right *  2.6f;
         float duration = 6.0f;
         float time = 0.0f;
 
         Vector3[] ogPos = {doors[0].transform.position,
                            doors[1].transform.position,
                            doors[2].transform.position};
-        
+
+        //wait for ministers to finish playing
+        yield return new WaitForSeconds(8);
 
         while (time <= duration)
         {
@@ -123,6 +118,7 @@ public class TimelineController : MonoBehaviour
         //Switch scenes
         //StartCoroutine(Timer(4, LoadPathScene));
         moveToPath.SetActive(true);
+        Debug.Log("End Door open");
         yield return null;
 
     }
@@ -160,6 +156,8 @@ public class TimelineController : MonoBehaviour
 
         }
     }
+
+   
 
     public void LoadPathScene()
     {

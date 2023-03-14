@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class SceneController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    bool firstPlayed = false;
+    //TODO Split this into animcontroller and scene controller
+
 
     //Game objects thate need to be placed on the floor (anim, anim markers, inter marker)
     public GameObject[] toPlace;
@@ -27,15 +28,20 @@ public class SceneController : MonoBehaviour
     GameObject nextButtonToInter;
 
     [SerializeField]
-    InterstitialsController ic;
+    public InterstitialsController ic;
 
 
     [SerializeField]
     ProjectToPillar ptp;
 
-
+    public GameObject[] animDates;
 
     public GameObject pillarRef;
+
+    //dates for the interstital button
+    string[] dates = { "Jul 3rd, 1964", "Jul 9th, 1964", "Jan 1st, 1965", "Feb 1st, 1965", "Feb 7th, 1965" };
+    public TextMeshProUGUI dateText;
+
 
     //called regardless if object = enabled
     void Awake()
@@ -51,7 +57,8 @@ public class SceneController : MonoBehaviour
     }
 
     private void Start()
-    {  
+    {
+        dateText = nextButtonToInter.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
         ptp.StartScanning();
         MoveToGround();
 
@@ -65,8 +72,6 @@ public class SceneController : MonoBehaviour
         animations[curMarker].SetActive(false);
         //show next itnerstitial marker
         ic.ShowNextIntersitial();
-
-        ic.curInter += 1;
         curMarker++;
     }
 
@@ -81,7 +86,11 @@ public class SceneController : MonoBehaviour
 
         //turn on next marker
         markers[curMarker].SetActive(true);
-        
+
+        if (curMarker == 0)
+        {
+            ic.TurnOnWalkToSign();
+        }
     }
 
 
@@ -91,10 +100,27 @@ public class SceneController : MonoBehaviour
     //Make sure signal only emits once
     public void ShowNextInterButton()
     {
-        nextButtonToInter.SetActive(true);
-        firstPlayed = true;
+        if(ic.curInter + 1 < dates.Length)
+        {
+            dateText.text = dates[ic.curInter + 1];
+            nextButtonToInter.SetActive(true);
+        }
+       
+      
         
     }
+
+    //NEED TO UPDATEE
+    public void TurnOnAnimDateUI() {
+        animDates[0].SetActive(true);
+    }
+
+    //called by to Interstitial button
+    public void TurnOffAnimDateUI()
+    {
+        animDates[0].SetActive(false);
+    }
+
 
     //position the path 
     public void PositionAR()

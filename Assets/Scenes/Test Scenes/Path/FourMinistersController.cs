@@ -13,6 +13,7 @@ public class FourMinistersController : MonoBehaviour
     public GameObject moveToNext;
     public GameObject arPlane;
     public GameObject meetMinisterText;
+    public GameObject WalkToMarkerSign;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +36,7 @@ public class FourMinistersController : MonoBehaviour
 
         firstMarker.SetActive(true);
         arPlane.SetActive(true);
+        WalkToMarkerSign.SetActive(true);
 
         for (int i = 0; i < ministers.Length; i++)
         {
@@ -50,7 +52,11 @@ public class FourMinistersController : MonoBehaviour
         {
             if (i == index)
             {
-                visited[i-1] = true;
+                //visit the value if not the intro
+                if (index > 0)
+                {
+                    visited[i - 1] = true;
+                }
                 ministers[i].SetActive(true);
             } else
             {
@@ -71,7 +77,6 @@ public class FourMinistersController : MonoBehaviour
                 return;
             } 
         }
-        Debug.Log("all visited");
         allVisited = true;
         meetMinisterText.SetActive(false);
         moveToNext.SetActive(true);

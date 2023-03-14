@@ -18,6 +18,8 @@ TagManager:
   - Ministers
   - MinistersScroll
   - Inter Marker
+  - Position
+  - MinistersMarker
   layers:
   - Default
   - TransparentFX

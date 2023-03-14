@@ -28,6 +28,10 @@ public class ProjectToPillar : MonoBehaviour
     [SerializeField]
     GameObject pointPillarText;
 
+    //TODO REMOVE ONLY FOR TESTING
+    [SerializeField]
+    GameObject scene;
+
     bool scanning = false;
 
     void Awake()
@@ -82,7 +86,7 @@ public class ProjectToPillar : MonoBehaviour
         m_planeManager.enabled = true;
         m_planeManager.requestedDetectionMode = PlaneDetectionMode.Vertical;
 
-        //turn off pint to wall 
+        //turn off point to wall 
       
         scanning = true;
     }
@@ -91,7 +95,12 @@ public class ProjectToPillar : MonoBehaviour
     {
         Debug.Log("Wall Raycast");
         CheckRaycast(DetectPillar, touch);
+        
+        
+
     }
+
+
 
 
     public bool CheckRaycast(Action<List<ARRaycastHit>> afterHit, Touch touch)
@@ -113,31 +122,59 @@ public class ProjectToPillar : MonoBehaviour
 
     public void DetectPillar(List<ARRaycastHit> hits)
     {
-        print(hits[0].ToString() + " " + hits[0].trackableId);
-        //Vector3 planePos = hits[0].pose.position;
-        //Quaternion rot = hits[0].pose.rotation;
+        print(hits[hits.Count - 1].ToString() + " " + hits[0].trackableId);
+        ARRaycastHit lastHit = hits[hits.Count - 1];
+
         scanning = false;
 
 
         m_planeManager.enabled = false;
+        int count = 0;
+        float farthestDist = -1;
+        ARPlane farthestPlane = null;
         
         foreach (ARPlane p in m_planeManager.trackables)
         {
-            if (p.trackableId.Equals(hits[0].trackableId))
-            {
-                Vector3 planePos = p.transform.position;
-                Quaternion rot = p.transform.rotation;
+            Vector3 camNoY = new Vector3(Camera.main.transform.position.x, 0 , Camera.main.transform.position.z);
+            Vector3 planeNoY = new Vector3(p.transform.position.x, 0, p.transform.position.z);
 
-                pillar.transform.position = planePos;
-                pillar.transform.rotation = rot;
-                pillar.transform.Rotate(90, 0, 0);
+
+
+            //float dist = Vector3.Distance(camNoY, planeNoY);
+            //get distance in forward camera direction
+            Vector3 zDist = planeNoY - camNoY;
+            Vector3 zDir = Camera.main.transform.TransformDirection(Vector3.forward).normalized;
+            float proj = Vector3.Dot(zDist, zDir);
+            if (proj > farthestDist){
+                farthestDist = proj;
+                farthestPlane = p;
+            }
+
+            //if (p.trackableId.Equals(lastHit.trackableId))
+            //{
+            //    Vector3 planePos = p.transform.position;
+            //    Quaternion rot = p.transform.rotation;
+
+            //    pillar.transform.position = planePos;
+            //    pillar.transform.rotation = rot;
+            //    pillar.transform.Rotate(90, 0, 0);
 
     
                
-            }
+            //}
+            Debug.Log(count +":" + p.transform.position);
             p.gameObject.SetActive(false);
 
         }
+        //set the plane based on the plane farthest distance from the camera
+        //farthestPlane.gameObject.SetActive(true);
+        Vector3 planePos = farthestPlane.transform.position;
+        Quaternion rot = farthestPlane.transform.rotation;
+
+        pillar.transform.position = planePos;
+        pillar.transform.rotation = rot;
+        pillar.transform.Rotate(90, 0, 0);
+
 
         //move the AR
         //from Pillar
@@ -145,28 +182,10 @@ public class ProjectToPillar : MonoBehaviour
 
         sc.PositionAR();
 
-        //float groundHeight = LocationInfo.Instance.GetFloorPos().y;
-
-        ////set the minister position 
-        //foreach (Transform c in gameObject.transform)
-        //{
-        //    Vector3 cPos = c.position;
-        //    c.rotation = pillar.transform.rotation;
-        //    //Renderer r = c.GetComponent<Renderer>();
-        //    //if (r != null)
-        //    //{
-        //    //    c.position = new Vector3(pillar.transform.position.x - 0.02f, groundHeight + r.bounds.extents.y, pillar.transform.position.z);
-        //    //}
-        //    //else
-        //    //{
-        //    c.position = new Vector3(pillar.transform.position.x - 1f, pillar.transform.position.y, pillar.transform.position.z);
-        //    Debug.Log(c.name+ " Move to ground:" + c.position);
-        //    //}
-
-
-        //}
-
         PositionMinsiters();
+
+        //Turn on Introduction Text
+        transform.GetChild(0).gameObject.SetActive(true);
 
         //Turn on Ministers canvas
         ministersMenu.SetActive(true);
@@ -174,6 +193,9 @@ public class ProjectToPillar : MonoBehaviour
         tapPillarText.SetActive(false);
 
     }
+
+
+
 
     public void PositionMinsiters()
     {
@@ -184,20 +206,12 @@ public class ProjectToPillar : MonoBehaviour
         {
             Vector3 cPos = c.position;
             c.rotation = pillar.transform.rotation;
-            //Renderer r = c.GetComponent<Renderer>();
-            //if (r != null)
-            //{
-            //    c.position = new Vector3(pillar.transform.position.x - 0.02f, groundHeight + r.bounds.extents.y, pillar.transform.position.z);
-            //}
-            //else
 
             //pillar&image has been rotated 90f z = right and left
             c.position = pillar.transform.position;
             c.position = new Vector3(pillar.transform.position.x, groundHeight + (cPos.y), pillar.transform.position.z);
-            //c.transform.Translate(-0.5f,0,0);
-            //c.position = new Vector3(pillar.transform.position.x, c.position.y + groundHeight, pillar.transform.position.z -0.5f);
-            Debug.Log(c.name + " Move to ground:" + c.position);
-            //}
+            //Debug.Log(c.name + " Move to ground:" + c.position);
+ 
 
 
         }

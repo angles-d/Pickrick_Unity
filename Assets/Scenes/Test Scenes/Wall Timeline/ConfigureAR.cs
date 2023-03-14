@@ -18,23 +18,23 @@ public class ConfigureAR : MonoBehaviour
     public State state = State.ScanningFloor;
 
     [SerializeField]
-    ARPlaneManager m_planeManager;
+    protected ARPlaneManager m_planeManager;
 
     [SerializeField]
-    ARRaycastManager m_raycastManager;
+    protected ARRaycastManager m_raycastManager;
 
     [SerializeField]
-    GameObject[] cards;
+    protected GameObject[] cards;
 
     [SerializeField]
-    GameObject[] doors;
+    protected GameObject[] doors;
 
     [SerializeField]
-    GameObject[] lightrays;
+    protected GameObject[] lightrays;
 
 
     [SerializeField]
-    GameObject intro;
+    protected GameObject intro;
 
 
     public GameObject[] popup; //point floor, tap floor, scan wall, tap wall
@@ -45,12 +45,12 @@ public class ConfigureAR : MonoBehaviour
     public GameObject dummy;
 
     [SerializeField]
-    GameObject arFloor;
+    protected GameObject arFloor;
 
 
-    public GameObject[][] toPlace = new GameObject[3][];
+    public GameObject[][] toPlace = new GameObject[2][];
 
-    bool scanning = false;
+    protected bool scanning = false;
 
     public GameObject dates;
 
@@ -70,8 +70,8 @@ public class ConfigureAR : MonoBehaviour
 
         //populate to place
         toPlace[0] = doors;
-        toPlace[1] = cards;
-        toPlace[2] = lightrays;
+        //toPlace[1] = cards;
+        toPlace[1] = lightrays;
 
         //hide timelin
         timeline.SetActive(false);
@@ -108,7 +108,7 @@ public class ConfigureAR : MonoBehaviour
 
     }
 
-    IEnumerator Timer(float t, Action DoneWait)
+    public IEnumerator Timer(float t, Action DoneWait)
     {
         //print("WaitAndPrint " + Time.time);
         yield return new WaitForSeconds(t);
@@ -219,7 +219,6 @@ public class ConfigureAR : MonoBehaviour
     }
 
 
-
     public void DetectWall(List<ARRaycastHit> hits)
     {
         print(hits[0].ToString() + " " + hits[0].trackableId);
@@ -233,7 +232,7 @@ public class ConfigureAR : MonoBehaviour
 
         foreach (ARPlane p in m_planeManager.trackables)
         {
-            if (p.trackableId.Equals(hits[0].trackableId))
+            if (p.isActiveAndEnabled && p.trackableId.Equals(hits[0].trackableId))
             {
                 //reposition timeline
                 //timeline.transform.position = pos;
@@ -247,7 +246,14 @@ public class ConfigureAR : MonoBehaviour
 
                 //move dates up
                 dates.transform.position = new Vector3(dates.transform.position.x, Camera.main.transform.position.y - 0.05f, dates.transform.position.z);
-                intro.transform.position = new Vector3(intro.transform.position.x, p.center.y, intro.transform.position.z);
+                intro.transform.position = new Vector3(intro.transform.position.x, hits[0].pose.position.y, intro.transform.position.z);
+
+                //move cards to middle of the wall; based on plane center
+                foreach (GameObject c in cards)
+                {
+                    Vector3 cardPos = c.transform.position;
+                    c.transform.position = new Vector3(cardPos.x, hits[0].pose.position.y, cardPos.z);
+                }
             }
            
              p.gameObject.SetActive(false);
