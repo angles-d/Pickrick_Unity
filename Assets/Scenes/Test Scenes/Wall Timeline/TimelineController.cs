@@ -91,9 +91,8 @@ public class TimelineController : MonoBehaviour
     IEnumerator OpenDoorCo()
     {
 
-        //TODO change this to global coordinates
         //offset in left direction; based on local direction of doors
-        Vector3 offset = doors[0].transform.right *  2.6f;
+        Vector3 offset = doors[0].transform.right *  -2.6f;
         float duration = 6.0f;
         float time = 0.0f;
 
