@@ -7,27 +7,15 @@ public class PathSpotController : MonoBehaviour
     public GameObject arAnim;
     private bool animActive = false;
 
-    InterstitialsController ic;
+    public InterstitialsPathController ic;
     public SceneController sc;
 
     // Start is called before the first frame update
     private void Awake()
     {
-        if (tag.Equals("Inter Marker"))
-        {
-            ic = transform.parent.GetComponent<InterstitialsController>();
-        }
-
-        //FIX LATER --> move to UI controller
         sc = transform.parent.parent.parent.GetComponent<SceneController>();
     }
-  
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -42,13 +30,10 @@ public class PathSpotController : MonoBehaviour
                 //TODO change this from hardcoded
                 if (gameObject.name.Equals("Car Scene Marker"))
                 {
-                    Debug.Log("TURN OFF");
-
-                    //TODO fix this nonsense; create UI controller??
-                    sc.ic.TurnOffWalkToSign();
+                    sc.TurnOffWalkToSign();
                 }
-                arAnim.SetActive(true);
-                sc.TurnOnAnimDateUI();
+                sc.ShowAnimation();
+                sc.ac.TurnOnAnimDateUI();
             }
 
             //For interstitials
@@ -61,9 +46,9 @@ public class PathSpotController : MonoBehaviour
                 if (gameObject.name.Equals("1. July 3"))
                 {
                     Debug.Log("TURN OFF");
-                    ic.TurnOffWalkToSign();
+                    sc.TurnOffWalkToSign();
                 }
-                ic.TrackPillar();
+                sc.ic.TrackPillar();
 
                 
             }

@@ -1,22 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+
 
 public class SceneController : MonoBehaviour
 {
-    //TODO Split this into animcontroller and scene controller
-
-
     //Game objects thate need to be placed on the floor (anim, anim markers, inter marker)
     public GameObject[] toPlace;
-
-    public GameObject[] markers;
-    public GameObject[] animations;
    
     //the current anim marker
     [SerializeField]
-    int curMarker = 0;
+    int curMarkerIndex = 0;
 
     [SerializeField]
     public GameObject posReference;
@@ -24,41 +18,22 @@ public class SceneController : MonoBehaviour
     [SerializeField]
     public GameObject path;
 
-    [SerializeField]
-    GameObject nextButtonToInter;
-
-    [SerializeField]
-    public InterstitialsController ic;
+    //marker controllers
+    public InterstitialsPathController ic;
+    public AnimationPathController ac;
 
 
     [SerializeField]
     ProjectToPillar ptp;
 
-    public GameObject[] animDates;
-
     public GameObject pillarRef;
 
-    //dates for the interstital button
-    string[] dates = { "Jul 3rd, 1964", "Jul 9th, 1964", "Jan 1st, 1965", "Feb 1st, 1965", "Feb 7th, 1965" };
-    public TextMeshProUGUI dateText;
+    //UI elements
+    public GameObject WalkToSign;
 
-
-    //called regardless if object = enabled
-    void Awake()
-    {
-        //hide all the markers
-        foreach (GameObject m in markers)
-        {
-            m.SetActive(false);
-        }
-
-
-
-    }
 
     private void Start()
     {
-        dateText = nextButtonToInter.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
         ptp.StartScanning();
         MoveToGround();
 
@@ -69,10 +44,13 @@ public class SceneController : MonoBehaviour
     public void ShowNextIntersitial()
     {
         //hide current animation
-        animations[curMarker].SetActive(false);
+        ac.HideAnimMarker(curMarkerIndex);
+        ac.HideAnimation(curMarkerIndex);
+        ac.TurnOffAnimDateUI();
+
         //show next itnerstitial marker
         ic.ShowNextIntersitial();
-        curMarker++;
+        curMarkerIndex++;
     }
 
   
@@ -85,47 +63,23 @@ public class SceneController : MonoBehaviour
         ic.HideCurrent();
 
         //turn on next marker
-        markers[curMarker].SetActive(true);
+        ac.ShowAnimMarker(curMarkerIndex);
 
-        if (curMarker == 0)
+        if (curMarkerIndex == 0)
         {
-            ic.TurnOnWalkToSign();
+            TurnOnWalkToSign();
         }
     }
 
-
-
-    //called after the animaiton has been played once
-    //through the signal emitter on the timeline
-    //Make sure signal only emits once
     public void ShowNextInterButton()
     {
-        if(ic.curInter + 1 < dates.Length)
-        {
-            dateText.text = dates[ic.curInter + 1];
-            nextButtonToInter.SetActive(true);
-        }
-       
-      
-        
+        ac.ShowNextInterButton(ic.curInterIndex);
     }
 
-    //NEED TO UPDATEE
-    public void TurnOnAnimDateUI() {
-        animDates[0].SetActive(true);
-    }
-
-    //called by to Interstitial button
-    public void TurnOffAnimDateUI()
-    {
-        animDates[0].SetActive(false);
-    }
-
-
-    //position the path 
+    //position the scene to be in the right location
+    //based on scanned pillar position
     public void PositionAR()
     {
-        //move to place to ground
         Debug.Log("Path AR Positioned");
         Debug.Log("pillar Pos" + pillarRef.transform.position);
 
@@ -134,19 +88,10 @@ public class SceneController : MonoBehaviour
 
         Vector3 pillarPos = new Vector3(pillarRef.transform.position.x, 0, pillarRef.transform.position.z);
         transform.position = pillarPos;
-        //Debug.Log("Ref Pos:" + posReference.transform.position);
-
-        //Vector3 noY = pillarPos - posReference.transform.localPosition;
-        //transform.Translate(noY.x,0, noY.z,Space.World);
-        //Debug.Log("Scene:" + transform.position);
-        //Debug.Log("Ref Pos" + posReference.transform.position);
-
         path.SetActive(true);
-       
-
     }
 
-
+    //Moves any objects in toPlace array to the floor
     public void MoveToGround()
     {
         Debug.Log("Move to Ground");
@@ -181,6 +126,19 @@ public class SceneController : MonoBehaviour
         }
     }
 
+    public void TurnOffWalkToSign()
+    {
+        WalkToSign.SetActive(false);
+    }
 
+    public void TurnOnWalkToSign()
+    {
+        WalkToSign.SetActive(true);
+    }
+
+    public void ShowAnimation()
+    {
+        ac.ShowAnimation(curMarkerIndex);
+    }
 
 }

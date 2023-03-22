@@ -7,8 +7,6 @@ using System;
 
 public class ProjectToPillar : MonoBehaviour
 {
-    bool tracking = false;
-
     [SerializeField]
     ARPlaneManager m_planeManager;
 
@@ -150,22 +148,10 @@ public class ProjectToPillar : MonoBehaviour
                 farthestPlane = p;
             }
 
-            //if (p.trackableId.Equals(lastHit.trackableId))
-            //{
-            //    Vector3 planePos = p.transform.position;
-            //    Quaternion rot = p.transform.rotation;
-
-            //    pillar.transform.position = planePos;
-            //    pillar.transform.rotation = rot;
-            //    pillar.transform.Rotate(90, 0, 0);
-
-    
-               
-            //}
             Debug.Log(count +":" + p.transform.position);
             p.gameObject.SetActive(false);
-
         }
+
         //set the plane based on the plane farthest distance from the camera
         //farthestPlane.gameObject.SetActive(true);
         Vector3 planePos = farthestPlane.transform.position;
@@ -210,13 +196,8 @@ public class ProjectToPillar : MonoBehaviour
             //pillar&image has been rotated 90f z = right and left
             c.position = pillar.transform.position;
             c.position = new Vector3(pillar.transform.position.x, groundHeight + (cPos.y), pillar.transform.position.z);
-            //Debug.Log(c.name + " Move to ground:" + c.position);
- 
-
 
         }
     }
-
-    
 
 }
