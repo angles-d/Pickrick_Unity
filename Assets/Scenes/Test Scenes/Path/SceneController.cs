@@ -71,6 +71,8 @@ public class SceneController : MonoBehaviour
         }
     }
 
+    //called by the ar animation event emitter
+    //component attached directly to the timeline gameobjects
     public void ShowNextInterButton()
     {
         ac.ShowNextInterButton(ic.curInterIndex);

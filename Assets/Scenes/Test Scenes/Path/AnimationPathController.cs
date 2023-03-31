@@ -50,9 +50,8 @@ public class AnimationPathController : MonoBehaviour
     }
 
 
-    //TODO UPDATE ANIMATION EVENTS TRIGGER??
 
-    //called after the animaiton has been played once
+    //called after the animation has been played once
     //through the signal emitter on the timeline
     //Make sure signal only emits once
     public void ShowNextInterButton(int index)

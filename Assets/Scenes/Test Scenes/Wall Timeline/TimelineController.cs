@@ -19,7 +19,7 @@ public class TimelineController : MonoBehaviour
 
     GameObject timeline;
 
-    public AudioSource doorSound;
+    public GameObject civilRightsVid;
 
     //variable related to opening door
     bool doorOpen = false;
@@ -84,7 +84,7 @@ public class TimelineController : MonoBehaviour
 
     public void OpenDoor()
     {
-        doorSound.Play();
+        civilRightsVid.SetActive(true);
         StartCoroutine(OpenDoorCo());
     }
 
@@ -115,7 +115,6 @@ public class TimelineController : MonoBehaviour
             yield return null;
         }
         //Switch scenes
-        //StartCoroutine(Timer(4, LoadPathScene));
         moveToPath.SetActive(true);
         Debug.Log("End Door open");
         yield return null;
