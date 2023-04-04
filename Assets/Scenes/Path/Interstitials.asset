@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 848409ee8ba454f42a5ddff137688a27, type: 3}
+  m_Name: Interstitials
+  m_EditorClassIdentifier: 
+  m_GuidLow: 5230816362682139005
+  m_GuidHigh: 9461803185176504970
+  m_Images:
+  - m_SerializedGuid:
+      m_GuidLow: 4725818282207502863
+      m_GuidHigh: 13984936222785683879
+    m_SerializedTextureGuid:
+      m_GuidLow: 11873712649348587796
+      m_GuidHigh: 15445042150058713434
+    m_Size: {x: 0.127, y: 0.078981094}
+    m_SpecifySize: 1
+    m_Name: Pillar1
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5478019657411374961
+      m_GuidHigh: 7632920385461147055
+    m_SerializedTextureGuid:
+      m_GuidLow: 2648992173666102238
+      m_GuidHigh: 2766774148733114794
+    m_Size: {x: 0.127, y: 0.08383985}
+    m_SpecifySize: 1
+    m_Name: Pillar2
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5151926992604344341
+      m_GuidHigh: 7272414277374715021
+    m_SerializedTextureGuid:
+      m_GuidLow: 9571808130865600087
+      m_GuidHigh: 851395567795582089
+    m_Size: {x: 0.127, y: 0.15958115}
+    m_SpecifySize: 1
+    m_Name: Pillar3
+    m_Texture: {fileID: 0}

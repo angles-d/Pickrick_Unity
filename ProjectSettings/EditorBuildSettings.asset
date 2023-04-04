@@ -18,25 +18,25 @@ EditorBuildSettings:
     path: Assets/Scenes/Test Scenes/Realtime Lighting.unity
     guid: a8d7977c2d9c345c68cb9b23d5e39cf3
   - enabled: 0
-    path: Assets/Scenes/Test Scenes/Adhere to Plane test/Wall Plane Test.unity
+    path: Assets/Scenes/Test Scenes/To Delete/Adhere to Plane test/Wall Plane Test.unity
     guid: 4ff2f4cb449dd49958fe5cd2e70dbf7f
   - enabled: 1
-    path: Assets/Scenes/Test Scenes/Wall Timeline/WallTimeline.unity
+    path: Assets/Scenes/Wall Timeline/WallTimeline.unity
     guid: bd89f1abdc89c48e08fefa46bc7b2dad
   - enabled: 1
-    path: Assets/Scenes/Test Scenes/Path/Path.unity
+    path: Assets/Scenes/Path/Path.unity
     guid: 5b0959010ecc248279ba00793e899dc9
-  - enabled: 1
-    path: Assets/Scenes/Test Scenes/TryDetectWall/UserproofStart.unity
+  - enabled: 0
+    path: Assets/Scenes/Test Scenes/To Delete/TryDetectWall/UserproofStart.unity
     guid: cd606e4e2d8464b59bfc750374424b79
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Test Scenes/Test Scenes.unity
     guid: 04a9646db1c5e45729192484f7d76df7
-  - enabled: 1
-    path: Assets/Scenes/Test Scenes/MinisterPillarTest/MinisterPillarTest.unity
+  - enabled: 0
+    path: Assets/Scenes/Test Scenes/To Delete/MinisterPillarTest/MinisterPillarTest.unity
     guid: bf37b7e6b283f442ea95b91bde1b080f
-  - enabled: 1
-    path: Assets/Scenes/Test Scenes/Marker Test/Markers.unity
+  - enabled: 0
+    path: Assets/Scenes/Test Scenes/To Delete/Marker Test/Markers.unity
     guid: 8250e841e4a43448dae695934b427b94
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: a14ae7ff30d1def4fa7e9f53491e50b2,
