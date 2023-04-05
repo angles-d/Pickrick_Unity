@@ -51,7 +51,7 @@ public class SceneController : MonoBehaviour
         //hide current animation
         ac.HideAnimMarker(curMarkerIndex);
         ac.HideAnimation(curMarkerIndex);
-        ac.TurnOffAnimDateUI();
+        ac.TurnOffAnimDateUI(curMarkerIndex);
 
         //show next itnerstitial marker
         ic.ShowNextIntersitial();
@@ -151,6 +151,11 @@ public class SceneController : MonoBehaviour
     public void ShowEndSceneGooger()
     {
         EndSceneUIGooger.SetActive(true);
+    }
+
+    public int GetCurrentMarkerIndex()
+    {
+        return curMarkerIndex;
     }
 
     

@@ -12,7 +12,11 @@ public class AnimationPathController : MonoBehaviour
     //UI elements
     [SerializeField]
     GameObject nextButtonToInter;
+
+    public GameObject animHeader;
+    //text & dates
     public GameObject[] animDates;
+  
 
     //dates for the interstital button
     string[] dates = { "Jul 3rd, 1964", "Jul 9th, 1964", "Jan 1st, 1965", "Feb 1st, 1965", "Feb 7th, 1965" };
@@ -34,18 +38,22 @@ public class AnimationPathController : MonoBehaviour
     {
         dateText = nextButtonToInter.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
 
+
+
     }
 
 
-    //NEED TO UPDATEE
-    public void TurnOnAnimDateUI()
+    //TODO create a children array automatically??
+    public void TurnOnAnimDateUI(int index)
     {
-        animDates[0].SetActive(true);
+        animHeader.SetActive(true);
+        animDates[index].SetActive(true);
     }
 
     //called by to Interstitial button
-    public void TurnOffAnimDateUI()
+    public void TurnOffAnimDateUI(int index)
     {
+        animHeader.SetActive(false);
         animDates[0].SetActive(false);
     }
 

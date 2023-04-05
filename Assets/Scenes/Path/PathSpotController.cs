@@ -22,33 +22,24 @@ public class PathSpotController : MonoBehaviour
         {
             Debug.Log("COLLIDE: " + gameObject.name);
 
-            //For Animation Marjers
-            if(gameObject.tag.Equals("Anim Marker"))
+            //check if it's the first marker
+            if (sc.GetCurrentMarkerIndex() == 0)
             {
-                //Detec the first animation marker by name
-                if (gameObject.name.Equals("Car Scene Marker"))
-                {
-                    sc.TurnOffWalkToSign();
-                }
+                sc.TurnOffWalkToSign();
+            }
+
+            //For Animation Marjers
+            if (gameObject.tag.Equals("Anim Marker"))
+            {
                 sc.ShowAnimation();
-                sc.ac.TurnOnAnimDateUI();
+                //TODO FIX THIS
+                sc.ac.TurnOnAnimDateUI(sc.GetCurrentMarkerIndex());
             }
 
             //For interstitials
             if (gameObject.tag.Equals("Inter Marker"))
             {
-                //if its the first interstitial
-                print(gameObject.name);
-
-                //Detect the first intersitial marker by name
-                if (gameObject.name.Equals("1. July 3"))
-                {
-                    Debug.Log("TURN OFF");
-                    sc.TurnOffWalkToSign();
-                }
                 sc.ic.TrackPillar();
-
-                
             }
             gameObject.SetActive(false);
         }
