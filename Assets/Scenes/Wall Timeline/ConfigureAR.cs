@@ -63,6 +63,9 @@ public class ConfigureAR : MonoBehaviour
     //cube that surrounds the configure wall image
     public GameObject positionObject;
 
+    //inside the first car holder
+    public GameObject line;
+
     //Location of the finalHit on the wall
     ARRaycastHit finalHit;
 
@@ -350,6 +353,7 @@ public class ConfigureAR : MonoBehaviour
         {
             Vector3 cardPos = c.transform.position;
             c.transform.position = new Vector3(cardPos.x, hit.pose.position.y, cardPos.z);
+
         }
 
         MoveToGround();
