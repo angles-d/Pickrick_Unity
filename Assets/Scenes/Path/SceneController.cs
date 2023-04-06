@@ -33,7 +33,12 @@ public class SceneController : MonoBehaviour
     public GameObject WalkToSign;
 
     public GameObject EndSceneUIGooger;
-   
+
+    private void Awake()
+    {
+        
+    }
+
 
     private void Start()
     {

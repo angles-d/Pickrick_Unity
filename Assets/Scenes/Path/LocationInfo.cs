@@ -14,6 +14,8 @@ public class LocationInfo: MonoBehaviour
     private Quaternion sceneRot;
     public GameObject arSessionOrigin;
 
+    private Vector3 sessionStartPosition;
+
 
     private void Awake()
     {

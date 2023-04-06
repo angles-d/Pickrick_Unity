@@ -20,6 +20,7 @@ public class TimelineController : MonoBehaviour
     GameObject timeline;
 
     public GameObject civilRightsVid;
+    VideoPlayer civilRightsVP;
 
     //variable related to opening door
     bool doorOpen = false;
@@ -44,8 +45,9 @@ public class TimelineController : MonoBehaviour
         //set timeline object
         timeline = dates[0].transform.parent.gameObject;
         introVidPlayer = intro.GetComponent<VideoPlayer>();
+        civilRightsVP = civilRightsVid.GetComponent<VideoPlayer>();
 
-       
+
     }
 
 
@@ -85,6 +87,7 @@ public class TimelineController : MonoBehaviour
     public void OpenDoor()
     {
         civilRightsVid.SetActive(true);
+        civilRightsVP.Play();
         StartCoroutine(OpenDoorCo());
     }
 
