@@ -55,7 +55,7 @@ public class AnimationPathController : MonoBehaviour
     public void TurnOffAnimDateUI(int index)
     {
         animHeader.SetActive(false);
-        animDates[0].SetActive(false);
+        animDates[index].SetActive(false);
     }
 
 

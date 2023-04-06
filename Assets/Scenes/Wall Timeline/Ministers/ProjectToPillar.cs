@@ -44,6 +44,7 @@ public class ProjectToPillar : MonoBehaviour
 
     public void StartScanning()
     {
+        m_planeManager.requestedDetectionMode = PlaneDetectionMode.Vertical;
         pointPillarText.SetActive(true);
         StartCoroutine(Timer(2f,TrackPillar));
     }
