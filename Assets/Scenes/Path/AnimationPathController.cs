@@ -8,6 +8,7 @@ public class AnimationPathController : MonoBehaviour
     //physcial game objects
     public GameObject[] markers; //path markers
     public GameObject[] animations; //animations to show
+    public GameObject restaurant;
 
     //UI elements
     [SerializeField]
@@ -88,6 +89,7 @@ public class AnimationPathController : MonoBehaviour
     public void ShowAnimation(int index)
     {
         animations[index].SetActive(true);
+        restaurant.SetActive(true);
 
     }
 
@@ -95,6 +97,7 @@ public class AnimationPathController : MonoBehaviour
     public void HideAnimation(int index)
     {
         animations[index].SetActive(false);
+        restaurant.SetActive(false);
 
     }
 
