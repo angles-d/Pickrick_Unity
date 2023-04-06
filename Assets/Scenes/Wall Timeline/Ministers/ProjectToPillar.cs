@@ -32,18 +32,25 @@ public class ProjectToPillar : MonoBehaviour
 
     bool scanning = false;
 
-    void Awake()
+    private void Awake()
     {
-
+        m_raycastManager = LocationInfo.Instance.GetRaycastManager();
+        m_planeManager = LocationInfo.Instance.GetPlaneManager();
+        //TODO FIX THIS PUT IN get manager??
+        m_planeManager.enabled = true;
     }
+
 
     private void Start()
     {
-       
+
+        
     }
 
     public void StartScanning()
     {
+        print(m_planeManager);
+
         m_planeManager.requestedDetectionMode = PlaneDetectionMode.Vertical;
         pointPillarText.SetActive(true);
         StartCoroutine(Timer(2f,TrackPillar));

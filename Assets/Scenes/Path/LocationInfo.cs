@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.XR.ARFoundation;
+using UnityEngine.XR.ARSubsystems;
+
 public class LocationInfo: MonoBehaviour
 {
     public static LocationInfo Instance;
@@ -9,6 +12,7 @@ public class LocationInfo: MonoBehaviour
     private Vector3 floorPos;
     private Vector3 scenePos;
     private Quaternion sceneRot;
+    public GameObject arSessionOrigin;
 
 
     private void Awake()
@@ -24,6 +28,7 @@ public class LocationInfo: MonoBehaviour
  
         DontDestroyOnLoad(gameObject);
 
+        arSessionOrigin = GameObject.Find("AR Session Origin"); 
 
     }
 
@@ -54,10 +59,14 @@ public class LocationInfo: MonoBehaviour
         return sceneRot;
     }
 
-   
-    // Update is called once per frame
-    void Update()
+
+    public ARPlaneManager GetPlaneManager()
     {
-        
+        return arSessionOrigin.GetComponent<ARPlaneManager>();
+    }
+
+    public ARRaycastManager GetRaycastManager()
+    {
+        return arSessionOrigin.GetComponent<ARRaycastManager>();
     }
 }

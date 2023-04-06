@@ -36,8 +36,16 @@ public class InterstitialsPathController : MonoBehaviour
     string[] dates = {"July 3rd, 1964", "Aug 11th, 1964", "Sep 26th, 1964" , "Jan 29th, 1965", "Feb 22th, 1965" };
     public TextMeshProUGUI dateText;
 
+    private void Awake()
+    {
+        m_raycastManager = LocationInfo.Instance.GetRaycastManager();
+        m_planeManager = LocationInfo.Instance.GetPlaneManager();
+
+    }
+
     private void Start()
     {
+
         dateText = nextButtonToAnim.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
     }
 

@@ -78,16 +78,17 @@ public class ConfigureAR : MonoBehaviour
 
     void Awake()
     {
-        m_raycastManager = gameObject.GetComponent<ARRaycastManager>();
-        m_planeManager = gameObject.GetComponent<ARPlaneManager>();
-        m_planeManager.enabled = false;
+       
 
         
     }
 
     private void Start()
     {
-       
+        m_raycastManager = LocationInfo.Instance.GetRaycastManager();
+        m_planeManager = LocationInfo.Instance.GetPlaneManager();
+        m_planeManager.enabled = false;
+
         dates = timeline.transform.GetChild(1).gameObject;
 
         //populate to place

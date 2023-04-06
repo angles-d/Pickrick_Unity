@@ -20,6 +20,7 @@ TagManager:
   - Inter Marker
   - Position
   - MinistersMarker
+  - DontDestroy
   layers:
   - Default
   - TransparentFX

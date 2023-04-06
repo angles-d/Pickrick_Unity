@@ -37,8 +37,6 @@ public class SceneController : MonoBehaviour
 
     private void Start()
     {
-      
-
         ptp.StartScanning();
         MoveToGround();
 
