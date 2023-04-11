@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.XR.ARSubsystems;
+using System;
 
 public class SceneController : MonoBehaviour
 {
@@ -33,6 +34,8 @@ public class SceneController : MonoBehaviour
     public GameObject WalkToSign;
 
     public GameObject EndSceneUIGooger;
+    bool endSceneStarted = false;
+
 
     private void Awake()
     {
@@ -149,11 +152,32 @@ public class SceneController : MonoBehaviour
     public void ShowAnimation()
     {
         ac.ShowAnimation(curMarkerIndex);
+        //last animation
+        if(curMarkerIndex == 4)
+        {
+            EndSceneTimer();
+        }
     }
 
     public void ShowEndSceneGooger()
     {
+        endSceneStarted = true;
         EndSceneUIGooger.SetActive(true);
+    }
+
+    public void EndSceneTimer()
+    {
+        Debug.Log("End scene timer started");
+        StartCoroutine(Timer(45.0f,CheckEndSceneTriggered));
+
+        void CheckEndSceneTriggered()
+        {
+            if (!endSceneStarted)
+            {
+                //endSceneStarted = true;
+                ShowEndSceneGooger();
+            }
+        }
     }
 
     public int GetCurrentMarkerIndex()
@@ -161,5 +185,13 @@ public class SceneController : MonoBehaviour
         return curMarkerIndex;
     }
 
-    
+    public IEnumerator Timer(float t, Action DoneWait)
+    {
+        //print("WaitAndPrint " + Time.time);
+        yield return new WaitForSeconds(t);
+        //print("WaitAndPrint " + Time.time);
+        DoneWait?.Invoke();
+
+    }
+
 }

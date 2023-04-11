@@ -6,10 +6,7 @@ public class EndSceneDoorCollider : MonoBehaviour
 {
     // Start is called before the first frame update
     public SceneController sc;
-    void Start()
-    {
-        print("WTF");
-    }
+  
 
     private void OnTriggerEnter(Collider other)
     {

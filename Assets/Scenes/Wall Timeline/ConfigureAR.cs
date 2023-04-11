@@ -7,7 +7,6 @@ using System;
 
 public class ConfigureAR : MonoBehaviour
 {
-    bool placed = false;
 
     public enum State{
         ScanningFloor,
@@ -30,10 +29,6 @@ public class ConfigureAR : MonoBehaviour
     protected GameObject[] doors;
 
     [SerializeField]
-    protected GameObject[] lightrays;
-
-
-    [SerializeField]
     protected GameObject intro;
 
     public GameObject timeline;
@@ -43,13 +38,13 @@ public class ConfigureAR : MonoBehaviour
 
     [SerializeField]
     protected GameObject arFloor;
+    bool floorDetected = false;
 
 
-    public GameObject[][] toPlace = new GameObject[2][];
+    public GameObject[][] toPlace = new GameObject[1][];
 
     protected bool scanning = false;
 
-    public GameObject dates;
 
     //UI Screens
     public GameObject[] popup; //point floor, tap floor, scan wall, tap wall
@@ -62,9 +57,6 @@ public class ConfigureAR : MonoBehaviour
 
     //cube that surrounds the configure wall image
     public GameObject positionObject;
-
-    //inside the first car holder
-    public GameObject line;
 
     //Location of the finalHit on the wall
     ARRaycastHit finalHit;
@@ -79,7 +71,7 @@ public class ConfigureAR : MonoBehaviour
     void Awake()
     {
        
-
+        
         
     }
 
@@ -89,12 +81,11 @@ public class ConfigureAR : MonoBehaviour
         m_planeManager = LocationInfo.Instance.GetPlaneManager();
         m_planeManager.enabled = false;
 
-        dates = timeline.transform.GetChild(1).gameObject;
+        Debug.Log("AR SESSIOn:" +m_planeManager.gameObject.transform.position);
+
 
         //populate to place
         toPlace[0] = doors;
-        //toPlace[1] = cards;
-        toPlace[1] = lightrays;
 
         //hide timeline
         timeline.SetActive(false);
@@ -206,35 +197,53 @@ public class ConfigureAR : MonoBehaviour
         {
             if (p.trackableId.Equals(hits[0].trackableId))
             {
-                arFloor.transform.position = p.transform.position;
-                Debug.Log("ar position:" + arFloor.transform.position);
+
+                //get first plane
+                arFloor.transform.position = new Vector3(arFloor.transform.position.x, p.transform.position.y, arFloor.transform.position.z);
+                floorDetected = true;
+                Debug.Log("ar floor position:" + arFloor.transform.position);
                 LocationInfo.Instance.SetFloorPos(arFloor);
+               
 
             }
-            else
-            {
-                p.gameObject.SetActive(false);
-               
-            }
+
 
         }
 
-        //turn off tap floor
-        popup[1].SetActive(false);
-        //turn on point to wall
-        popup[2].SetActive(true);
+        if (floorDetected)
+        {
 
-        //Time Delay
-        StartCoroutine(Timer(0.7f, SwitchToWall));
-      
+            foreach (ARPlane p in m_planeManager.trackables)
+            {
+                 p.gameObject.SetActive(false);
+            }
 
-        //switch scanning to wall
-        void SwitchToWall(){
+            //turn off tap floor
+            popup[1].SetActive(false);
+            //turn on point to wall
+            popup[2].SetActive(true);
 
-            state = State.ScanningWall;
-            m_planeManager.enabled = false;
-            StartCoroutine(Timer(2f, TrackWall));
-           
+            //Time Delay
+            StartCoroutine(Timer(0.7f, SwitchToWall));
+
+
+            //switch scanning to wall
+            void SwitchToWall()
+            {
+
+                state = State.ScanningWall;
+                m_planeManager.enabled = false;
+                StartCoroutine(Timer(2f, TrackWall));
+
+            }
+        } else
+        {
+            //continue detecting
+            StartCoroutine(Timer(0.2f, SetScan));
+            void SetScan()
+            {
+                scanning = true;
+            }
         }
       
     }
@@ -252,34 +261,7 @@ public class ConfigureAR : MonoBehaviour
         scanning = true;
     }
 
-    public void MoveToGround()
-    {
-        float groundHeight = arFloor.transform.position.y;
-        
-        foreach (GameObject[] go in toPlace)
-        {
-            //for all children in each gameobject
-            foreach (GameObject g in go)
-            {
-                Vector3 pos = g.transform.position;
-                Renderer r = g.GetComponent<Renderer>();
-                if (r != null)
-                {
-                    g.transform.position = new Vector3(pos.x, groundHeight + r.bounds.extents.y, pos.z);
-                }
-                else
-                {
-                    g.transform.position = new Vector3(pos.x, groundHeight + pos.y, pos.z);
-                }
-
-               
-            }
-
-        }
-
-
-
-    }
+   
 
     public void VerifyWallPosition(Touch touch)
     {
@@ -328,7 +310,33 @@ public class ConfigureAR : MonoBehaviour
         positioned = true;
         state = State.InTimeline;
         PlaceARObjects(finalPlane, finalHit);
+    }
 
+    public void MoveToGround()
+    {
+        float groundHeight = arFloor.transform.position.y;
+        print(timeline.name + ":" + timeline.transform.position); ;
+
+        foreach (GameObject[] go in toPlace)
+        {
+            //for all children in each gameobject
+            foreach (GameObject g in go)
+            {
+                Vector3 pos = g.transform.position;
+                Renderer r = g.GetComponent<Renderer>();
+                if (r != null)
+                {
+                    Debug.Log("renderer");
+                    g.transform.position = new Vector3(pos.x, groundHeight + r.bounds.extents.y, pos.z);
+                }
+                else
+                {
+                    Debug.Log("no renderer");
+                    g.transform.position = new Vector3(pos.x, groundHeight + pos.y, pos.z);
+                }
+                print(g.name + ":"+g.transform.position);
+            }
+        }
     }
 
     public void PlaceARObjects(ARPlane p, ARRaycastHit hit)
@@ -346,7 +354,6 @@ public class ConfigureAR : MonoBehaviour
         timeline.transform.position = userPos - dummy.transform.position;
 
         //move dates up
-        dates.transform.position = new Vector3(dates.transform.position.x, Camera.main.transform.position.y - 0.05f, dates.transform.position.z);
         intro.transform.position = new Vector3(intro.transform.position.x, hit.pose.position.y, intro.transform.position.z);
 
         //move cards to middle of the wall; based on plane center

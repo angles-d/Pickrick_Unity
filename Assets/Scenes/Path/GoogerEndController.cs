@@ -11,7 +11,7 @@ using TMPro;
 public class GoogerEndController : MonoBehaviour
 {
     public VideoPlayer vp;
-    public GameObject name;
+    public GameObject nameText;
     public GameObject quote;
     public GameObject video;
     public GameObject credits;
@@ -30,7 +30,7 @@ public class GoogerEndController : MonoBehaviour
     {
         uiGoogerBackground = GetComponent<Image>();
         uiGoogerVideo = video.GetComponent<RawImage>();
-        uiName = name.GetComponent<TextMeshProUGUI>();
+        uiName = nameText.GetComponent<TextMeshProUGUI>();
         uiQuote = quote.GetComponent<TextMeshProUGUI>();
         creditsAnim = credits.GetComponent<Animator>();
 
@@ -38,19 +38,19 @@ public class GoogerEndController : MonoBehaviour
 
     private void OnEnable()
     {
-        vp.frame = 20;
+        vp.frame = 0;
 
         uiGoogerBackground.CrossFadeAlpha(0f, 0f, true);
-        uiGoogerBackground.CrossFadeAlpha(1, 2, false);
+        uiGoogerBackground.CrossFadeAlpha(1, 3, false);
 
         uiGoogerVideo.CrossFadeAlpha(0f, 0f, true);
-        uiGoogerVideo.CrossFadeAlpha(1, 3, false);
+        uiGoogerVideo.CrossFadeAlpha(1, 4, false);
 
         uiName.CrossFadeAlpha(0f, 0f, true);
-        uiName.CrossFadeAlpha(1, 3, false);
+        uiName.CrossFadeAlpha(1, 4, false);
 
         uiQuote.CrossFadeAlpha(0f, 0f, true);
-        uiQuote.CrossFadeAlpha(1, 3, false);
+        uiQuote.CrossFadeAlpha(1, 4, false);
 
         //StartCoroutine(ShowGoogerUI());
     }

@@ -81,7 +81,8 @@ public class TimelineController : MonoBehaviour
         //save the current door position
         LocationInfo.Instance.SetScenePos(timeline);
 
-        introVidPlayer.Pause();
+        //For Testing
+        //introVidPlayer.Pause();
     }
 
     public void OpenDoor()
