@@ -20,7 +20,7 @@ public class AnimationPathController : MonoBehaviour
   
 
     //dates for the interstital button
-    string[] dates = { "Jul 3rd, 1964", "Jul 9th, 1964", "Jan 1st, 1965", "Feb 1st, 1965", "Feb 7th, 1965" };
+    string[] dates = { "Jul 3rd, 1964", "Jul 9th, 1964", "Jul 22nd, 1965", "Fall, 1964", "February, 1965" };
     public TextMeshProUGUI dateText;
 
     //called regardless if object = enabled
