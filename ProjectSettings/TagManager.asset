@@ -4,22 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - ARLocationRoot
-  - Timeline
-  - ScrollArea
-  - MoreInfo
-  - Event_AR_MinistersEnterResturant
-  - Event_AR_MaddoxThreatensMinisters
-  - Info
   - Spawnable
   - Camera
   - Anim Marker
-  - Pillar Position
   - Ministers
-  - MinistersScroll
   - Inter Marker
-  - Position
-  - MinistersMarker
   - DontDestroy
   layers:
   - Default

@@ -4,43 +4,41 @@ using UnityEngine;
 
 public class PathSpotController : MonoBehaviour
 {
-    public SceneController sc;
+    PathSceneController sc;
 
-    // Start is called before the first frame update
     private void Awake()
     {
         //get a reference to the scene controller
-        //Finds the scene object by name
-        sc = GameObject.Find("Scene").GetComponent<SceneController>();
+        sc = GameObject.Find("Scene Controller").GetComponent<PathSceneController>();
     }
 
 
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("Trigger: " + other.name);
+        //If the user colliders w. the pin object
         if (other.gameObject.CompareTag("MainCamera"))
         {
-            Debug.Log("COLLIDE: " + gameObject.name);
-
             //check if it's the first marker
             if (sc.GetCurrentMarkerIndex() == 0)
             {
-                sc.TurnOffWalkToSign();
+                //Turn off the walk to the red pin sign
+                sc.HideWalkToSign();
             }
 
-            //For Animation Marjers
+            //If the user collided with an animation marker
             if (gameObject.tag.Equals("Anim Marker"))
             {
                 sc.ShowAnimation();
-                //TODO FIX THIS
-                sc.ac.TurnOnAnimDateUI(sc.GetCurrentMarkerIndex());
+                sc.TurnOnAnimDateUI();
             }
 
-            //For interstitials
+            //If the user collided with an interstitial marker
             if (gameObject.tag.Equals("Inter Marker"))
             {
-                sc.ic.TrackPillar();
+                sc.ShowInterstitial();
             }
+
+            //Hide the marker after collision
             gameObject.SetActive(false);
         }
        

@@ -6,22 +6,21 @@ using TMPro;
 public class AnimationPathController : MonoBehaviour
 {
     //physcial game objects
-    public GameObject[] markers; //path markers
-    public GameObject[] animations; //animations to show
-    public GameObject restaurant;
+    [SerializeField] GameObject[] markers; //path markers
+    [SerializeField] GameObject[] animations; //animations to show
+    [SerializeField] GameObject restaurant;
 
+    [Header("UI Elements")]
     //UI elements
-    [SerializeField]
-    GameObject nextButtonToInter;
-
-    public GameObject animHeader;
+    [SerializeField] GameObject nextButtonToInter;
+    [SerializeField] GameObject animHeader;
     //text & dates
-    public GameObject[] animDates;
+    [SerializeField] GameObject[] animDates;
   
 
     //dates for the interstital button
     string[] dates = { "Jul 3rd, 1964", "Jul 9th, 1964", "Jul 22nd, 1965", "Fall, 1964", "February, 1965" };
-    public TextMeshProUGUI dateText;
+    TextMeshProUGUI dateText;
 
     //called regardless if object = enabled
     void Awake()
@@ -33,18 +32,13 @@ public class AnimationPathController : MonoBehaviour
         }
     }
 
-
     // Start is called before the first frame update
     void Start()
     {
         dateText = nextButtonToInter.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
-
-
-
     }
 
-
-    //TODO create a children array automatically??
+    //Sets the Newspaper UI Overlay
     public void TurnOnAnimDateUI(int index)
     {
         animHeader.SetActive(true);
@@ -57,8 +51,6 @@ public class AnimationPathController : MonoBehaviour
         animHeader.SetActive(false);
         animDates[index].SetActive(false);
     }
-
-
 
     //called after the animation has been played once
     //through the signal emitter on the timeline
@@ -73,19 +65,19 @@ public class AnimationPathController : MonoBehaviour
 
     }
 
-    //turns on the marker at index
+    //turns on the marker at input index
     public void ShowAnimMarker(int index)
     {
         markers[index].SetActive(true);
     }
 
-    //hides the marker at index
+    //hides the marker at input index
     public void HideAnimMarker(int index)
     {
         markers[index].SetActive(false);
     }
 
-    //public show animation
+    //shows the input index animation 
     public void ShowAnimation(int index)
     {
         animations[index].SetActive(true);
@@ -93,7 +85,7 @@ public class AnimationPathController : MonoBehaviour
 
     }
 
-    //public show animation
+    //hides input index animation
     public void HideAnimation(int index)
     {
         animations[index].SetActive(false);

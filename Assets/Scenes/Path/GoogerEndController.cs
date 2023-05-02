@@ -6,22 +6,18 @@ using UnityEngine.UI;
 using TMPro;
 
 
-
-
 public class GoogerEndController : MonoBehaviour
 {
-    public VideoPlayer vp;
-    public GameObject nameText;
-    public GameObject quote;
-    public GameObject video;
-    public GameObject credits;
+    [SerializeField] VideoPlayer videoPlayer;
+    [SerializeField] GameObject nameText;
+    [SerializeField] GameObject quote;
+    [SerializeField] GameObject video;
+    [SerializeField] GameObject credits;
 
     Image uiGoogerBackground;
     RawImage uiGoogerVideo;
     TextMeshProUGUI uiName;
     TextMeshProUGUI uiQuote;
-
-    Animator creditsAnim;
 
     bool vidDone = false;
 
@@ -32,13 +28,12 @@ public class GoogerEndController : MonoBehaviour
         uiGoogerVideo = video.GetComponent<RawImage>();
         uiName = nameText.GetComponent<TextMeshProUGUI>();
         uiQuote = quote.GetComponent<TextMeshProUGUI>();
-        creditsAnim = credits.GetComponent<Animator>();
-
     }
 
+    //When the end Scene Credit object is activated
     private void OnEnable()
     {
-        vp.frame = 0;
+        videoPlayer.frame = 0;
 
         uiGoogerBackground.CrossFadeAlpha(0f, 0f, true);
         uiGoogerBackground.CrossFadeAlpha(1, 3, false);
@@ -51,13 +46,11 @@ public class GoogerEndController : MonoBehaviour
 
         uiQuote.CrossFadeAlpha(0f, 0f, true);
         uiQuote.CrossFadeAlpha(1, 4, false);
-
-        //StartCoroutine(ShowGoogerUI());
     }
 
     private void Update()
     {
-        if (!vidDone && vp.time >= 8.7)
+        if (!vidDone && videoPlayer.time >= 8.7)
         {
             vidDone = true;
             uiGoogerVideo.CrossFadeAlpha(0, 1, false);

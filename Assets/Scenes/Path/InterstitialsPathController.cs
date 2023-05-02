@@ -4,167 +4,96 @@ using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using TMPro;
-using System;
 
 public class InterstitialsPathController : MonoBehaviour
 {
-    
-    public int curInterIndex = 0;
-
-
-    [SerializeField]
-    ARPlaneManager m_planeManager;
-    
-    [SerializeField]
-    ARRaycastManager m_raycastManager;
-
+    [SerializeField] PathSceneController sc;
 
     //interstitial gameobject prefabs
-    public GameObject[] inters;
+    [SerializeField] GameObject[] inters;
     //interstitial pin markers
-    public GameObject[] markers;
-
+    [SerializeField] GameObject[] markers;
     //Variables for the timer
-    float timer = 0;
-    public float timeToNext;
-    public bool timerOn = false;
+    [SerializeField] float timeToNext;
 
+    [Header("UI Elements")]
     //button to show next animation
     public GameObject nextButtonToAnim;
   
-    //array of dates to put on the button for next anim
+    //array of dates to put on the next button to the animations
     string[] dates = {"July 3rd, 1964", "Aug 11th, 1964", "Sep 26th, 1964" , "Jan 29th, 1965", "Feb 22th, 1965" };
-    public TextMeshProUGUI dateText;
+    TextMeshProUGUI dateText;
+
+    [SerializeField]
+    ARPlaneManager m_planeManager;
+    [SerializeField]
+    ARRaycastManager m_raycastManager;
 
     private void Awake()
     {
         m_raycastManager = LocationInfo.Instance.GetRaycastManager();
-        m_planeManager = LocationInfo.Instance.GetPlaneManager();
+        m_planeManager = LocationInfo.Instance.GetPlaneManager(); 
 
     }
-
+    
     private void Start()
     {
-
         dateText = nextButtonToAnim.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
     }
 
-
-    
-
-    private void Update()
+    //Shows the input index interstial marker
+    public void ShowIntersitialMarker(int index)
     {
-        if (timerOn)
-        {
-            InterstitialTimer();
-        }
+       //set transform and pos (in front of pillar)
+        markers[index].SetActive(true);
     }
 
-    //for testing
-    public void StartTimer()
+    //Hides the input index interstial marker
+    public void HideInterstitial(int index)
     {
-        timerOn = true;
-
+        inters[index].SetActive(false);
     }
 
-    public void ShowNextIntersitial()
-    {
-        if (curInterIndex < markers.Length - 1)
-        {
-            curInterIndex += 1;
-
-            Debug.Log("Show Next");
-            //set transform and pos (in front of pillar)
-            markers[curInterIndex].SetActive(true);
-            Debug.Log("prev inter:" + curInterIndex);
-        }
-    }
-
-    public void HideCurrent()
-    {
-        Debug.Log("Hide Current");
-        inters[curInterIndex].SetActive(false);
-
-    }
-
-
-    public void TrackPillar()
+    //Starts the set up to detect the pillar
+    public void TrackPillar(int index)
     {
         m_planeManager.enabled = true;
         m_planeManager.requestedDetectionMode = PlaneDetectionMode.Vertical;
 
-        StartCoroutine(Timer(0.8f, CheckPillarRaycast));
-
+        StartCoroutine(sc.Timer(0.8f, CheckPillarRaycast, index));
     }
 
 
-    IEnumerator Timer(float t, Action DoneWait) { 
-    
-        print("WaitAndPrint " + Time.time);
-        yield return new WaitForSeconds(t);
-        print("WaitAndPrint Done " + Time.time);
-        DoneWait?.Invoke();
-
-    }
-
-
-    public void CheckPillarRaycast()
+    public void CheckPillarRaycast(int index)
     {
-        Debug.Log("Wall Raycast");
-        //DetectPillar();
-        CheckRaycast(DetectPillar);
-    }
+        Ray fromCamera = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
 
-
-    public bool CheckRaycast(Action<List<ARRaycastHit>> afterHit)
-    {
-        Ray fromCamera = new Ray(Camera.main.transform.position,Camera.main.transform.forward);
-        const TrackableType trackableTypes = TrackableType.Planes;
-
-
-        List<ARRaycastHit> hits = new List<ARRaycastHit>();
-        if (m_raycastManager.Raycast(fromCamera, hits, trackableTypes))
-        {
-            afterHit?.Invoke(hits);
-            return true;
-        }
-        //if there's no hit detected
-        else
+        if(!sc.CheckRaycast(m_raycastManager, PlaceOnPillar, fromCamera, index))
         {
             Debug.Log("No Hit");
-            Vector3 position = inters[curInterIndex].transform.position;
-            inters[curInterIndex].transform.position = new Vector3(position.x, Camera.main.transform.position.y, position.z);
-            inters[curInterIndex].SetActive(true);
+            Vector3 position = inters[index].transform.position;
+            inters[index].transform.position = new Vector3(position.x, Camera.main.transform.position.y, position.z);
+            inters[index].SetActive(true);
 
-            Debug.Log(inters[curInterIndex].name);
 
             //Start the countdown timer
-            timerOn = true;
+            StartCoroutine(sc.Timer(timeToNext, ShowNextButton, index));
         }
 
-        return false;
     }
 
-
-    public void DetectPillar(List<ARRaycastHit> hits)
+    //Places the interstial cards on the pillar
+    void PlaceOnPillar(List<ARRaycastHit> hits, int index)
     {
-        Debug.Log("Detect Pillar");
-        //scanning = false;
         m_planeManager.enabled = false;
         ARRaycastHit hit = hits[0];
         ARPlane hitPlane = null;
 
-        Debug.Log("hit" + hit+ ", "+hit.trackableId);
         foreach (ARPlane p in m_planeManager.trackables)
         {
-
-            //set a distance check??
-            Debug.Log(p.normal + " " + p.isActiveAndEnabled);
-            Debug.Log("g active" + " " + p.gameObject.activeSelf);
             //Check if the current plane is active
             if (p.isActiveAndEnabled && p.trackableId == hit.trackableId)
             {
-                Debug.Log("This plane" + p.normal);
                 hitPlane = p;
             }
             p.gameObject.SetActive(false);
@@ -173,23 +102,24 @@ public class InterstitialsPathController : MonoBehaviour
 
         if (hitPlane == null)
         {
-            Debug.Log("HIT NO PLANE");
-            Vector3 position = inters[curInterIndex].transform.position;
-            inters[curInterIndex].transform.position = new Vector3(position.x, Camera.main.transform.position.y, position.z);
+            Debug.Log("No Planes Hit");
+            Vector3 position = inters[index].transform.position;
+            inters[index].transform.position = new Vector3(position.x, Camera.main.transform.position.y, position.z);
         }
         else
         {
-            //check if hit pose up is perpendiculat to up direction (aka a vertical plane)
+            //check if hit pose up is perpendicular to up direction (aka a vertical plane)
+            //If the hitplane is vertical this value should be close to 0
+
             float normalDir = Mathf.Abs(Vector3.Dot(transform.up, hitPlane.normal));
 
             Debug.Log("Hit plane " + hitPlane);
-            Debug.Log("norm" + hitPlane.normal);
-            Debug.Log("Normal compare:" + normalDir);
-
+            Debug.Log("plane normal" + hitPlane.normal);
+            Debug.Log("Normal compare to Horizontal:" + normalDir); 
 
             if (normalDir < 0.1)
             {
-                Debug.Log("Plane active");
+                Debug.Log("Hit a vertical plane");
 
                 //get the position of plane
                 Vector3 position = hitPlane.transform.position;
@@ -197,45 +127,28 @@ public class InterstitialsPathController : MonoBehaviour
                 Quaternion rotation = hitPlane.transform.rotation;
 
                 //set new position & transformation of tracked image
-                inters[curInterIndex].transform.rotation = Quaternion.identity;
-                inters[curInterIndex].transform.rotation = rotation;
-                inters[curInterIndex].transform.position = new Vector3(position.x, Camera.main.transform.position.y, position.z);
+                inters[index].transform.rotation = rotation;
+                inters[index].transform.position = new Vector3(position.x, Camera.main.transform.position.y, position.z);
             }
             else
             {
-                Debug.Log("HIT NO PLANE");
-                Vector3 position = inters[curInterIndex].transform.position;
-                inters[curInterIndex].transform.position = new Vector3(position.x, Camera.main.transform.position.y, position.z);
+                Debug.Log("Did not hit a vertical plane");
+
+                Vector3 position = inters[index].transform.position;
+                inters[index].transform.position = new Vector3(position.x, Camera.main.transform.position.y, position.z);
             }
         }
 
-        inters[curInterIndex].SetActive(true);
+        inters[index].SetActive(true);
+        StartCoroutine(sc.Timer(timeToNext, ShowNextButton, index));
 
-        Debug.Log(inters[curInterIndex].name);
-
-        //Start the countdown timer
-        timerOn = true;
-        
     }
 
-
-    void InterstitialTimer()
+    //Updates and shows the next button to the animation events
+    void ShowNextButton(int index)
     {
-        if (timer < timeToNext)
-        {
-            timer += Time.deltaTime;
-        }
-        else
-        {
-            Debug.Log("timerDone");
-            timer = 0;
-            timerOn = false;
-            dateText.text = dates[curInterIndex];
-            nextButtonToAnim.SetActive(true);
-
-
-        }
-
+        dateText.text = dates[index];
+        nextButtonToAnim.SetActive(true);
     }
 
 }

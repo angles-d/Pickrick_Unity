@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EndSceneDoorCollider : MonoBehaviour
-{
-    // Start is called before the first frame update
-    public SceneController sc;
+{  
+    [SerializeField] PathSceneController sc;
   
-
+    //starts the end scene when the user walks through the door collider
     private void OnTriggerEnter(Collider other)
     {
-        print(other);
-        //if user walks into the door
         if (other.gameObject.CompareTag("MainCamera"))
         {
             sc.ShowEndSceneGooger();
