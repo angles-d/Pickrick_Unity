@@ -198,6 +198,8 @@ public class ConfigureAR : MonoBehaviour
     //Prepare to scan the wall 
     public void ContinueWallTracking()
     {
+        //m_planeManager.requestedDetectionMode = PlaneDetectionMode.Vertical;
+
         yesPositionedButton.SetActive(false);
         noPositionedButton.SetActive(false);
         confirmPositionText.SetActive(false);
@@ -223,20 +225,23 @@ public class ConfigureAR : MonoBehaviour
 
         if (m_raycastManager.Raycast(touch.position, hits, trackableTypes))
         {
+            
             m_planeManager.enabled = false;
             scanning = false;
 
             foreach (ARPlane p in m_planeManager.trackables)
             {
+                Debug.Log(p.normal);
                 if (p.trackableId.Equals(hits[0].trackableId))
                 {
+                    Debug.Log("wall hit");
                     finalHit = hits[0];
                     confirmPositionBox.transform.position = finalHit.pose.position;
                     confirmPositionBox.transform.rotation = finalHit.pose.rotation;
                     confirmPositionBox.SetActive(true);
                 }
 
-                p.gameObject.SetActive(false);
+                //p.gameObject.SetActive(false);
 
             }
 

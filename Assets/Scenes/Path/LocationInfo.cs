@@ -22,7 +22,8 @@ public class LocationInfo: MonoBehaviour
 
         Instance = this;
         floorPos = new Vector3(0, 0, 0);
-        arSessionOrigin = GameObject.Find("AR Session Origin"); 
+        arSessionOrigin = GameObject.Find("AR Session Origin");
+        DontDestroyOnLoad(this.gameObject);
     }
 
 

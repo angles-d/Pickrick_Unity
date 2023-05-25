@@ -5,7 +5,7 @@ using UnityEngine;
 public class DontDestroy : MonoBehaviour
 {
     //Number of objects you want to keep between scenes
-    public static int numDontDestroy = 3;
+    static int numDontDestroy = 2;
 
     private void Awake()
     {

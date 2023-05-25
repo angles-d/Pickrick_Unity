@@ -44,7 +44,7 @@ public class FourMinistersController : MonoBehaviour
     //If all the ministers have been visited
     bool allVisited = false;
 
-    private void Awake()
+    private void Start()
     {
         m_raycastManager = LocationInfo.Instance.GetRaycastManager();
         m_planeManager = LocationInfo.Instance.GetPlaneManager();

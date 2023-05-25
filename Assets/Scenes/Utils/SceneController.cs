@@ -87,6 +87,7 @@ public class SceneController : MonoBehaviour
         //perform the raycast
         if (m_raycastManager.Raycast(touch.position, hits, trackableTypes))
         {
+            Debug.Log("Intersection" + hits);
             //if hits is not null call the afterHit method
             afterHit?.Invoke(hits);
             return true;

@@ -1258,6 +1258,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8121836350969750582, guid: bf45911e226a84c45b5ab712ea9db582,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8121836350969750582, guid: bf45911e226a84c45b5ab712ea9db582,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: bdd3f5e3410cf4298880c0aaa5c70f3c, type: 2}
@@ -2384,7 +2389,7 @@ PrefabInstance:
     - target: {fileID: 4970239045816377700, guid: f2caafb1db00a47d9a411733058522d5,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartWallTracking
+      value: ContinueWallTracking
       objectReference: {fileID: 0}
     - target: {fileID: 4970239045816377701, guid: f2caafb1db00a47d9a411733058522d5,
         type: 3}
@@ -5677,7 +5682,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1982955406}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 802737175}
+        m_MethodName: LoadScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Path
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1982955406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6887,5 +6903,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LocationInfo
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8176840001308019429, guid: 21eea5edb8a81487181b4d3d384d6416,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6941817010000529582, guid: 21eea5edb8a81487181b4d3d384d6416, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 21eea5edb8a81487181b4d3d384d6416, type: 3}

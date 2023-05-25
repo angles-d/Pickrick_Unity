@@ -13,6 +13,7 @@ public class PathSceneController : SceneController
     [SerializeField] GameObject pillarRef;
     [SerializeField] GameObject scenePosReference;
     [SerializeField] GameObject path;
+    [SerializeField] GameObject scene;
 
     //marker controllers
     [Header("Controller Scripts")]
@@ -80,11 +81,11 @@ public class PathSceneController : SceneController
         Debug.Log("Path AR Positioned");
         Debug.Log("pillar Pos" + pillarRef.transform.position);
 
-        transform.rotation = pillarRef.transform.rotation;
-        transform.Rotate(0, 90, 0);
+        scene.transform.rotation = pillarRef.transform.rotation;
+        scene.transform.Rotate(0, 90, 0);
 
         Vector3 pillarPos = new Vector3(pillarRef.transform.position.x, 0, pillarRef.transform.position.z);
-        transform.position = pillarPos;
+        scene.transform.position = pillarPos;
         path.SetActive(true);
     }
 
