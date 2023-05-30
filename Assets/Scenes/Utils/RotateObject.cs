@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Rotates an object around its y axis
 public class RotateObject : MonoBehaviour
 {
     public float speed = 3;

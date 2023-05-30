@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
+//Controller for the minister pillar interaction
 public class FourMinistersController : MonoBehaviour
 {
     //Location of the pillar (the reference object outside the Scene game object)
@@ -17,7 +18,6 @@ public class FourMinistersController : MonoBehaviour
   
     //UI Elements
     [Header("UI Elements")]
-    //Sign Pop ups
     [SerializeField] GameObject pointPillarText;
     [SerializeField] GameObject tapPillarText;
     [SerializeField] GameObject moveToNext;
@@ -29,43 +29,42 @@ public class FourMinistersController : MonoBehaviour
     //set of indivdual minister picture  canvas groups
     [SerializeField] CanvasGroup[] ministerCanvas = new CanvasGroup[4];
 
-    [SerializeField]
     ARPlaneManager m_planeManager;
-    [SerializeField]
     ARRaycastManager m_raycastManager;
 
     //flag booleans
-    //true if scanning for the pillar
-    bool scanning = false;
     //true if current minister button is pressed
     bool[] buttonPressed = new bool[4];
     //true if the minister button has been visited by the user
     bool[] visited = { false, false, false, false };
-    //If all the ministers have been visited
+    //true if scanning for the pillar
+    bool scanning = false;
+    //true if all the ministers have been visited
     bool allVisited = false;
 
     private void Start()
     {
-        m_raycastManager = LocationInfo.Instance.GetRaycastManager();
-        m_planeManager = LocationInfo.Instance.GetPlaneManager();
+        m_raycastManager = ARInfo.Instance.GetRaycastManager();
+        m_planeManager = ARInfo.Instance.GetPlaneManager();
 
         m_planeManager.enabled = true;
     }
 
     void Update()
     {
-        //if no touch events
+        //if no touch events are detected
         if (Input.touchCount == 0)
         {
             return;
         }
 
-        // If the Camera is detecting AR interaction
-        // Save the found touch event
+        // If the Camera is scanning for an AR interaction
         if (scanning)
         {
+            // Save the found touch event
             Touch touch = Input.GetTouch(0);
-            //check for a raycast interaction w/ the planes
+
+            //check for a raycast interaction w/ the current AR planes
             CheckPillarRaycast(touch);
         }
 
@@ -81,15 +80,19 @@ public class FourMinistersController : MonoBehaviour
         StartCoroutine(sc.Timer(2f, TrackPillar));
     }
 
-
+    //Prepares the camera & user to detect the pillar
     public void TrackPillar()
     {
+        //Turn on detect pillar UI popups
         pointPillarText.SetActive(false);
         tapPillarText.SetActive(true);
+
+        //Activate scanning
         m_planeManager.enabled = true;
         scanning = true;
     }
 
+    //Check for a raycast w/ the pillar
     public void CheckPillarRaycast(Touch touch)
     {
         sc.CheckRaycast(m_raycastManager, DetectPillar, touch);
@@ -105,18 +108,19 @@ public class FourMinistersController : MonoBehaviour
         //Variables to save the farthest plane
         float farthestDist = -1;
         ARPlane farthestPlane = null;
-        //Camera position vector w/ y = 0
+
+        //Camera position vector w/ the y value set to 0
         Vector3 camNoY = new Vector3(Camera.main.transform.position.x, 0, Camera.main.transform.position.z);
 
         foreach (ARPlane p in m_planeManager.trackables)
         {
-            //Get the plane position where y = 0
+            //Get the plane position w/ the y value set to 0
             Vector3 planeNoY = new Vector3(p.transform.position.x, 0, p.transform.position.z);
 
-            //Get distance to the Plane in the forward camera direction
+            //Get distance to the plane from the camera in the forward camera direction
             Vector3 zDist = planeNoY - camNoY;
             Vector3 zDir = Camera.main.transform.TransformDirection(Vector3.forward).normalized;
-            float projDist = Vector3.Dot(zDist, zDir);
+            float projDist = Vector3.Dot(zDist, zDir); //projected distance in the camera direction to the plane
 
             //check if the current plane is farthest away
             if (projDist > farthestDist)
@@ -158,7 +162,7 @@ public class FourMinistersController : MonoBehaviour
     //Position the minister pillar panels so that the ministers' feet are on the ground
     public void PositionMinsiters()
     {
-        float groundHeight = LocationInfo.Instance.GetFloorPosition().y;
+        float groundHeight = ARInfo.Instance.GetFloorPosition().y;
 
         //set the minister position 
         foreach (Transform c in gameObject.transform)
@@ -172,6 +176,30 @@ public class FourMinistersController : MonoBehaviour
         }
     }
 
+    //Activates the selected AR Minister panel on the pillar
+    public void ShowMinister(int index)
+    {
+        for (int i = 0; i < ministers.Length; i++)
+        {
+            if (i == index)
+            {
+                if (index > 0)
+                {
+                    visited[i - 1] = true;
+                }
+                ministers[i].SetActive(true);
+            }
+            else
+            {
+                ministers[i].SetActive(false);
+            }
+
+        }
+
+
+    }
+
+    //Hides the AR minister cards
     public void HideMinisterCards()
     {
         for (int i = 0; i < ministers.Length; i++)
@@ -180,12 +208,13 @@ public class FourMinistersController : MonoBehaviour
 
         }
 
-        //turn off script (no longer used)
+        //turn off script (ministers section has been completed)
         this.enabled = false;
     }
 
     //Minister Canvas Methods
 
+    //Greys out the non-selected minister images
     public void LowerImageAlpha(int index)
     {
         ministerCanvas[index].alpha = 1f;
@@ -205,43 +234,28 @@ public class FourMinistersController : MonoBehaviour
         }
     }
 
-
-    public void ShowMinister(int index)
-    {
-        for (int i = 0; i < ministers.Length; i++)
-        {
-            if (i == index)
-            {
-                //visit the value if not the intro
-                if (index > 0)
-                {
-                    visited[i - 1] = true;
-                }
-                ministers[i].SetActive(true);
-            } else
-            {
-                ministers[i].SetActive(false);
-            }
-           
-        }
-       
-
-    }
-
+    //Checks to see if all the ministers have been visited
+    //Called when the minister UI images are pressed
     public void CheckAllVisited()
     {
         if (!allVisited)
-        foreach(bool minVisited in visited)
         {
-            if (!minVisited)
+            foreach (bool minVisited in visited)
             {
-                return;
-            } 
-        }
+                if (!minVisited)
+                {
+                    return;
+                }
+            }
 
-        allVisited = true;
-        meetMinisterText.SetActive(false);
-        moveToNext.SetActive(true);
+            allVisited = true;
+
+            //Turn off meet the minister text
+            meetMinisterText.SetActive(false);
+
+            //Turn on the tap to continue button
+            moveToNext.SetActive(true);
+        }
     }
     
 }

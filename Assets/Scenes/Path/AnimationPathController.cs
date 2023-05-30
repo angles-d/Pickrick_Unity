@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+//Controller for the Animation Markers and Animations
 public class AnimationPathController : MonoBehaviour
 {
-    //physcial game objects
+    //game objects
     [SerializeField] GameObject[] markers; //path markers
     [SerializeField] GameObject[] animations; //animations to show
     [SerializeField] GameObject restaurant;
 
-    [Header("UI Elements")]
     //UI elements
+    [Header("UI Elements")]
     [SerializeField] GameObject nextButtonToInter;
     [SerializeField] GameObject animHeader;
-    //text & dates
-    [SerializeField] GameObject[] animDates;
-  
+    [SerializeField] GameObject[] animDates; //text & dates
+
 
     //dates for the interstital button
     string[] dates = { "Jul 3rd, 1964", "Jul 9th, 1964", "Jul 22nd, 1965", "Fall, 1964", "February, 1965" };
@@ -31,8 +31,7 @@ public class AnimationPathController : MonoBehaviour
             m.SetActive(false);
         }
     }
-
-    // Start is called before the first frame update
+     
     void Start()
     {
         dateText = nextButtonToInter.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
@@ -65,13 +64,13 @@ public class AnimationPathController : MonoBehaviour
 
     }
 
-    //turns on the marker at input index
+    //turns on the input index marker
     public void ShowAnimMarker(int index)
     {
         markers[index].SetActive(true);
     }
 
-    //hides the marker at input index
+    //hides the input index marker
     public void HideAnimMarker(int index)
     {
         markers[index].SetActive(false);
@@ -82,7 +81,6 @@ public class AnimationPathController : MonoBehaviour
     {
         animations[index].SetActive(true);
         restaurant.SetActive(true);
-
     }
 
     //hides input index animation
@@ -90,7 +88,6 @@ public class AnimationPathController : MonoBehaviour
     {
         animations[index].SetActive(false);
         restaurant.SetActive(false);
-
     }
 
 

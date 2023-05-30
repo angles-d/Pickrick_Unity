@@ -5,6 +5,7 @@ using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using TMPro;
 
+//Controller for the AR Interstitials panels on the pillars
 public class InterstitialsPathController : MonoBehaviour
 {
     [SerializeField] PathSceneController sc;
@@ -24,20 +25,18 @@ public class InterstitialsPathController : MonoBehaviour
     string[] dates = {"July 3rd, 1964", "Aug 11th, 1964", "Sep 26th, 1964" , "Jan 29th, 1965", "Feb 22th, 1965" };
     TextMeshProUGUI dateText;
 
-    [SerializeField]
     ARPlaneManager m_planeManager;
-    [SerializeField]
     ARRaycastManager m_raycastManager;
 
     private void Awake()
     {
-        m_raycastManager = LocationInfo.Instance.GetRaycastManager();
-        m_planeManager = LocationInfo.Instance.GetPlaneManager(); 
-
+        m_raycastManager = ARInfo.Instance.GetRaycastManager();
+        m_planeManager = ARInfo.Instance.GetPlaneManager(); 
     }
     
     private void Start()
     {
+        //Get the text compenent in the "NEW EVENT" button to update the date
         dateText = nextButtonToAnim.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
     }
 
@@ -48,7 +47,7 @@ public class InterstitialsPathController : MonoBehaviour
         markers[index].SetActive(true);
     }
 
-    //Hides the input index interstial marker
+    //Hide the input index interstial marker
     public void HideInterstitial(int index)
     {
         inters[index].SetActive(false);
@@ -63,26 +62,29 @@ public class InterstitialsPathController : MonoBehaviour
         StartCoroutine(sc.Timer(0.8f, CheckPillarRaycast, index));
     }
 
-
+    //Checks for a Raycast with the Pillar to place AR interstial panel
     public void CheckPillarRaycast(int index)
     {
+        //Shoot a ray from the camera
         Ray fromCamera = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
 
+        //If a raycast collision is detected PlaceonPillar runs
+        //if no collision is detected
         if(!sc.CheckRaycast(m_raycastManager, PlaceOnPillar, fromCamera, index))
         {
             Debug.Log("No Hit");
-            Vector3 position = inters[index].transform.position;
-            inters[index].transform.position = new Vector3(position.x, Camera.main.transform.position.y, position.z);
-            inters[index].SetActive(true);
+            PlaceAtPreset(index);
 
-
-            //Start the countdown timer
-            StartCoroutine(sc.Timer(timeToNext, ShowNextButton, index));
         }
 
+        //Show the interstitial
+        inters[index].SetActive(true);
+
+        //Start the countdown timer to show the next button
+        StartCoroutine(sc.Timer(timeToNext, ShowNextButton, index));
     }
 
-    //Places the interstial cards on the pillar
+    //Places the interstial cards on the pillar if a collision is detected
     void PlaceOnPillar(List<ARRaycastHit> hits, int index)
     {
         m_planeManager.enabled = false;
@@ -103,19 +105,13 @@ public class InterstitialsPathController : MonoBehaviour
         if (hitPlane == null)
         {
             Debug.Log("No Planes Hit");
-            Vector3 position = inters[index].transform.position;
-            inters[index].transform.position = new Vector3(position.x, Camera.main.transform.position.y, position.z);
+            PlaceAtPreset(index);
         }
         else
         {
             //check if hit pose up is perpendicular to up direction (aka a vertical plane)
             //If the hitplane is vertical this value should be close to 0
-
             float normalDir = Mathf.Abs(Vector3.Dot(transform.up, hitPlane.normal));
-
-            Debug.Log("Hit plane " + hitPlane);
-            Debug.Log("plane normal" + hitPlane.normal);
-            Debug.Log("Normal compare to Horizontal:" + normalDir); 
 
             if (normalDir < 0.1)
             {
@@ -133,15 +129,17 @@ public class InterstitialsPathController : MonoBehaviour
             else
             {
                 Debug.Log("Did not hit a vertical plane");
-
-                Vector3 position = inters[index].transform.position;
-                inters[index].transform.position = new Vector3(position.x, Camera.main.transform.position.y, position.z);
+                PlaceAtPreset(index);
             }
         }
 
-        inters[index].SetActive(true);
-        StartCoroutine(sc.Timer(timeToNext, ShowNextButton, index));
+    }
 
+    //Places the interstitial at the preset position set in the unity scene
+    void PlaceAtPreset(int index)
+    {
+        Vector3 position = inters[index].transform.position;
+        inters[index].transform.position = new Vector3(position.x, Camera.main.transform.position.y, position.z);
     }
 
     //Updates and shows the next button to the animation events

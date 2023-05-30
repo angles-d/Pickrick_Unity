@@ -5,7 +5,7 @@ using UnityEngine.XR.ARFoundation;
 using UnityEngine.Video;
 
 
-
+//Scene Controller for the Wall Timeline Scene
 public class TimelineSceneController : SceneController
 {
     //Timeline date objects (contain collider & card holder); 6 cards rn
@@ -104,7 +104,7 @@ public class TimelineSceneController : SceneController
         Vector3 userPos = new Vector3(pos.x, Camera.main.transform.position.y, pos.z);
         timeline.transform.position = userPos - timelinePosRef.transform.position;
 
-        //move dates up
+        //move the video to tap height
         intro.transform.position = new Vector3(intro.transform.position.x, pos.y, intro.transform.position.z);
 
         //move cards to middle of the wall; based on plane center
@@ -115,10 +115,13 @@ public class TimelineSceneController : SceneController
 
         }
 
+        //Scene Controller MovetoGround method
         MoveToGround(arFloor.transform.position.y, doors);
 
     }
 
+    //Activates the timelie gameobject
+    //Called when the video finishes playing
     public void ShowTimeline()
     {
         //Show first 3 dates
@@ -128,8 +131,10 @@ public class TimelineSceneController : SceneController
         }
     }
 
+    //Checks to see if the intro video has finished playing
     void CheckIntroVidEnd()
     {
+        //if the intro vid is 6 secs from the end
         if (introVidPlayer.time > introVidPlayer.clip.length - 6)
         {
             introDone = true;
@@ -137,7 +142,7 @@ public class TimelineSceneController : SceneController
         }
     }
 
-
+    //Plays the signing the civil rights act video then starts to open the door
     public void OpenDoor()
     {
         Debug.Log("Video started");
@@ -146,19 +151,25 @@ public class TimelineSceneController : SceneController
         StartCoroutine(OpenDoorCoroutine());
     }
 
+    //Translates the doors to open them
+    //Uses lerp for transformation
     IEnumerator OpenDoorCoroutine()
     {
         Debug.Log("Door Opening");
-        //offset in left direction; based on local direction of doors
+
+        //amount to offset
         Vector3 offset = doors[0].transform.right * 2.6f;
+        //how long doors take to open
         float duration = 6.0f;
+        //counter for time
         float time = 0.0f;
 
+        //original door pos reference
         Vector3[] ogPos = {doors[0].transform.position,
                            doors[1].transform.position,
                            doors[2].transform.position};
 
-        //wait for ministers to finish playing
+        //wait for signing the civil rights at audio to finish playing
         yield return new WaitForSeconds(8);
 
         while (time <= duration)
@@ -166,19 +177,21 @@ public class TimelineSceneController : SceneController
             time = time + Time.deltaTime;
             float percent = Mathf.Clamp01(time / duration);
 
+            //Moves the door in the left direction; based on local direction of doors
             doors[0].transform.position = Vector3.Lerp(ogPos[0], ogPos[0] + offset, percent);
             doors[1].transform.position = Vector3.Lerp(ogPos[1], ogPos[1] + offset, percent);
             doors[2].transform.position = Vector3.Lerp(ogPos[2], ogPos[2] + offset, percent);
 
             yield return null;
         }
-        //Switch scenes
+
+        //Activates button to switch scenes
         pathSceneButton.SetActive(true);
         yield return null;
 
     }
 
-    //Increment date value
+    //Increment the date value
     public void IncrementDateCount()
     {
         if(curDate < dates.Length)
@@ -190,7 +203,6 @@ public class TimelineSceneController : SceneController
 
 
     //getters and setters
-
     public GameObject GetTimeline()
     {
         return timeline;

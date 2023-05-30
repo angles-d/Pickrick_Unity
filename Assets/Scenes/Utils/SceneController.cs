@@ -7,6 +7,8 @@ using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
 [DisallowMultipleComponent]
+//Scene Controller Component
+//Handles general methods used in a scene
 public class SceneController : MonoBehaviour
 {
     //Timer waits t seconds then calls DoneWait method
@@ -75,7 +77,7 @@ public class SceneController : MonoBehaviour
     //Creates a ray from a 2D screen touch position and checks if there's an
     //intersection w/ any trackable objects
     //Use when you want to detect a hit from a user's tap
-    //returns true if the raycast was successful else false
+    //returns true if the raycast intersects with a trackable
     public bool CheckRaycast(ARRaycastManager m_raycastManager, Action<List<ARRaycastHit>> afterHit, Touch touch)
     {
         //We only want to track for intersections w/ planes
@@ -98,6 +100,7 @@ public class SceneController : MonoBehaviour
 
     //checks for an intersection between an input Ray and a trackable object
     //(ex: creating a ray from the camera to check if the user is looking at something)
+    //returns true if the raycast intersects with a trackable
     public bool CheckRaycast(ARRaycastManager m_raycastManager, Action<List<ARRaycastHit>> afterHit, Ray ray)
     {
         const TrackableType trackableTypes = TrackableType.Planes;
@@ -114,6 +117,7 @@ public class SceneController : MonoBehaviour
 
     //checks for an intersection between an input Ray and a trackable object
     //(ex: creating a ray from the camera to check if the user is looking at something)
+    //returns true if the raycast intersects with a trackable
     public bool CheckRaycast<T>(ARRaycastManager m_raycastManager, Action<List<ARRaycastHit>, T> afterHit, Ray ray, T param)
     {
         const TrackableType trackableTypes = TrackableType.Planes;

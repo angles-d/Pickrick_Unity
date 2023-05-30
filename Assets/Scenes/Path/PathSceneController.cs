@@ -1,21 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.XR.ARSubsystems;
-using System;
+﻿using UnityEngine;
 
+//Controller for the Path Scene methods
 public class PathSceneController : SceneController
 {
     //Game objects that need to be placed on the floor (anim, anim markers, inter marker)
+    //Game objects to place on the floor
     [SerializeField] GameObject[] toPlace;
+    //Reference to arFloor
     [SerializeField] GameObject arFloor;
+    //Reference to the pillar position (outside the "Scene Objects" game object)
     [SerializeField] GameObject pillarRef;
+    //Reference to the scene position (inside the "Scene Object" game object)
     [SerializeField] GameObject scenePosReference;
+    //Reference to the path markers
     [SerializeField] GameObject path;
+    //Scene objects
     [SerializeField] GameObject scene;
 
-    //marker controllers
+    //Controller scripts
     [Header("Controller Scripts")]
     [SerializeField] InterstitialsPathController ic;
     [SerializeField] AnimationPathController ac;
@@ -33,10 +35,14 @@ public class PathSceneController : SceneController
 
     private void Start()
     {
+        //start scanning for the pillar
         fmc.StartScanning();
-        MoveToGround(LocationInfo.Instance.GetFloorPosition().y, toPlace);
+
+        //Move objects to ground
+        MoveToGround(ARInfo.Instance.GetFloorPosition().y, toPlace);
     }
 
+    //Show the next interstital marker
     public void ShowNextIntersitialMarker()
     {
         //hide current animation
@@ -58,7 +64,7 @@ public class PathSceneController : SceneController
         //hide the current interstitial
         ic.HideInterstitial(curMarkerIndex);
 
-        //turn on next marker
+        //turn on next animation marker
         ac.ShowAnimMarker(curMarkerIndex);
 
         if (curMarkerIndex == 0)
@@ -78,8 +84,8 @@ public class PathSceneController : SceneController
     //based on scanned pillar position
     public void PositionAR()
     {
-        Debug.Log("Path AR Positioned");
-        Debug.Log("pillar Pos" + pillarRef.transform.position);
+        //Debug.Log("Path AR Positioned");
+        //Debug.Log("pillar Pos" + pillarRef.transform.position);
 
         scene.transform.rotation = pillarRef.transform.rotation;
         scene.transform.Rotate(0, 90, 0);
@@ -122,7 +128,7 @@ public class PathSceneController : SceneController
     {
         ac.ShowAnimation(curMarkerIndex);
 
-        //if last animation has been viewed
+        //if last animation has been viewed start the end scene timer
         if(curMarkerIndex == 4)
         {
             EndSceneTimer();

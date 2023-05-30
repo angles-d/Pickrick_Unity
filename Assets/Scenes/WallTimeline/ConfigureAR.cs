@@ -1,10 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
-using System;
 
+
+//Configures AR data for the experience
+//Sets the ground position and positions the timeline
 public class ConfigureAR : MonoBehaviour
 {
     [SerializeField] TimelineSceneController sc;
@@ -12,7 +13,7 @@ public class ConfigureAR : MonoBehaviour
     //cube that surrounds the configure wall image
     [SerializeField] GameObject confirmPositionBox;
 
-    //UI Screens
+    //UI Screens Elements
     [Header("UI Elements")]
     public GameObject pointFloor;
     public GameObject tapFloor;
@@ -39,12 +40,14 @@ public class ConfigureAR : MonoBehaviour
     //reference to the ar floor
     GameObject arFloor;
 
+    //AR Managers
     ARPlaneManager m_planeManager;
     ARRaycastManager m_raycastManager;
 
     //Scanning state of AR Camera
     State state = State.ScanningFloor;
 
+    //AR Camera scanning state
     public enum State
     {
         ScanningFloor, //confgiuring the floor position
@@ -54,8 +57,8 @@ public class ConfigureAR : MonoBehaviour
 
     private void Start()
     {
-        m_raycastManager = LocationInfo.Instance.GetRaycastManager();
-        m_planeManager = LocationInfo.Instance.GetPlaneManager();
+        m_raycastManager = ARInfo.Instance.GetRaycastManager();
+        m_planeManager = ARInfo.Instance.GetPlaneManager();
         arFloor = sc.arFloor;
 
         //Turn off plane manager till the user starts the experience
@@ -75,7 +78,7 @@ public class ConfigureAR : MonoBehaviour
                 return;
             }
 
-            //Get one finger touch
+            //Get one finger touch interaction (tap)
             Touch touch = Input.GetTouch(0);
 
             switch (state)
@@ -147,7 +150,7 @@ public class ConfigureAR : MonoBehaviour
                 //get first plane
                 arFloor.transform.position = new Vector3(arFloor.transform.position.x, p.transform.position.y, arFloor.transform.position.z);
                 floorDetected = true;
-                LocationInfo.Instance.SetFloorPosition(arFloor);
+                ARInfo.Instance.SetFloorPosition(arFloor);
                 
 
             }
@@ -195,16 +198,16 @@ public class ConfigureAR : MonoBehaviour
         scanning = true;
     }
 
-    //Prepare to scan the wall 
+    //Prepares the camera to rescan the wall 
     public void ContinueWallTracking()
     {
-        //m_planeManager.requestedDetectionMode = PlaneDetectionMode.Vertical;
-
+        //Turn off confirmation UI
         yesPositionedButton.SetActive(false);
         noPositionedButton.SetActive(false);
         confirmPositionText.SetActive(false);
         confirmPositionBox.SetActive(false);
 
+        //Turn on scanning
         StartCoroutine(sc.Timer(1f, () => {
             m_planeManager.enabled = true;
             tapWall.SetActive(true);
@@ -215,6 +218,7 @@ public class ConfigureAR : MonoBehaviour
 
 
     //Verify the tapped wall position location is in the right location
+    //TODO rewrite with Checkraycast 
     public void VerifyWallPosition(Touch touch)
     {
         //turn off the tap the wall UI sign
@@ -270,7 +274,7 @@ public class ConfigureAR : MonoBehaviour
         sc.ConfigureARPlaceObjects(pos, rot);
         sc.GetTimeline().SetActive(true);
 
-        //turn off script (done configuring)
+        //turn off script (configuration is completed)
         this.enabled = false;
     }
 
