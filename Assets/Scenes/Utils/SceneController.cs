@@ -131,4 +131,110 @@ public class SceneController : MonoBehaviour
 
         return false;
     }
+
+    //Returns ARRaycastHit
+    public ARRaycastHit? RaycastGetHit(ARRaycastManager m_raycastManager, Ray ray)
+    {
+        List<ARRaycastHit> hits = new List<ARRaycastHit>();
+
+        m_raycastManager.Raycast(ray, hits, TrackableType.Planes);
+
+        if (hits.Count == 0)
+        {
+            return null;
+        }
+        else
+        {
+            return hits[0];
+        }
+    }
+
+    //Returns ARRaycastHit
+    public ARRaycastHit? RaycastGetHit(ARRaycastManager m_raycastManager, Touch touch)
+    {
+        List<ARRaycastHit> hits = new List<ARRaycastHit>();
+
+        m_raycastManager.Raycast(touch.position, hits, TrackableType.Planes);
+
+        //No hits detected; hit list = empty
+        if (hits.Count == 0)
+        {
+            return null;
+        }
+        else
+        {
+            return hits[0];
+        }
+    }
+
+    //Returns ARRaycastHit Plane
+    public ARPlane RaycastGetPlane(ARRaycastManager m_raycastManager, ARPlaneManager m_planeManager, Ray ray)
+    {
+        List<ARRaycastHit> hits = new List<ARRaycastHit>();
+
+        
+        m_raycastManager.Raycast(ray, hits, TrackableType.Planes);
+
+        //No hits detected; hit list = empty
+        if (hits.Count == 0)
+        {
+            return null;
+        }
+
+        Debug.Log("Hit Count: " + hits.Count);
+        ARRaycastHit hit = hits[0];
+
+        foreach (ARPlane p in m_planeManager.trackables)
+        {
+            //Check if the current plane is active
+            if (p.isActiveAndEnabled && p.trackableId == hit.trackableId)
+            {
+                return p;
+            }
+            
+        }
+
+        //plane not found
+        return null;
+    }
+
+    //Returns ARRaycastHit Plane
+    public ARPlane RaycastGetPlane(ARRaycastManager m_raycastManager, ARPlaneManager m_planeManager, Touch touch)
+    {
+        List<ARRaycastHit> hits = new List<ARRaycastHit>();
+
+        m_raycastManager.Raycast(touch.position, hits, TrackableType.Planes);
+
+        //No hits detected; hit list = empty
+        if (hits.Count == 0)
+        {
+            return null;
+        }
+
+        ARRaycastHit hit = hits[0];
+
+        foreach (ARPlane p in m_planeManager.trackables)
+        {
+            //Check if the current plane is active
+            if (p.isActiveAndEnabled && p.trackableId == hit.trackableId)
+            {
+                return p;
+            }
+
+        }
+
+        //plane not found
+        return null;
+    }
+
+
+    //Hides active AR planes in plane_manager
+    public void HideARPlanes(ARPlaneManager m_planeManager)
+    {
+        foreach (ARPlane p in m_planeManager.trackables)
+        {
+            p.gameObject.SetActive(false);
+
+        }
+    }
 }

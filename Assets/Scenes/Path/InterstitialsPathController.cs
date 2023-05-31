@@ -40,19 +40,6 @@ public class InterstitialsPathController : MonoBehaviour
         dateText = nextButtonToAnim.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
     }
 
-    //Shows the input index interstial marker
-    public void ShowIntersitialMarker(int index)
-    {
-       //set transform and pos (in front of pillar)
-        markers[index].SetActive(true);
-    }
-
-    //Hide the input index interstial marker
-    public void HideInterstitial(int index)
-    {
-        inters[index].SetActive(false);
-    }
-
     //Starts the set up to detect the pillar
     public void TrackPillar(int index)
     {
@@ -62,19 +49,43 @@ public class InterstitialsPathController : MonoBehaviour
         StartCoroutine(sc.Timer(0.8f, CheckPillarRaycast, index));
     }
 
-    //Checks for a Raycast with the Pillar to place AR interstial panel
+    //Checks for a Raycast with the Pillar and places the interstial cards on the pillar if a collision is detected
+    //if no collision is detected interstital is placed at the  world position in the editor
     public void CheckPillarRaycast(int index)
     {
         //Shoot a ray from the camera
         Ray fromCamera = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
 
+        ARPlane p = sc.RaycastGetPlane(m_raycastManager, m_planeManager, fromCamera);
+
         //If a raycast collision is detected PlaceonPillar runs
         //if no collision is detected
-        if(!sc.CheckRaycast(m_raycastManager, PlaceOnPillar, fromCamera, index))
+        if (p == null)
         {
             Debug.Log("No Hit");
-            PlaceAtPreset(index);
+            PlaceAtPresetLocation(index);
+        }
+        else
+        {
+            //check if hit pose up is perpendicular to up direction (aka a vertical plane)
+            //If the hitplane is vertical this value should be close to 0
+            float normalDir = Mathf.Abs(Vector3.Dot(transform.up, p.normal));
 
+            if (normalDir < 0.1)
+            {
+                Debug.Log("Hit a vertical plane");
+
+                //get the position of plane
+                Vector3 position = p.transform.position;
+
+                //set new position & transformation of tracked image
+                inters[index].transform.SetPositionAndRotation(new Vector3(position.x, Camera.main.transform.position.y, position.z), p.transform.rotation);
+            }
+            else
+            {
+                Debug.Log("Did not hit a vertical plane");
+                PlaceAtPresetLocation(index);
+            }
         }
 
         //Show the interstitial
@@ -84,59 +95,21 @@ public class InterstitialsPathController : MonoBehaviour
         StartCoroutine(sc.Timer(timeToNext, ShowNextButton, index));
     }
 
-    //Places the interstial cards on the pillar if a collision is detected
-    void PlaceOnPillar(List<ARRaycastHit> hits, int index)
+    //Shows the input index interstial marker
+    public void ShowIntersitialMarker(int index)
     {
-        m_planeManager.enabled = false;
-        ARRaycastHit hit = hits[0];
-        ARPlane hitPlane = null;
-
-        foreach (ARPlane p in m_planeManager.trackables)
-        {
-            //Check if the current plane is active
-            if (p.isActiveAndEnabled && p.trackableId == hit.trackableId)
-            {
-                hitPlane = p;
-            }
-            p.gameObject.SetActive(false);
-
-        }
-
-        if (hitPlane == null)
-        {
-            Debug.Log("No Planes Hit");
-            PlaceAtPreset(index);
-        }
-        else
-        {
-            //check if hit pose up is perpendicular to up direction (aka a vertical plane)
-            //If the hitplane is vertical this value should be close to 0
-            float normalDir = Mathf.Abs(Vector3.Dot(transform.up, hitPlane.normal));
-
-            if (normalDir < 0.1)
-            {
-                Debug.Log("Hit a vertical plane");
-
-                //get the position of plane
-                Vector3 position = hitPlane.transform.position;
-                //get the position of plane
-                Quaternion rotation = hitPlane.transform.rotation;
-
-                //set new position & transformation of tracked image
-                inters[index].transform.rotation = rotation;
-                inters[index].transform.position = new Vector3(position.x, Camera.main.transform.position.y, position.z);
-            }
-            else
-            {
-                Debug.Log("Did not hit a vertical plane");
-                PlaceAtPreset(index);
-            }
-        }
-
+        //set transform and pos (in front of pillar)
+        markers[index].SetActive(true);
     }
 
-    //Places the interstitial at the preset position set in the unity scene
-    void PlaceAtPreset(int index)
+    //Hide the input index interstial marker
+    public void HideInterstitial(int index)
+    {
+        inters[index].SetActive(false);
+    }
+
+    //Places the interstitial at the preset position set in the unity editor scene (estimate of pillar position)
+    void PlaceAtPresetLocation(int index)
     {
         Vector3 position = inters[index].transform.position;
         inters[index].transform.position = new Vector3(position.x, Camera.main.transform.position.y, position.z);
