@@ -94,7 +94,6 @@ public class SceneController : MonoBehaviour
             afterHit?.Invoke(hits);
             return true;
         }
-
         return false;
     }
 

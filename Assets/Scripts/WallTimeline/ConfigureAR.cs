@@ -202,7 +202,7 @@ public class ConfigureAR : MonoBehaviour
         {
             Debug.Log("Wall hit");
             wallHitPose = ((ARRaycastHit)finalWallHit).pose;
-confirmPositionBox.transform.SetPositionAndRotation(wallHitPose.position, wallHitPose.rotation);
+            confirmPositionBox.transform.SetPositionAndRotation(wallHitPose.position, wallHitPose.rotation);
             confirmPositionBox.SetActive(true);
         }
 
