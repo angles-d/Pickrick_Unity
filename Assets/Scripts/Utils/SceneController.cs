@@ -39,6 +39,11 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadScene(scene);
     }
 
+    public void LoadScene(int scene)
+    {
+        SceneManager.LoadScene(scene);
+    }
+
     //Moves objects to a specified height
     //Bottom of the object will be at the set height
     public void MoveToGround(float height, GameObject[] toPlace)

@@ -30,13 +30,6 @@ public class PathMarkerController : MonoBehaviour
             if (gameObject.tag.Equals("Anim Marker"))
             {
                 sc.ShowAnimation();
-                sc.TurnOnAnimDateUI();
-            }
-
-            //If the user collided with an interstitial marker
-            if (gameObject.tag.Equals("Inter Marker"))
-            {
-                sc.ShowInterstitial();
             }
 
             //Hide the marker after collision
