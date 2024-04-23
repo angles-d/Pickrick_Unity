@@ -22,6 +22,8 @@ public class GoogerEndController : MonoBehaviour
     //Black Background
     Image uiGoogerBackground;
 
+    [SerializeField] PathSceneController pathSceneControllerGameObject;
+
     //if the googer video is finished
     bool vidDone = false;
 
@@ -61,8 +63,10 @@ public class GoogerEndController : MonoBehaviour
             uiName.CrossFadeAlpha(0, 1, false);
             uiQuote.CrossFadeAlpha(0, 1, false);
 
+//SPRING 2024 IMPLEMENTATION - MOVE CREDITS TO END OF NEXT SCENE
             //roll credits
-            credits.SetActive(true); 
+            // credits.SetActive(true); 
+            pathSceneControllerGameObject.LoadScene(2);
         }
     }
 

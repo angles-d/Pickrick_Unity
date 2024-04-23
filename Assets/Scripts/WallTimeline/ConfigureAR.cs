@@ -13,6 +13,11 @@ public class ConfigureAR : MonoBehaviour
     //cube that surrounds the configure wall image
     [SerializeField] GameObject confirmPositionBox;
 
+    private int noPositionButtonClickCount;
+    public int maxClickCount = 3;
+
+    public GameObject[] gameObjectsToDestroy;
+
     //UI Screens Elements
     [Header("UI Elements")]
     public GameObject pointFloor;
@@ -22,7 +27,6 @@ public class ConfigureAR : MonoBehaviour
     public GameObject confirmPositionText;
     public GameObject yesPositionedButton;
     public GameObject noPositionedButton;
-
 
     //Location of the finalHit on the wall
     //Based on the location tapped by the user
@@ -60,6 +64,7 @@ public class ConfigureAR : MonoBehaviour
 
         //Turn off plane manager till the user starts the experience
         m_planeManager.enabled = false;
+        noPositionButtonClickCount = 0;
     }
 
 
@@ -172,6 +177,14 @@ public class ConfigureAR : MonoBehaviour
     //Prepares the camera to rescan the wall 
     public void ContinueWallTracking()
     {
+        //SPRING 2024 IMPLEMENTATION - RESTART  IF CANNOT SCAN WALL CORRECTLY {maxClickCount} TIMES
+        noPositionButtonClickCount++;
+        if(noPositionButtonClickCount == maxClickCount) {
+            //error in floor scan, will not scan wall correctly -> restart floor scanning
+            foreach(GameObject obj in gameObjectsToDestroy) Destroy(obj);
+            sc.LoadScene(0);
+        }
+        
         //Turn off confirmation UI
         yesPositionedButton.SetActive(false);
         noPositionedButton.SetActive(false);
@@ -202,7 +215,7 @@ public class ConfigureAR : MonoBehaviour
         {
             Debug.Log("Wall hit");
             wallHitPose = ((ARRaycastHit)finalWallHit).pose;
-confirmPositionBox.transform.SetPositionAndRotation(wallHitPose.position, wallHitPose.rotation);
+            confirmPositionBox.transform.SetPositionAndRotation(wallHitPose.position, wallHitPose.rotation);
             confirmPositionBox.SetActive(true);
         }
 

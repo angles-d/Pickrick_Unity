@@ -42,6 +42,8 @@ public class FourMinistersController : MonoBehaviour
     //true if all the ministers have been visited
     bool allVisited = false;
 
+    public float ministersOffsetY;
+
     private void Start()
     {
         m_raycastManager = ARInfo.Instance.GetRaycastManager();
@@ -172,7 +174,7 @@ public class FourMinistersController : MonoBehaviour
 
             //pillar&image are rotated 90 degrees so z = right and left
             c.position = pillarLocationRef.transform.position;
-            c.position = new Vector3(pillarLocationRef.transform.position.x, groundHeight + cPos.y, pillarLocationRef.transform.position.z);
+            c.position = new Vector3(pillarLocationRef.transform.position.x, groundHeight + cPos.y + ministersOffsetY, pillarLocationRef.transform.position.z);
         }
     }
 

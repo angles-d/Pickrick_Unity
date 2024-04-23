@@ -42,8 +42,11 @@ public class TimelineSceneController : SceneController
     //latest date the user has collided with
     int curDate = 0;
 
+
     //Historical cards in the date gameobjects
     GameObject[] cards = new GameObject[6];
+
+    public float SigningVideoWaitTime = 10f;
 
     private void Awake()
     {
@@ -84,8 +87,8 @@ public class TimelineSceneController : SceneController
         if (!doorOpen && curDate == dates.Length)
         {
             Debug.Log("Video Timer on");
-            //Open the door after 15s
-            StartCoroutine(Timer(15f, OpenDoor));
+            //Open the door after 10s
+            StartCoroutine(Timer(SigningVideoWaitTime, OpenDoor));
             doorOpen = true;
 
         }
@@ -207,6 +210,5 @@ public class TimelineSceneController : SceneController
     {
         return timeline;
     }
-
 
 }

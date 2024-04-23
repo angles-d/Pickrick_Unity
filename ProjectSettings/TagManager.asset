@@ -10,6 +10,8 @@ TagManager:
   - Ministers
   - Inter Marker
   - DontDestroy
+  - MinistersScroll
+  - Event_AR_MinistersEnterResturant
   layers:
   - Default
   - TransparentFX
