@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
@@ -64,7 +64,7 @@ public class GoogerEndScene : MonoBehaviour
 
             //SPRING 2024 IMPLEMENTATION - MOVED CREDITS TO END OF NEXT SCENE
             //change scene
-            pathSceneControllerGameObject.LoadScene(2);
+            pathSceneControllerGameObject.LoadScene(3);
         }
     }
 
