@@ -2424,6 +2424,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1295456385544970292, guid: f2caafb1db00a47d9a411733058522d5,
+        type: 3}
+      propertyPath: m_text
+      value: Is the box at the right position?
+      objectReference: {fileID: 0}
     - target: {fileID: 3612126304530715565, guid: f2caafb1db00a47d9a411733058522d5,
         type: 3}
       propertyPath: m_RootOrder

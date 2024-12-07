@@ -239,8 +239,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.19531986}
   m_AnchorMax: {x: 1, y: 0.85668015}
-  m_AnchoredPosition: {x: 0.0058288574, y: 0.13433838}
-  m_SizeDelta: {x: -0.011657715, y: 85.91052}
+  m_AnchoredPosition: {x: 1.1616211, y: -7.100006}
+  m_SizeDelta: {x: 3.203003, y: 14.145126}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &413780047
 MonoBehaviour:
@@ -293,7 +293,7 @@ VideoPlayer:
   m_TargetMaterialRenderer: {fileID: 0}
   m_TargetMaterialProperty: _MainTex
   m_RenderMode: 2
-  m_AspectRatio: 3
+  m_AspectRatio: 1
   m_DataSource: 0
   m_PlaybackSpeed: 0.75
   m_AudioOutputMode: 2
@@ -831,7 +831,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0.11879295, y: 0.8405537}
-  m_AnchoredPosition: {x: 0.2999878, y: -0.36390018}
+  m_AnchoredPosition: {x: 0.2999878, y: -0.36389923}
   m_SizeDelta: {x: -0.12714386, y: 0.24289703}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &890067072
@@ -964,7 +964,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.12758589, y: 0}
   m_AnchorMax: {x: 0.18217179, y: 1}
-  m_AnchoredPosition: {x: 0.13595581, y: 0.3803339}
+  m_AnchoredPosition: {x: 0.13595581, y: 0.38033295}
   m_SizeDelta: {x: 0.36198425, y: -0.7171593}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &921212384
@@ -1193,8 +1193,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This video provides a concise overview of the steps required to successfully
-    start the AR experience
+  m_text: Check out the video below for guidance on where to stand and how to position
+    your camera to setup the AR. Detailed instructions will follow on the next screen.
+    Be sure to follow the steps carefully for a successful experience!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1221,7 +1222,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16.25
+  m_fontSize: 10.75
   m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 1
